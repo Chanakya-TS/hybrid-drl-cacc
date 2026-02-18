@@ -1,0 +1,199 @@
+% Use this document definition for digest
+\documentclass[conference,onecolumn,draftclsnofoot]{IEEEtran}
+
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Hybrid Deep Reinforcement Learning and Model Predictive Control for Eco-Driving in Autonomous Vehicles}
+
+% Do not provide author information in the digest
+\author{\IEEEauthorblockN{AVTC: EcoCar and Battery Workforce Challenge}}
+
+\maketitle
+
+\begin{abstract}
+This paper presents a novel hybrid framework that integrates Deep Reinforcement Learning (DRL) with Model Predictive Control (MPC) for eco-driving in autonomous vehicles. Traditional MPC-based eco-driving controllers rely on fixed cost function weights that cannot adapt to varying traffic conditions, while pure DRL approaches often struggle with safety guarantees and computational efficiency. The proposed hybrid approach leverages DRL to dynamically adjust MPC cost function weights in real-time, optimizing the trade-off between energy efficiency, safety, and ride comfort. The framework is designed for implementation and validation using the CARLA Simulator with high-fidelity vehicle dynamics. A Soft Actor-Critic (SAC) agent will learn to select optimal weights for velocity tracking, safety distance, and control effort terms based on current traffic states. The proposed methodology includes comprehensive evaluation metrics and baseline comparisons to demonstrate the potential advantages of the hybrid approach. This framework shows promise for deployment in real-world autonomous vehicle eco-driving applications.
+\end{abstract}
+
+\section{Introduction}
+
+Transportation accounts for a significant portion of global energy consumption and greenhouse gas emissions. Eco-driving strategies that optimize vehicle energy usage while maintaining safety and comfort have emerged as a promising approach to improve vehicle efficiency \cite{b1, b9}. With the advancement of autonomous vehicle technology, intelligent control systems can leverage sophisticated optimization algorithms to achieve eco-driving objectives beyond human driver capabilities.
+
+Model Predictive Control (MPC) has been widely adopted for autonomous vehicle longitudinal control due to its ability to handle constraints and predict future states \cite{b2, b11}. However, conventional MPC implementations rely on hand-tuned, fixed cost function weights that represent a static trade-off between competing objectives such as energy efficiency, safety, and comfort. These fixed weights cannot adapt to dynamic traffic conditions, leading to suboptimal performance across varying driving scenarios \cite{b12}.
+
+Deep Reinforcement Learning (DRL) has shown remarkable success in learning complex control policies through interaction with environments \cite{b3, b13}. While DRL agents can potentially learn adaptive eco-driving strategies \cite{b14}, they face challenges including sample inefficiency, difficulty in providing safety guarantees, and computational overhead during deployment. Furthermore, the black-box nature of neural network policies can limit their interpretability and acceptance in safety-critical applications \cite{b7}.
+
+Recent hybrid approaches have explored combining learning and optimization \cite{b15, b16}, but few have addressed adaptive cost function weight selection for MPC in eco-driving scenarios. This paper proposes a hybrid framework that combines the strengths of both approaches: DRL provides adaptive, data-driven decision-making for weight selection, while MPC ensures constraint satisfaction and computational efficiency through its optimization-based control structure. The DRL agent learns to dynamically adjust MPC cost function weights based on real-time traffic states, enabling the controller to adapt its behavior to different driving phases such as acceleration, cruising, braking, and stop-and-go traffic.
+
+\section{System Architecture}
+
+\subsection{Problem Formulation}
+
+The eco-driving problem is formulated as a car-following scenario where an ego vehicle follows a lead vehicle with varying velocity. The system state includes ego vehicle velocity $v_{\text{ego}}$, lead vehicle velocity $v_{\text{lead}}$, and inter-vehicle distance gap $d$. The control objective is to minimize energy consumption while maintaining safety (adequate distance gap) and ensuring ride comfort (smooth acceleration profiles).
+
+\subsection{MPC Controller Design}
+
+The MPC controller uses a prediction horizon of $N$ steps (e.g., 20-50 steps) with time increment $\Delta t$ (typically 0.05-0.1 seconds). At each control step, it solves an optimization problem to determine the optimal acceleration trajectory over the prediction horizon.
+
+\textbf{Decision Variables:} The optimization determines two sets of variables over the horizon: (1) state trajectory including position $p[k]$ (longitudinal position of ego vehicle in meters) and velocity $v[k]$ (ego velocity in m/s) at each time step $k$, and (2) control trajectory $u[k]$ representing desired acceleration (m/s$^2$) at each step.
+
+\textbf{Cost Function:} The MPC objective balances three competing goals through a weighted quadratic cost function:
+
+\begin{equation}
+J = w_v \sum_{k=0}^{N-1} (v_{\text{ref}}[k] - v[k])^2 + w_s \sum_{k=0}^{N-1} s[k]^2 + w_u \sum_{k=0}^{N-1} u[k]^2
+\end{equation}
+
+The three terms represent distinct objectives:
+
+\textit{Velocity Tracking Term} ($w_v$): The reference velocity $v_{\text{ref}}[k]$ is set equal to the predicted lead vehicle velocity at step $k$. This term encourages the ego vehicle to match the lead vehicle's speed, minimizing unnecessary acceleration and deceleration that waste energy.
+
+\textit{Safety Term} ($w_s$): The slack variable $s[k]$ represents the violation of the minimum safe following distance constraint. When the distance gap falls below the safety threshold (defined by time headway), $s[k]$ becomes positive and incurs a penalty. This soft constraint formulation allows the optimizer to find feasible solutions even in challenging scenarios while strongly discouraging unsafe following distances.
+
+\textit{Control Effort Term} ($w_u$): This term penalizes large acceleration values $u[k]$, promoting smooth control that enhances passenger comfort and reduces mechanical wear. Minimizing control effort also contributes to energy efficiency by avoiding aggressive throttle and brake applications.
+
+The weights $w_v$, $w_s$, and $w_u$ determine the relative priority of these objectives and are the key parameters adapted by the DRL agent.
+
+\textbf{Constraints:} The optimization is subject to simplified kinematic motion equations that predict future states:
+\begin{align}
+v[k+1] &= v[k] + u[k] \Delta t \\
+p[k+1] &= p[k] + v[k] \Delta t + \frac{1}{2}u[k]\Delta t^2
+\end{align}
+
+These represent Euler integration of basic physics: velocity updates based on acceleration, and position updates based on velocity and acceleration. While CARLA uses high-fidelity dynamics, the MPC uses this simplified model for computational efficiency during prediction.
+
+Additional constraints ensure physical realizability and safety:
+\begin{align}
+d[k] - s[k] &\geq \text{THW} \cdot v_{\text{ego}}[k] \\
+0 &\leq v[k] \leq v_{\max} \\
+u_{\min} &\leq u[k] \leq u_{\max} \\
+s[k] &\geq 0
+\end{align}
+
+where $d[k] = p_{\text{lead}}[k] - p_{\text{ego}}[k]$ is the distance gap, THW is the time headway parameter (typically 1.5-2.0 seconds), $v_{\max}$ is the maximum allowed velocity (e.g., 30 m/s), and $u_{\min}$, $u_{\max}$ represent physical acceleration limits (e.g., -3 to 2 m/s$^2$).
+
+\subsection{DRL Integration}
+
+\textbf{Algorithm Selection:} The DRL component uses the Soft Actor-Critic (SAC) algorithm, an off-policy actor-critic method that maximizes both expected return and entropy. SAC is chosen for several compelling reasons: (1) \textit{Sample efficiency} - as an off-policy algorithm, SAC can reuse past experiences through a replay buffer, crucial for expensive CARLA simulations; (2) \textit{Continuous action space} - SAC naturally handles continuous actions (the MPC weights) without discretization; (3) \textit{Stability} - the entropy regularization encourages exploration and prevents premature convergence to suboptimal policies; and (4) \textit{Robustness} - SAC has demonstrated strong performance across diverse continuous control tasks with minimal hyperparameter tuning.
+
+\textbf{State and Action Spaces:} The observation space consists of normalized values of ego velocity, relative velocity ($v_{\text{lead}} - v_{\text{ego}}$), and distance gap. These three variables fully characterize the car-following state. The action space comprises the three MPC weights $[w_v, w_s, w_u]$, bounded between 0 and 1 and normalized to sum to unity, ensuring they represent valid weight coefficients.
+
+\textbf{Reward Function Design:} The reward function balances multiple objectives to guide learning toward eco-driving behavior:
+\begin{equation}
+r = -\alpha_e E - \alpha_j J_{\text{rms}} - \alpha_c C + \alpha_s S
+\end{equation}
+
+Each component serves a specific purpose:
+
+\textit{Energy Consumption Term} ($-\alpha_e E$): This is the primary optimization objective. Energy $E$ is estimated as throttle position multiplied by velocity (power proxy), integrated over the time step. Minimizing this term directly addresses the eco-driving goal of reducing fuel or battery consumption. The negative sign makes lower energy consumption yield higher rewards.
+
+\textit{Comfort Term} ($-\alpha_j J_{\text{rms}}$): Root mean square jerk $J_{\text{rms}}$ measures the rate of change of acceleration, which correlates strongly with passenger comfort. High jerk causes uncomfortable jerky motions. Penalizing jerk encourages the agent to select weights that produce smooth acceleration profiles, improving ride quality while also contributing to energy efficiency through smoother control.
+
+\textit{Safety Term} ($-\alpha_c C + \alpha_s S$): The collision penalty $C$ is a large negative value triggered if the distance gap becomes critically small (near-collision), teaching the agent to avoid dangerous situations. Conversely, the safety bonus $S$ provides positive reward for maintaining headway above the minimum threshold, reinforcing safe following behavior. Together, these terms ensure the learned policy prioritizes safety alongside efficiency.
+
+The coefficients $\alpha_e$, $\alpha_j$, $\alpha_c$, $\alpha_s$ are tuned to emphasize energy efficiency as the primary objective while ensuring safety and comfort constraints are satisfied.
+
+\section{Implementation and Validation}
+
+\subsection{CARLA Simulation Environment}
+
+The framework is implemented using the CARLA Simulator (version 0.9.15), which provides high-fidelity vehicle dynamics including realistic engine response, aerodynamic drag, rolling resistance, and mass effects. The simulation operates in synchronous mode with a fixed time step of 0.05 seconds to ensure deterministic and reproducible results.
+
+A custom car-following environment manages ego and lead vehicle spawning, converts MPC acceleration commands to CARLA throttle/brake controls, and logs all relevant state variables and performance metrics. The lead vehicle follows a predefined velocity trajectory that includes challenging scenarios: constant velocity cruising, acceleration, hard braking, and stop-and-go patterns.
+
+\subsection{Baseline Controllers}
+
+Two baseline controllers are implemented for comparison:
+
+\textbf{Fixed-Weight MPC:} An MPC controller with hand-tuned constant weights optimized through manual parameter sweeping. This represents the conventional MPC approach commonly used in practice.
+
+\textbf{Adaptive Cruise Control (ACC):} A PID-based controller that maintains a constant time headway policy ($d_{\text{setpoint}} = \text{THW} \cdot v_{\text{ego}}$). This represents traditional vehicle following control.
+
+\subsection{Evaluation Methodology}
+
+Evaluation will be performed on multiple standardized test scenarios to comprehensively assess controller performance across diverse traffic conditions:
+
+\textbf{Scenario 1 - Highway Cruise:} Moderate-speed highway driving (20-25 m/s) with gradual lead vehicle velocity variations, testing steady-state energy efficiency.
+
+\textbf{Scenario 2 - Urban Stop-and-Go:} Frequent acceleration and braking cycles (0-15 m/s) simulating congested urban traffic, emphasizing adaptability and comfort.
+
+\textbf{Scenario 3 - Emergency Braking:} Lead vehicle performs sudden hard braking from cruise speed, testing safety response and constraint satisfaction.
+
+\textbf{Scenario 4 - Mixed Driving:} Combined scenario with cruise, acceleration, deceleration, and stop-and-go phases lasting 300-500 seconds, representing realistic driving conditions.
+
+\section{Proposed Results and Analysis}
+
+\textit{Note: Experimental validation is in progress. This section outlines the expected results framework.}
+
+Table~\ref{tab:metrics} presents the proposed performance comparison framework across key metrics: energy consumption, RMS jerk (comfort), minimum time headway (safety), and average speed (efficiency).
+
+\begin{table}[htbp]
+\caption{Proposed Performance Comparison (Mixed Driving)}
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Controller} & \textbf{Energy} & \textbf{RMS Jerk} & \textbf{Min THW} & \textbf{Avg Speed} \\
+\textbf{} & \textbf{(kJ)} & \textbf{(m/s\textsuperscript{3})} & \textbf{(s)} & \textbf{(m/s)} \\
+\hline
+Hybrid DRL-MPC & TBD & TBD & TBD & TBD \\
+Fixed MPC & TBD & TBD & TBD & TBD \\
+ACC & TBD & TBD & TBD & TBD \\
+\hline
+\end{tabular}
+\label{tab:metrics}
+\end{center}
+\end{table}
+
+Analysis will examine weight adaptation behavior across driving phases, with expected increased $w_s$ during close-following, increased $w_v$ during acceleration, and increased $w_u$ during cruising.
+
+\subsection{Proposed Figures}
+
+The following figures will be generated from experimental data:
+
+\textbf{Figure 1 (Training Convergence):} Episode reward and average energy consumption versus training timesteps, demonstrating SAC learning progress and convergence behavior.
+
+\textbf{Figure 2 (Velocity and Acceleration Profiles):} Three-panel time-series plot showing (a) ego and lead velocity, (b) ego acceleration, and (c) distance gap for all controllers on Scenario 4, with safety threshold line.
+
+\textbf{Figure 3 (Adaptive Weight Evolution):} Time-series of DRL-selected weights $[w_v, w_s, w_u]$ overlaid on velocity profile, annotated with driving phase labels to illustrate context-aware adaptation.
+
+\textbf{Figure 4 (Energy Comparison Bar Chart):} Total energy consumption comparison across all scenarios with error bars representing variance across multiple runs.
+
+\textbf{Figure 5 (Comfort Analysis):} Histogram or box plot of jerk values for all controllers, demonstrating distribution of comfort metrics.
+
+\textbf{Figure 6 (Safety Heat Map):} 2D heat map showing time headway versus relative velocity for all controllers, with safety boundary overlay to visualize operating regions.
+
+\section{Conclusions and Future Work}
+
+This paper presents a novel hybrid DRL-MPC framework for eco-driving that combines adaptive learning with optimization-based control. The key innovations include: (1) DRL-based dynamic weight selection for MPC cost functions, (2) multi-objective reward function balancing energy, safety, and comfort, and (3) comprehensive CARLA-based validation framework.
+
+The experimental validation in progress will demonstrate the hybrid approach's advantages across diverse scenarios. Expected contributions include showing that learned adaptive weights can outperform fixed hand-tuned weights in energy efficiency while maintaining safety and comfort.
+
+Future work will focus on: (1) real-world validation and hardware-in-the-loop testing, (2) multi-vehicle cooperative eco-driving, (3) traffic signal integration, (4) transfer learning for robustness across platforms, and (5) policy interpretability methods. This framework provides a foundation for energy-efficient autonomous vehicle control, contributing to sustainable transportation goals.
+
+\begin{thebibliography}{00}
+\bibitem{b1} A. Sciarretta and L. Guzzella, ``Control of hybrid electric vehicles,'' IEEE Control Systems Magazine, vol. 27, no. 2, pp. 60-70, April 2007.
+\bibitem{b2} S. Li, K. Li, R. Rajamani, and J. Wang, ``Model predictive multi-objective vehicular adaptive cruise control,'' IEEE Transactions on Control Systems Technology, vol. 19, no. 3, pp. 556-566, May 2011.
+\bibitem{b3} T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine, ``Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor,'' in Proceedings of the 35th International Conference on Machine Learning, 2018, pp. 1861-1870.
+\bibitem{b4} A. Dosovitskiy, G. Ros, F. Codevilla, A. Lopez, and V. Koltun, ``CARLA: An open urban driving simulator,'' in Proceedings of the 1st Annual Conference on Robot Learning, 2017, pp. 1-16.
+\bibitem{b5} M. Wang, W. Daamen, S. Hoogendoorn, and B. van Arem, ``Cooperative car-following control: Distributed algorithm and impact on moving jam features,'' IEEE Transactions on Intelligent Transportation Systems, vol. 17, no. 5, pp. 1459-1471, May 2016.
+\bibitem{b6} J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, ``Proximal policy optimization algorithms,'' arXiv preprint arXiv:1707.06347, 2017.
+\bibitem{b7} E. Yurtsever, J. Lambert, A. Carballo, and K. Takeda, ``A survey of autonomous driving: Common practices and emerging technologies,'' IEEE Access, vol. 8, pp. 58443-58469, 2020.
+\bibitem{b8} H. A. Rakha, K. Ahn, and A. Trani, ``Development of VT-Micro model for estimating hot stabilized light duty vehicle and truck emissions,'' Transportation Research Part D: Transport and Environment, vol. 9, no. 1, pp. 49-74, Jan. 2004.
+\bibitem{b9} M. Barth and K. Boriboonsomsin, ``Energy and emissions impacts of a freeway-based dynamic eco-driving system,'' Transportation Research Part D: Transport and Environment, vol. 14, no. 6, pp. 400-410, Aug. 2009.
+\bibitem{b10} H. Xia, K. Boriboonsomsin, F. Schweizer, A. Winckler, K. Zhou, W. B. Zhang, and M. Barth, ``Field operational testing of eco-approach technology at a fixed-time signalized intersection,'' in Proceedings of the 15th International IEEE Conference on Intelligent Transportation Systems, 2012, pp. 188-193.
+\bibitem{b11} A. Kamal, J. Imura, T. Hayakawa, A. Ohata, and K. Aihara, ``Smart driving of a vehicle using model predictive control for improving traffic flow,'' IEEE Transactions on Intelligent Transportation Systems, vol. 15, no. 2, pp. 878-888, April 2014.
+\bibitem{b12} V. Turri, B. Besselink, and K. H. Johansson, ``Cooperative look-ahead control for fuel-efficient and safe heavy-duty vehicle platooning,'' IEEE Transactions on Control Systems Technology, vol. 25, no. 1, pp. 12-28, Jan. 2017.
+\bibitem{b13} T. P. Lillicrap, J. J. Hunt, A. Pritzel, N. Heess, T. Erez, Y. Tassa, D. Silver, and D. Wierstra, ``Continuous control with deep reinforcement learning,'' arXiv preprint arXiv:1509.02971, 2015.
+\bibitem{b14} C. Wu, A. R. Kreidieh, K. Parvate, E. Vinitsky, and A. M. Bayen, ``Flow: Architecture and benchmarking for reinforcement learning in traffic control,'' arXiv preprint arXiv:1710.05465, 2017.
+\bibitem{b15} A. Carvalho, Y. Gao, A. Gray, H. E. Tseng, and F. Borrelli, ``Predictive control of an autonomous ground vehicle using an iterative linearization approach,'' in Proceedings of the 16th International IEEE Conference on Intelligent Transportation Systems, 2013, pp. 2335-2340.
+\bibitem{b16} U. Rosolia and F. Borrelli, ``Learning model predictive control for iterative tasks. A data-driven control framework,'' IEEE Transactions on Automatic Control, vol. 63, no. 7, pp. 1883-1896, July 2018.
+\end{thebibliography}
+
+\end{document}

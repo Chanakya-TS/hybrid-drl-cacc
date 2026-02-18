@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.env
+
+# Training artifacts
+models/
+logs/
+tensorboard/
+
+# CARLA simulator (too large for git)
+CARLA_0.9.16/
+CARLA_0.9.16.zip
+
+# Results (regenerable)
+results/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+nul
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Test outputs
+mpc_test.png
+acc_test.png

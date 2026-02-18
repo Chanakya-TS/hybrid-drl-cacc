@@ -1,0 +1,9 @@
+numpy>=1.24.0
+matplotlib>=3.7.0
+pandas>=2.0.0
+scipy>=1.10.0
+stable-baselines3[extra]>=2.0.0
+gymnasium>=0.28.0
+casadi>=3.6.0
+carla==0.9.16
+pygame>=2.5.0
