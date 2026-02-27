@@ -39,7 +39,9 @@ def simple_proportional_controller(obs, kp_velocity=0.3, kp_distance=0.1):
     Returns:
         acceleration: Desired acceleration (m/s²)
     """
-    ego_velocity, relative_velocity, distance_gap = obs
+    ego_velocity = obs[0]
+    relative_velocity = obs[1]   # rel_vel to closest lead
+    distance_gap = obs[2]        # distance to closest lead
 
     # Target: match lead vehicle velocity and maintain safe distance
     lead_velocity = ego_velocity + relative_velocity

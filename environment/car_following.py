@@ -82,6 +82,9 @@ class CarFollowingEnv:
         self.current_step = 0
         self.episode_count = 0
 
+        # Previous lead velocities for acceleration estimation (one per lead)
+        self.prev_lead_velocities = [0.0] * self.num_lead_vehicles
+
         # Data logging
         self.episode_data = {
             'time': [],
@@ -94,7 +97,17 @@ class CarFollowingEnv:
             'acceleration': [],
             'throttle': [],
             'brake': [],
-            'energy': []
+            'energy': [],
+            # Per-lead data for all 3 vehicles
+            'distance_gap_1': [],
+            'distance_gap_2': [],
+            'distance_gap_3': [],
+            'rel_vel_1': [],
+            'rel_vel_2': [],
+            'rel_vel_3': [],
+            'lead_accel_1': [],
+            'lead_accel_2': [],
+            'lead_accel_3': []
         }
 
         self.total_energy = 0.0
@@ -158,7 +171,7 @@ class CarFollowingEnv:
             seed: Random seed for reproducibility
 
         Returns:
-            observation: Initial state [ego_velocity, relative_velocity, distance_gap]
+            observation: 10-dim state (see _get_observation)
             info: Additional information dictionary
         """
         if seed is not None:
@@ -177,6 +190,7 @@ class CarFollowingEnv:
         self.trajectory_idx = 0
         self.total_energy = 0.0
         self.previous_velocity = 0.0
+        self.prev_lead_velocities = [0.0] * self.num_lead_vehicles
 
         # Clear episode data
         for key in self.episode_data:
@@ -278,7 +292,7 @@ class CarFollowingEnv:
             acceleration: Desired acceleration command (m/s²)
 
         Returns:
-            observation: New state [ego_velocity, relative_velocity, distance_gap]
+            observation: 10-dim state (see _get_observation)
             reward: Reward for this step (computed elsewhere, return 0.0 here)
             terminated: Whether episode has terminated (collision)
             truncated: Whether episode has been truncated (max steps)
@@ -313,9 +327,12 @@ class CarFollowingEnv:
         # Update step counter
         self.current_step += 1
 
-        # Get new observation
+        # Get new observation (10-dim)
         observation = self._get_observation()
-        ego_velocity, relative_velocity, distance_gap = observation
+        ego_velocity = observation[0]
+        rel_vel_1, distance_1, accel_1 = observation[1], observation[2], observation[3]
+        rel_vel_2, distance_2, accel_2 = observation[4], observation[5], observation[6]
+        rel_vel_3, distance_3, accel_3 = observation[7], observation[8], observation[9]
 
         # Calculate energy consumption
         energy_increment = throttle * ego_velocity * self.dt
@@ -325,22 +342,25 @@ class CarFollowingEnv:
         measured_acceleration = (ego_velocity - self.previous_velocity) / self.dt
         self.previous_velocity = ego_velocity
 
-        # Log data
+        # Log data (includes all 3 leads)
         self._log_data(
-            ego_velocity, relative_velocity, distance_gap,
-            measured_acceleration, throttle, brake, energy_increment
+            ego_velocity, rel_vel_1, distance_1,
+            measured_acceleration, throttle, brake, energy_increment,
+            lead_distances=[distance_1, distance_2, distance_3],
+            lead_rel_vels=[rel_vel_1, rel_vel_2, rel_vel_3],
+            lead_accels=[accel_1, accel_2, accel_3]
         )
 
-        # Check termination conditions
-        terminated = self._check_collision(distance_gap)
+        # Check termination conditions (closest lead only)
+        terminated = self._check_collision(distance_1)
         truncated = self.current_step >= self.max_episode_steps
 
         # Prepare info dictionary
         info = {
             'step': self.current_step,
             'ego_velocity': ego_velocity,
-            'distance_gap': distance_gap,
-            'time_headway': distance_gap / (ego_velocity + 1e-6),
+            'distance_gap': distance_1,
+            'time_headway': distance_1 / (ego_velocity + 1e-6),
             'total_energy': self.total_energy,
             'throttle': throttle,
             'brake': brake,
@@ -351,28 +371,63 @@ class CarFollowingEnv:
 
     def _get_observation(self) -> np.ndarray:
         """
-        Get current observation from CARLA.
+        Get current observation from CARLA for all 3 lead vehicles.
 
         Returns:
-            observation: [ego_velocity, relative_velocity, distance_gap] in m/s and m
+            observation: 10-dim array
+                [ego_velocity,
+                 rel_vel_1, distance_1, accel_1,   # closest lead
+                 rel_vel_2, distance_2, accel_2,   # second lead
+                 rel_vel_3, distance_3, accel_3]   # third lead
         """
-        # Get ego vehicle state
         ego_velocity = self._get_vehicle_speed(self.ego_vehicle)  # m/s
+        lead_states = self._get_all_lead_states(ego_velocity)
 
-        # Get closest lead vehicle state (first in list)
-        if len(self.lead_vehicles) > 0:
-            closest_lead = self.lead_vehicles[0]
-            lead_velocity = self._get_vehicle_speed(closest_lead)  # m/s
-        else:
-            lead_velocity = ego_velocity  # Fallback
-
-        # Calculate relative quantities
-        distance_gap = self._get_distance_between_vehicles()  # m
-        relative_velocity = lead_velocity - ego_velocity  # m/s
-
-        observation = np.array([ego_velocity, relative_velocity, distance_gap], dtype=np.float32)
-
+        observation = np.array([ego_velocity] + lead_states, dtype=np.float32)
         return observation
+
+    def _get_all_lead_states(self, ego_velocity: float) -> List[float]:
+        """
+        Compute relative velocity, distance gap, and acceleration for all lead vehicles.
+
+        Args:
+            ego_velocity: Current ego vehicle speed (m/s)
+
+        Returns:
+            Flat list [rel_vel_1, dist_1, accel_1, rel_vel_2, dist_2, accel_2, ...]
+        """
+        ego_location = self.ego_vehicle.get_location()
+        states = []
+
+        for i in range(self.num_lead_vehicles):
+            if i < len(self.lead_vehicles):
+                vehicle = self.lead_vehicles[i]
+                lead_velocity = self._get_vehicle_speed(vehicle)
+
+                # Euclidean distance from ego to this lead
+                lead_location = vehicle.get_location()
+                distance_gap = float(np.sqrt(
+                    (lead_location.x - ego_location.x)**2 +
+                    (lead_location.y - ego_location.y)**2
+                ))
+
+                # Relative velocity (positive = lead pulling away)
+                rel_vel = lead_velocity - ego_velocity
+
+                # Acceleration from finite difference
+                accel = (lead_velocity - self.prev_lead_velocities[i]) / self.dt
+
+                # Update stored velocity for next step
+                self.prev_lead_velocities[i] = lead_velocity
+            else:
+                # Fallback if fewer vehicles than expected
+                rel_vel = 0.0
+                distance_gap = 100.0
+                accel = 0.0
+
+            states.extend([rel_vel, distance_gap, accel])
+
+        return states
 
     def _get_vehicle_speed(self, vehicle: carla.Vehicle) -> float:
         """
@@ -689,7 +744,10 @@ class CarFollowingEnv:
         acceleration: float,
         throttle: float,
         brake: float,
-        energy_increment: float
+        energy_increment: float,
+        lead_distances: Optional[List[float]] = None,
+        lead_rel_vels: Optional[List[float]] = None,
+        lead_accels: Optional[List[float]] = None
     ):
         """Log episode data for later analysis."""
         self.episode_data['time'].append(self.current_step * self.dt)
@@ -701,6 +759,17 @@ class CarFollowingEnv:
         self.episode_data['throttle'].append(throttle)
         self.episode_data['brake'].append(brake)
         self.episode_data['energy'].append(energy_increment)
+
+        # Log per-lead data
+        if lead_distances is not None:
+            for i in range(3):
+                self.episode_data[f'distance_gap_{i+1}'].append(lead_distances[i])
+        if lead_rel_vels is not None:
+            for i in range(3):
+                self.episode_data[f'rel_vel_{i+1}'].append(lead_rel_vels[i])
+        if lead_accels is not None:
+            for i in range(3):
+                self.episode_data[f'lead_accel_{i+1}'].append(lead_accels[i])
 
         # Get positions
         if self.ego_vehicle is not None:
@@ -775,17 +844,22 @@ if __name__ == "__main__":
     try:
         # Test reset
         obs, info = env.reset()
-        print(f"Initial observation: {obs}")
+        print(f"Initial observation ({len(obs)} dims): {obs}")
 
         # Run a few steps
         for i in range(10):
-            # Simple proportional controller
-            ego_vel, rel_vel, distance_gap = obs
-            target_vel = ego_vel + rel_vel  # Match lead velocity
+            # Simple proportional controller using closest lead
+            ego_vel = obs[0]
+            rel_vel_1, distance_1 = obs[1], obs[2]
+            target_vel = ego_vel + rel_vel_1  # Match lead 1 velocity
             accel = 0.5 * (target_vel - ego_vel)
 
             obs, reward, terminated, truncated, info = env.step(accel)
-            print(f"Step {i+1}: vel={obs[0]:.2f}, gap={obs[2]:.2f}, THW={info['time_headway']:.2f}")
+            print(
+                f"Step {i+1}: vel={obs[0]:.2f}, "
+                f"d1={obs[2]:.2f}, d2={obs[5]:.2f}, d3={obs[8]:.2f}, "
+                f"THW={info['time_headway']:.2f}"
+            )
 
             if terminated or truncated:
                 break

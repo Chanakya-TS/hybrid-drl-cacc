@@ -20,6 +20,7 @@ from datetime import datetime
 from typing import Optional, Dict, Any
 
 import numpy as np
+import gymnasium as gym
 
 # Stable-baselines3 imports
 from stable_baselines3 import SAC
@@ -84,32 +85,206 @@ class TrainingMetricsCallback(BaseCallback):
         return True
 
 
+class CurriculumScheduler(gym.Wrapper):
+    """
+    3-phase curriculum learning wrapper for scenario scheduling.
+
+    Instead of uniform-random scenario selection, progressively increases
+    difficulty as training advances:
+
+    Phase 1 — Warmup (0–20% of steps):
+        Only easy scenarios (highway_cruise, predictable_pattern).
+        Agent learns stable car-following with steady MPC weights.
+
+    Phase 2 — Main (20–70% of steps):
+        Weighted random: 70% DRL-advantage scenarios, 30% all scenarios.
+        Agent learns when and how to adjust weights.
+
+    Phase 3 — Generalization (70–100% of steps):
+        All scenarios equally. Agent refines across all patterns.
+
+    Tracks cumulative steps across episodes to determine current phase.
+    """
+
+    # Scenario names for each phase
+    EASY_SCENARIOS = ['highway_cruise', 'predictable_pattern']
+
+    def __init__(
+        self,
+        env: HybridMPCEnv,
+        all_scenario_pool: list,
+        drl_advantage_pool: list,
+        easy_pool: list,
+        total_timesteps: int
+    ):
+        """
+        Args:
+            env: The HybridMPCEnv to wrap
+            all_scenario_pool: List of (trajectory, num_steps, name) for all scenarios
+            drl_advantage_pool: Subset for DRL-advantage scenarios
+            easy_pool: Subset for warmup (easy) scenarios
+            total_timesteps: Total training timesteps (for phase boundaries)
+        """
+        super().__init__(env)
+        self.all_pool = all_scenario_pool
+        self.drl_advantage_pool = drl_advantage_pool
+        self.easy_pool = easy_pool
+        self.total_timesteps = total_timesteps
+
+        # Phase boundaries (fraction of total_timesteps)
+        self.phase1_end = int(total_timesteps * 0.20)
+        self.phase2_end = int(total_timesteps * 0.70)
+
+        # Tracking
+        self.cumulative_steps = 0
+        self.current_scenario_name = None
+        self.current_num_steps = 0
+        self.current_step = 0
+        self.episode_num = 0
+        self.current_phase = 1
+
+        logger.info(f"CurriculumScheduler initialized:")
+        logger.info(f"  Phase 1 (Warmup):         steps 0–{self.phase1_end} "
+                     f"({len(easy_pool)} easy scenarios)")
+        logger.info(f"  Phase 2 (Main):           steps {self.phase1_end}–{self.phase2_end} "
+                     f"({len(drl_advantage_pool)} DRL-advantage + {len(all_scenario_pool)} all)")
+        logger.info(f"  Phase 3 (Generalization): steps {self.phase2_end}–{total_timesteps} "
+                     f"({len(all_scenario_pool)} all scenarios)")
+
+    def _get_current_phase(self) -> int:
+        """Determine curriculum phase from cumulative step count."""
+        if self.cumulative_steps < self.phase1_end:
+            return 1
+        elif self.cumulative_steps < self.phase2_end:
+            return 2
+        else:
+            return 3
+
+    def _select_scenario(self, phase: int):
+        """Select a scenario based on the current curriculum phase."""
+        if phase == 1:
+            # Warmup: only easy scenarios
+            pool = self.easy_pool
+        elif phase == 2:
+            # Main: 70% DRL-advantage, 30% all scenarios
+            if np.random.random() < 0.7:
+                pool = self.drl_advantage_pool
+            else:
+                pool = self.all_pool
+        else:
+            # Generalization: all scenarios equally
+            pool = self.all_pool
+
+        idx = np.random.randint(len(pool))
+        return pool[idx]
+
+    def reset(self, **kwargs):
+        self.current_phase = self._get_current_phase()
+        trajectory, num_steps, name = self._select_scenario(self.current_phase)
+
+        self.current_scenario_name = name
+        self.current_num_steps = num_steps
+        self.current_step = 0
+        self.episode_num += 1
+
+        # Swap trajectory and episode length on the CARLA env
+        self.env.carla_env.lead_trajectory = trajectory
+        self.env.carla_env.max_episode_steps = num_steps
+        self.env.max_episode_steps = num_steps
+
+        # Console output with phase info
+        phase_names = {1: 'Warmup', 2: 'Main', 3: 'Generalization'}
+        logger.info(
+            f"[Episode {self.episode_num}] Phase {self.current_phase} "
+            f"({phase_names[self.current_phase]}) | Scenario: {name} "
+            f"({num_steps} steps, {num_steps * 0.05:.0f}s) | "
+            f"Cumulative: {self.cumulative_steps}/{self.total_timesteps}"
+        )
+
+        obs, info = self.env.reset(**kwargs)
+
+        # Draw scenario name in CARLA world above ego vehicle
+        self._draw_scenario_label(name, num_steps)
+
+        return obs, info
+
+    def step(self, action):
+        obs, reward, terminated, truncated, info = self.env.step(action)
+
+        # HybridMPCEnv runs action_repeat sim sub-steps per agent step.
+        # Track sim-level steps for episode boundary control.
+        sim_steps = info.get('sim_steps', 1)
+        self.current_step += sim_steps
+        self.cumulative_steps += sim_steps
+
+        # Only allow truncation when the full trajectory has been played
+        if truncated and self.current_step < self.current_num_steps:
+            truncated = False
+
+        # Force truncation when trajectory is complete (even if CARLA didn't)
+        if not terminated and self.current_step >= self.current_num_steps:
+            truncated = True
+
+        return obs, reward, terminated, truncated, info
+
+    def _draw_scenario_label(self, name: str, num_steps: int):
+        """Draw the current scenario name as debug text in CARLA."""
+        try:
+            import carla
+            carla_env = self.env.carla_env
+            if carla_env.ego_vehicle is not None and carla_env.world is not None:
+                ego_loc = carla_env.ego_vehicle.get_location()
+                label_loc = carla.Location(
+                    x=ego_loc.x, y=ego_loc.y, z=ego_loc.z + 4.0
+                )
+                phase_names = {1: 'Warmup', 2: 'Main', 3: 'Generalize'}
+                label = f"P{self.current_phase}({phase_names[self.current_phase]}): {name}"
+                carla_env.world.debug.draw_string(
+                    label_loc,
+                    label,
+                    draw_shadow=True,
+                    color=carla.Color(0, 255, 0),
+                    life_time=num_steps * 0.05 + 5.0
+                )
+        except Exception:
+            pass  # Don't crash training if debug draw fails
+
+
 def create_training_env(
     scenario_name: Optional[str] = None,
     max_episode_steps: int = 1000,
+    total_timesteps: int = 200000,
     log_dir: str = "logs"
-) -> HybridMPCEnv:
+) -> gym.Env:
     """
-    Create the training environment.
+    Create the training environment with curriculum learning.
+
+    When no scenario is specified, uses a 3-phase curriculum scheduler:
+    - Phase 1 (Warmup, 0-20%): Easy scenarios for basic car-following
+    - Phase 2 (Main, 20-70%): DRL-advantage scenarios for weight adaptation
+    - Phase 3 (Generalization, 70-100%): All scenarios equally
 
     Args:
-        scenario_name: Name of scenario to use (None for random)
-        max_episode_steps: Maximum steps per episode
+        scenario_name: Name of a single scenario to use (None for curriculum)
+        max_episode_steps: Maximum steps per episode (used as initial default)
+        total_timesteps: Total training timesteps (for curriculum phase boundaries)
         log_dir: Directory for logs
 
     Returns:
         Wrapped training environment
     """
-    # Get scenario trajectory
     if scenario_name:
+        # Single scenario mode
         scenario = get_scenario(scenario_name)
         trajectory = scenario.trajectory
         max_episode_steps = scenario.num_steps
         logger.info(f"Using scenario: {scenario_name} ({scenario.duration_s:.1f}s)")
     else:
-        # Create a varied training trajectory
-        trajectory = create_varied_training_trajectory()
-        logger.info("Using varied training trajectory")
+        # Use the longest scenario as the initial trajectory (will be swapped on reset)
+        all_scenarios = get_all_scenarios()
+        longest = max(all_scenarios.values(), key=lambda s: s.num_steps)
+        trajectory = longest.trajectory
+        max_episode_steps = longest.num_steps
 
     # Create environment
     env = HybridMPCEnv(
@@ -122,6 +297,47 @@ def create_training_env(
         lead_trajectory=trajectory,
         map_name='Town04'
     )
+
+    # If no specific scenario, wrap with curriculum scheduler
+    if not scenario_name:
+        all_scenarios = get_all_scenarios()
+
+        # Build scenario pools
+        all_pool = []
+        drl_advantage_pool = []
+        easy_pool = []
+
+        for name, s in all_scenarios.items():
+            entry = (s.trajectory, s.num_steps, name)
+            all_pool.append(entry)
+
+            if name in DRL_ADVANTAGE_SCENARIOS:
+                drl_advantage_pool.append(entry)
+
+            if name in CurriculumScheduler.EASY_SCENARIOS:
+                easy_pool.append(entry)
+
+        # Also add the custom varied training trajectory to all pool
+        varied_traj = create_varied_training_trajectory()
+        all_pool.append((varied_traj, len(varied_traj), 'varied_training'))
+
+        logger.info(f"Training with {len(all_pool)} scenarios (curriculum learning):")
+        for traj, steps, name in all_pool:
+            phase_tags = []
+            if name in CurriculumScheduler.EASY_SCENARIOS:
+                phase_tags.append("P1-easy")
+            if name in DRL_ADVANTAGE_SCENARIOS:
+                phase_tags.append("P2-advantage")
+            phase_tags.append("P3-all")
+            logger.info(f"  {name}: {steps} steps ({steps*0.05:.1f}s) [{', '.join(phase_tags)}]")
+
+        env = CurriculumScheduler(
+            env,
+            all_scenario_pool=all_pool,
+            drl_advantage_pool=drl_advantage_pool,
+            easy_pool=easy_pool,
+            total_timesteps=total_timesteps
+        )
 
     # Wrap with Monitor for logging
     os.makedirs(log_dir, exist_ok=True)
@@ -220,31 +436,36 @@ def create_sac_model(
 
 
 def train(
-    total_timesteps: int = 50000,
+    total_timesteps: int = 200000,
     scenario_name: Optional[str] = None,
     checkpoint_freq: int = 10000,
     resume_path: Optional[str] = None,
     save_path: str = "models",
-    log_dir: str = "logs"
+    log_dir: str = "logs",
+    model_name: Optional[str] = None
 ):
     """
     Main training function.
 
     Args:
-        total_timesteps: Total training timesteps
-        scenario_name: Scenario to train on (None for varied)
+        total_timesteps: Total training timesteps (default: 200k)
+        scenario_name: Scenario to train on (None for curriculum learning)
         checkpoint_freq: Checkpoint save frequency
         resume_path: Path to resume training from
         save_path: Directory to save models
         log_dir: Directory for logs
+        model_name: User-provided name for the model (optional)
     """
     # Create directories
     os.makedirs(save_path, exist_ok=True)
     os.makedirs(log_dir, exist_ok=True)
 
-    # Create timestamp for this run
+    # Create run name from user input or default
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    run_name = f"sac_{scenario_name or 'varied'}_{timestamp}"
+    if model_name:
+        run_name = f"{model_name}_{timestamp}"
+    else:
+        run_name = f"sac_{scenario_name or 'curriculum'}_{timestamp}"
 
     logger.info("=" * 60)
     logger.info("HYBRID DRL-MPC TRAINING")
@@ -257,14 +478,27 @@ def train(
     logger.info("\nCreating training environment...")
     env = create_training_env(
         scenario_name=scenario_name,
+        total_timesteps=total_timesteps,
         log_dir=log_dir
     )
 
     try:
         # Create or load model
+        reset_num_timesteps = True
         if resume_path and os.path.exists(resume_path):
             logger.info(f"\nResuming training from: {resume_path}")
             model = SAC.load(resume_path, env=env)
+            reset_num_timesteps = False
+
+            # Extract resumed timestep count from the loaded model
+            resumed_steps = model.num_timesteps
+            logger.info(f"Resumed at timestep {resumed_steps}/{total_timesteps}")
+
+            # Sync curriculum scheduler so it starts at the correct phase
+            if hasattr(env, 'env') and hasattr(env.env, 'cumulative_steps'):
+                env.env.cumulative_steps = resumed_steps
+                logger.info(f"Curriculum scheduler synced to step {resumed_steps} "
+                            f"(Phase {env.env._get_current_phase()})")
         else:
             logger.info("\nCreating new SAC model...")
             model = create_sac_model(env)
@@ -292,7 +526,8 @@ def train(
                 total_timesteps=total_timesteps,
                 callback=callbacks,
                 log_interval=10,
-                progress_bar=True
+                progress_bar=True,
+                reset_num_timesteps=reset_num_timesteps
             )
         except KeyboardInterrupt:
             logger.info("\nTraining interrupted by user")
@@ -333,8 +568,8 @@ def main():
     parser.add_argument(
         '--timesteps', '-t',
         type=int,
-        default=50000,
-        help='Total training timesteps (default: 50000)'
+        default=200000,
+        help='Total training timesteps (default: 200000)'
     )
     parser.add_argument(
         '--scenario', '-s',
@@ -387,9 +622,13 @@ def main():
     print()
     print("Training Configuration:")
     print(f"  Timesteps: {args.timesteps}")
-    print(f"  Scenario: {args.scenario or 'varied (multiple patterns)'}")
+    print(f"  Scenario: {args.scenario or 'curriculum (3-phase learning)'}")
     print(f"  Checkpoint freq: {args.checkpoint_freq}")
     print()
+
+    model_name = input("Enter a name for this model: ").strip()
+    if not model_name:
+        model_name = None
 
     input("Press ENTER when CARLA is ready to start training...")
 
@@ -399,7 +638,8 @@ def main():
         checkpoint_freq=args.checkpoint_freq,
         resume_path=args.resume,
         save_path=args.save_path,
-        log_dir=args.log_dir
+        log_dir=args.log_dir,
+        model_name=model_name
     )
 
 

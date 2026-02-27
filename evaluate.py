@@ -30,7 +30,7 @@ from stable_baselines3 import SAC
 # Project imports
 from environment.car_following import CarFollowingEnv
 from environment.gym_wrapper import HybridMPCEnv
-from controllers.mpc_controller import FixedWeightMPC
+from controllers.mpc_controller import MPCController, FixedWeightMPC
 from controllers.acc_controller import ACCController
 from utils.metrics import calculate_all_metrics, print_metrics_summary
 from utils.scenarios import (
@@ -80,7 +80,8 @@ def run_drl_episode(
         'w_comfort': []
     }
 
-    step = 0
+    sim_step = 0
+    agent_step = 0
     done = False
     total_reward = 0.0
 
@@ -88,39 +89,62 @@ def run_drl_episode(
         # Get action from trained model
         action, _ = model.predict(obs, deterministic=True)
 
-        # Step environment
+        # Step environment (runs action_repeat sub-steps internally)
         obs, reward, terminated, truncated, info = env.step(action)
         done = terminated or truncated
         total_reward += reward
 
-        # Extract data
-        carla_info = info.get('carla_info', {})
+        # Extract sub-step data for full-resolution logging
         mpc_weights = info.get('mpc_weights', [0.33, 0.34, 0.33])
+        sub_data = info.get('sub_step_data', {})
 
-        # Record data
-        episode_data['time'].append(step * env.dt)
-        episode_data['ego_velocity'].append(carla_info.get('ego_velocity', 0))
-        episode_data['lead_velocity'].append(
-            carla_info.get('ego_velocity', 0) + obs[1] * 20.0
-        )
-        episode_data['distance_gap'].append(carla_info.get('distance_gap', 0))
-        episode_data['relative_velocity'].append(obs[1] * 20.0)
-        episode_data['acceleration'].append(info.get('acceleration', 0))
-        episode_data['throttle'].append(carla_info.get('throttle', 0))
-        episode_data['brake'].append(carla_info.get('brake', 0))
-        episode_data['time_headway'].append(carla_info.get('time_headway', 0))
-        episode_data['w_velocity'].append(mpc_weights[0])
-        episode_data['w_safety'].append(mpc_weights[1])
-        episode_data['w_comfort'].append(mpc_weights[2])
+        n_subs = info.get('sim_steps', 1)
+        for i in range(n_subs):
+            episode_data['time'].append(sim_step * env.dt)
+            episode_data['ego_velocity'].append(
+                sub_data.get('ego_velocities', [0])[i] if i < len(sub_data.get('ego_velocities', [])) else 0
+            )
+            episode_data['lead_velocity'].append(
+                sub_data.get('lead_velocities', [0])[i] if i < len(sub_data.get('lead_velocities', [])) else 0
+            )
+            episode_data['distance_gap'].append(
+                sub_data.get('distance_gaps', [0])[i] if i < len(sub_data.get('distance_gaps', [])) else 0
+            )
+            ego_v = sub_data.get('ego_velocities', [0])[i] if i < len(sub_data.get('ego_velocities', [])) else 0
+            lead_v = sub_data.get('lead_velocities', [0])[i] if i < len(sub_data.get('lead_velocities', [])) else 0
+            episode_data['relative_velocity'].append(lead_v - ego_v)
+            episode_data['acceleration'].append(
+                sub_data.get('accelerations', [0])[i] if i < len(sub_data.get('accelerations', [])) else 0
+            )
+            episode_data['throttle'].append(
+                sub_data.get('throttles', [0])[i] if i < len(sub_data.get('throttles', [])) else 0
+            )
+            episode_data['brake'].append(
+                sub_data.get('brakes', [0])[i] if i < len(sub_data.get('brakes', [])) else 0
+            )
+            episode_data['time_headway'].append(
+                sub_data.get('time_headways', [0])[i] if i < len(sub_data.get('time_headways', [])) else 0
+            )
+            # Weights are constant across all sub-steps (that's the point)
+            episode_data['w_velocity'].append(mpc_weights[0])
+            episode_data['w_safety'].append(mpc_weights[1])
+            episode_data['w_comfort'].append(mpc_weights[2])
+            sim_step += 1
 
-        step += 1
+        agent_step += 1
 
-        if step % 100 == 0:
-            logger.info(f"  Step {step}: reward={reward:.2f}, weights={mpc_weights}")
+        if agent_step % 10 == 0:
+            logger.info(
+                f"  Agent step {agent_step} (sim {sim_step}): "
+                f"reward={reward:.2f}, weights={mpc_weights}"
+            )
 
-    logger.info(f"  Episode completed: {step} steps, total reward: {total_reward:.2f}")
+    logger.info(
+        f"  Episode completed: {agent_step} agent steps, "
+        f"{sim_step} sim steps, total reward: {total_reward:.2f}"
+    )
 
-    # Calculate metrics
+    # Calculate metrics at simulation-level dt (full resolution)
     metrics = calculate_all_metrics(
         episode_data=episode_data,
         dt=env.dt,
@@ -170,15 +194,33 @@ def run_baseline_episode(
     done = False
 
     while not done:
-        ego_velocity, relative_velocity, distance_gap = obs
-        lead_velocity = ego_velocity + relative_velocity
+        # Extract 10-dim observation
+        ego_velocity = obs[0]
+        rel_vel_1, distance_1, accel_1 = obs[1], obs[2], obs[3]
+        rel_vel_2, distance_2, accel_2 = obs[4], obs[5], obs[6]
+        rel_vel_3, distance_3, accel_3 = obs[7], obs[8], obs[9]
 
-        # Compute control action
-        acceleration, _ = controller.compute_control(
-            ego_velocity=ego_velocity,
-            lead_velocity=lead_velocity,
-            distance_gap=distance_gap
-        )
+        lead_velocity_1 = ego_velocity + rel_vel_1
+
+        # Dispatch based on controller type
+        if isinstance(controller, (MPCController, FixedWeightMPC)):
+            acceleration, _ = controller.compute_control(
+                ego_velocity=ego_velocity,
+                lead_velocities=[
+                    lead_velocity_1,
+                    ego_velocity + rel_vel_2,
+                    ego_velocity + rel_vel_3
+                ],
+                distance_gaps=[distance_1, distance_2, distance_3],
+                lead_accelerations=[accel_1, accel_2, accel_3]
+            )
+        else:
+            # ACC or other baseline: single lead
+            acceleration, _ = controller.compute_control(
+                ego_velocity=ego_velocity,
+                lead_velocity=lead_velocity_1,
+                distance_gap=distance_1
+            )
 
         # Step environment
         obs, _, terminated, truncated, info = env.step(acceleration)
@@ -187,9 +229,9 @@ def run_baseline_episode(
         # Record data
         episode_data['time'].append(step * env.dt)
         episode_data['ego_velocity'].append(ego_velocity)
-        episode_data['lead_velocity'].append(lead_velocity)
-        episode_data['distance_gap'].append(distance_gap)
-        episode_data['relative_velocity'].append(relative_velocity)
+        episode_data['lead_velocity'].append(lead_velocity_1)
+        episode_data['distance_gap'].append(distance_1)
+        episode_data['relative_velocity'].append(rel_vel_1)
         episode_data['acceleration'].append(acceleration)
         episode_data['throttle'].append(info.get('throttle', 0))
         episode_data['brake'].append(info.get('brake', 0))
@@ -364,6 +406,8 @@ def print_comparison(results: Dict):
         ('Min Time Headway (s)', 'safety', 'min_time_headway', '.2f'),
         ('Avg Time Headway (s)', 'safety', 'avg_time_headway', '.2f'),
         ('THW Violation Rate', 'safety', 'violation_rate', '.1%'),
+        ('  Too Close (<1.5s)', 'safety', 'too_close_rate', '.1%'),
+        ('  Too Far (>5.0s)', 'safety', 'too_far_rate', '.1%'),
         ('Avg Velocity (m/s)', 'velocity', 'avg_ego_velocity', '.2f'),
     ]
 
@@ -616,21 +660,7 @@ def main():
 
     input("Press ENTER when CARLA is ready...")
 
-    if args.all:
-        evaluate_all_scenarios(
-            model_path=args.model,
-            drl_only=False,
-            save_results=not args.no_save,
-            results_dir=args.results_dir
-        )
-    elif args.drl_scenarios:
-        evaluate_all_scenarios(
-            model_path=args.model,
-            drl_only=True,
-            save_results=not args.no_save,
-            results_dir=args.results_dir
-        )
-    elif args.scenario:
+    if args.scenario:
         if args.scenario not in ALL_SCENARIOS:
             print(f"Unknown scenario: {args.scenario}")
             print(f"Available: {', '.join(ALL_SCENARIOS.keys())}")
@@ -641,40 +671,21 @@ def main():
             save_results=not args.no_save,
             results_dir=args.results_dir
         )
+    elif args.drl_scenarios:
+        evaluate_all_scenarios(
+            model_path=args.model,
+            drl_only=True,
+            save_results=not args.no_save,
+            results_dir=args.results_dir
+        )
     else:
-        # Interactive selection
-        print("\nSelect evaluation mode:")
-        print("1. Single scenario")
-        print("2. DRL-advantage scenarios (5)")
-        print("3. All scenarios (9)")
-        choice = input("Enter choice (1-3): ").strip()
-
-        if choice == '1':
-            print("\nAvailable scenarios:")
-            for i, name in enumerate(ALL_SCENARIOS.keys(), 1):
-                print(f"  {i}. {name}")
-            idx = int(input("Enter scenario number: ")) - 1
-            scenario_name = list(ALL_SCENARIOS.keys())[idx]
-            evaluate_scenario(
-                scenario_name=scenario_name,
-                model_path=args.model,
-                save_results=not args.no_save,
-                results_dir=args.results_dir
-            )
-        elif choice == '2':
-            evaluate_all_scenarios(
-                model_path=args.model,
-                drl_only=True,
-                save_results=not args.no_save,
-                results_dir=args.results_dir
-            )
-        else:
-            evaluate_all_scenarios(
-                model_path=args.model,
-                drl_only=False,
-                save_results=not args.no_save,
-                results_dir=args.results_dir
-            )
+        # Default: run all scenarios
+        evaluate_all_scenarios(
+            model_path=args.model,
+            drl_only=False,
+            save_results=not args.no_save,
+            results_dir=args.results_dir
+        )
 
 
 if __name__ == "__main__":

@@ -82,42 +82,51 @@ class MPCController:
         """
         Build the CasADi optimization problem.
 
-        State: [ego_velocity, distance_gap]
+        State: [ego_velocity, distance_gap_1, distance_gap_2, distance_gap_3]
         Control: [acceleration]
+
+        The MPC tracks distances to all 3 lead vehicles and uses anticipatory
+        costs on leads 2 and 3 to enable smoother, earlier braking.
         """
         N = self.horizon
 
         # Define symbolic variables
-        # States: ego velocity (v) and distance gap (d)
-        v = ca.SX.sym('v', N + 1)  # Ego velocity over horizon
-        d = ca.SX.sym('d', N + 1)  # Distance gap over horizon
-        a = ca.SX.sym('a', N)  # Acceleration (control) over horizon
+        # States: ego velocity and 3 distance gaps
+        v = ca.SX.sym('v', N + 1)   # Ego velocity over horizon
+        d1 = ca.SX.sym('d1', N + 1)  # Distance gap to lead 1 (closest)
+        d2 = ca.SX.sym('d2', N + 1)  # Distance gap to lead 2
+        d3 = ca.SX.sym('d3', N + 1)  # Distance gap to lead 3
+        a = ca.SX.sym('a', N)        # Acceleration (control) over horizon
 
-        # Parameters (passed at each solve)
-        # [v0, d0, v_rel0, v_lead0, v_lead_pred(0:N), a_prev, w_v, w_s, w_c, v_target]
-        # 4 initial states + (N+1) lead predictions + 1 prev_a + 3 weights + 1 target = N + 10
-        n_params = N + 10
+        # Parameters layout:
+        # [v0, d1_0, d2_0, d3_0,                        # 4 initial states
+        #  v_lead1(0:N), v_lead2(0:N), v_lead3(0:N),    # 3*(N+1) lead velocity predictions
+        #  a_prev, w_v, w_s, w_c, v_target]             # 5 scalars
+        # Total: 4 + 3*(N+1) + 5 = 3N + 12
+        n_params = 3 * N + 12
         params = ca.SX.sym('params', n_params)
 
         # Extract parameters
-        v0 = params[0]  # Initial ego velocity
-        d0 = params[1]  # Initial distance gap
-        v_rel0 = params[2]  # Initial relative velocity
-        v_lead0 = params[3]  # Initial lead velocity
+        v0 = params[0]     # Initial ego velocity
+        d1_0 = params[1]   # Initial distance to lead 1
+        d2_0 = params[2]   # Initial distance to lead 2
+        d3_0 = params[3]   # Initial distance to lead 3
 
-        # Lead vehicle velocity predictions (assume constant for simplicity)
-        v_lead = params[4:4 + N + 1]
+        # Lead vehicle velocity predictions for each lead
+        idx = 4
+        v_lead1 = params[idx:idx + N + 1]
+        idx += N + 1
+        v_lead2 = params[idx:idx + N + 1]
+        idx += N + 1
+        v_lead3 = params[idx:idx + N + 1]
+        idx += N + 1
 
-        # Previous acceleration (for jerk penalty)
-        a_prev = params[4 + N + 1]
-
-        # Weights
-        w_v = params[4 + N + 2]
-        w_s = params[4 + N + 3]
-        w_c = params[4 + N + 4]
-
-        # Target velocity
-        v_target = params[4 + N + 5]
+        # Scalar parameters
+        a_prev = params[idx]       # Previous acceleration (for jerk penalty)
+        w_v = params[idx + 1]      # Velocity tracking weight
+        w_s = params[idx + 2]      # Safety weight
+        w_c = params[idx + 3]      # Comfort weight
+        v_target = params[idx + 4]  # Target velocity
 
         # Build cost function
         cost = 0.0
@@ -125,46 +134,62 @@ class MPCController:
         # Initial conditions constraints
         constraints = []
         constraints.append(v[0] - v0)
-        constraints.append(d[0] - d0)
+        constraints.append(d1[0] - d1_0)
+        constraints.append(d2[0] - d2_0)
+        constraints.append(d3[0] - d3_0)
 
         for k in range(N):
             # ===== Dynamics constraints =====
             # Ego vehicle dynamics: v[k+1] = v[k] + a[k] * dt
             constraints.append(v[k + 1] - (v[k] + a[k] * self.dt))
 
-            # Distance dynamics: d[k+1] = d[k] + (v_lead[k] - v[k]) * dt
-            constraints.append(d[k + 1] - (d[k] + (v_lead[k] - v[k]) * self.dt))
+            # Distance dynamics for each lead vehicle
+            constraints.append(d1[k + 1] - (d1[k] + (v_lead1[k] - v[k]) * self.dt))
+            constraints.append(d2[k + 1] - (d2[k] + (v_lead2[k] - v[k]) * self.dt))
+            constraints.append(d3[k + 1] - (d3[k] + (v_lead3[k] - v[k]) * self.dt))
 
             # ===== Cost function =====
-            # 1. Velocity tracking cost (eco-driving: match lead velocity smoothly)
-            # Penalize deviation from lead vehicle velocity (for car-following)
-            rel_vel_error = v[k] - v_lead[k]
+            # 1. Velocity tracking cost (eco-driving: match lead 1 velocity smoothly)
+            rel_vel_error = v[k] - v_lead1[k]
             cost += w_v * 0.5 * rel_vel_error ** 2
 
-            # Also gently track target velocity when far from lead
+            # Gently track target velocity
             velocity_error = v[k] - v_target
             cost += w_v * 0.1 * velocity_error ** 2
 
-            # 2. Safety cost (penalize being too close)
-            # Desired distance based on time headway
-            d_desired = self.TIME_HEADWAY * v[k] + self.MIN_DISTANCE
-            safety_error = d[k] - d_desired
-            # Only penalize if too close (asymmetric penalty)
-            cost += w_s * ca.fmax(0, -safety_error) ** 2
-            # Small reward for maintaining good distance (encourages coasting)
-            cost += w_s * 0.01 * (d[k] - d_desired) ** 2
+            # 2. Primary safety cost on lead 1 (closest)
+            d1_desired = self.TIME_HEADWAY * v[k] + self.MIN_DISTANCE
+            safety_error_1 = d1[k] - d1_desired
+            # Asymmetric penalty: only penalize if too close
+            cost += w_s * ca.fmax(0, -safety_error_1) ** 2
+            # Small symmetric cost to maintain good distance
+            cost += w_s * 0.01 * (d1[k] - d1_desired) ** 2
 
-            # 3. Comfort cost (minimize acceleration magnitude)
+            # 3. Anticipatory safety cost on leads 2 and 3 (lighter weight)
+            # Penalize if lead 2 is decelerating (v_lead2 dropping relative to v_lead1)
+            # This encourages the ego to start braking earlier
+            lead2_decel = v_lead1[k] - v_lead2[k]  # positive = lead2 slower than lead1
+            cost += w_s * 0.05 * ca.fmax(0, lead2_decel) ** 2
+
+            lead3_decel = v_lead2[k] - v_lead3[k]  # positive = lead3 slower than lead2
+            cost += w_s * 0.02 * ca.fmax(0, lead3_decel) ** 2
+
+            # If lead 2 or 3 are decelerating, penalize maintaining high speed
+            # (encourages earlier, smoother braking)
+            anticipated_decel = ca.fmax(0, v[k] - v_lead2[k])
+            cost += w_s * 0.03 * anticipated_decel ** 2
+
+            # 4. Comfort cost (minimize acceleration magnitude)
             cost += w_c * a[k] ** 2
 
-            # 4. Jerk penalty (MUCH stronger for smooth control)
+            # 5. Jerk penalty (strong for smooth control)
             if k == 0:
                 jerk = a[k] - a_prev
             else:
                 jerk = a[k] - a[k - 1]
-            cost += w_c * 2.0 * jerk ** 2  # Increased from 0.1 to 2.0
+            cost += w_c * 2.0 * jerk ** 2
 
-            # 5. Energy cost (penalize positive acceleration - eco-driving)
+            # 6. Energy cost (penalize positive acceleration - eco-driving)
             cost += w_v * 0.1 * ca.fmax(0, a[k]) ** 2
 
         # Terminal cost (encourage reaching target velocity)
@@ -173,7 +198,9 @@ class MPCController:
         # Collect all decision variables
         opt_vars = ca.vertcat(
             ca.reshape(v, -1, 1),
-            ca.reshape(d, -1, 1),
+            ca.reshape(d1, -1, 1),
+            ca.reshape(d2, -1, 1),
+            ca.reshape(d3, -1, 1),
             ca.reshape(a, -1, 1)
         )
 
@@ -181,12 +208,11 @@ class MPCController:
         g = ca.vertcat(*constraints)
 
         # Variable bounds
-        n_v = N + 1  # Number of velocity variables
-        n_d = N + 1  # Number of distance variables
-        n_a = N  # Number of acceleration variables
-        n_vars = n_v + n_d + n_a
+        n_v = N + 1   # Velocity variables
+        n_d = N + 1   # Distance variables (per lead)
+        n_a = N       # Acceleration variables
+        n_vars = n_v + 3 * n_d + n_a
 
-        # Lower and upper bounds for variables
         lbx = []
         ubx = []
 
@@ -195,10 +221,10 @@ class MPCController:
             lbx.append(self.MIN_VELOCITY)
             ubx.append(self.MAX_VELOCITY)
 
-        # Distance bounds (must be positive)
-        for _ in range(n_d):
+        # Distance bounds for d1, d2, d3 (must be positive)
+        for _ in range(3 * n_d):
             lbx.append(0.0)
-            ubx.append(200.0)  # Large upper bound
+            ubx.append(500.0)  # Upper bound (d2, d3 can be larger)
 
         # Acceleration bounds
         for _ in range(n_a):
@@ -243,7 +269,7 @@ class MPCController:
         # Warm start solution
         self.x0 = None
 
-        logger.debug("MPC optimizer built successfully")
+        logger.debug("MPC optimizer built successfully (4-state, 3-lead formulation)")
 
     def set_weights(self, w_velocity: float, w_safety: float, w_comfort: float):
         """
@@ -270,18 +296,26 @@ class MPCController:
     def compute_control(
         self,
         ego_velocity: float,
-        lead_velocity: float,
-        distance_gap: float,
-        lead_velocity_prediction: Optional[np.ndarray] = None
+        lead_velocities: Optional[list] = None,
+        distance_gaps: Optional[list] = None,
+        lead_accelerations: Optional[list] = None,
+        lead_velocity: Optional[float] = None,
+        distance_gap: Optional[float] = None
     ) -> Tuple[float, Dict]:
         """
-        Compute optimal acceleration using MPC.
+        Compute optimal acceleration using MPC with 3-lead awareness.
+
+        Accepts either the new multi-lead interface (lead_velocities, distance_gaps,
+        lead_accelerations as lists of 3) or the legacy single-lead interface
+        (lead_velocity, distance_gap) for backward compatibility.
 
         Args:
             ego_velocity: Current ego vehicle velocity (m/s)
-            lead_velocity: Current lead vehicle velocity (m/s)
-            distance_gap: Current distance gap (m)
-            lead_velocity_prediction: Predicted lead velocity over horizon (optional)
+            lead_velocities: Velocities of all 3 leads [v1, v2, v3] (m/s)
+            distance_gaps: Distances to all 3 leads [d1, d2, d3] (m)
+            lead_accelerations: Accelerations of all 3 leads [a1, a2, a3] (m/s²)
+            lead_velocity: (legacy) Single lead velocity (m/s)
+            distance_gap: (legacy) Single distance gap (m)
 
         Returns:
             acceleration: Optimal acceleration command (m/s²)
@@ -289,35 +323,63 @@ class MPCController:
         """
         self.solve_count += 1
 
-        # Relative velocity
-        relative_velocity = lead_velocity - ego_velocity
+        # Handle legacy single-lead interface
+        if lead_velocities is None:
+            lv = lead_velocity if lead_velocity is not None else ego_velocity
+            dg = distance_gap if distance_gap is not None else 50.0
+            lead_velocities = [lv, lv, lv]
+            distance_gaps = [dg, dg + 15.0, dg + 30.0]
+            lead_accelerations = [0.0, 0.0, 0.0]
 
-        # Default lead velocity prediction (assume constant)
-        if lead_velocity_prediction is None:
-            lead_velocity_prediction = np.ones(self.horizon + 1) * lead_velocity
+        # Build lead velocity predictions (assume constant over horizon)
+        N = self.horizon
+        v_lead1_pred = np.ones(N + 1) * lead_velocities[0]
+        v_lead2_pred = np.ones(N + 1) * lead_velocities[1]
+        v_lead3_pred = np.ones(N + 1) * lead_velocities[2]
 
-        # Build parameter vector
+        # If leads are decelerating, project deceleration into predictions
+        for i, (pred, accel) in enumerate([
+            (v_lead1_pred, lead_accelerations[0]),
+            (v_lead2_pred, lead_accelerations[1]),
+            (v_lead3_pred, lead_accelerations[2])
+        ]):
+            if accel < -0.5:  # Only project significant deceleration
+                for k in range(1, N + 1):
+                    pred[k] = max(0.0, pred[k - 1] + accel * self.dt)
+
+        # Build parameter vector: [v0, d1_0, d2_0, d3_0, v_lead1(N+1), v_lead2(N+1),
+        #                           v_lead3(N+1), a_prev, w_v, w_s, w_c, v_target]
         params = np.zeros(self.n_params)
         params[0] = ego_velocity
-        params[1] = distance_gap
-        params[2] = relative_velocity
-        params[3] = lead_velocity
-        params[4:4 + self.horizon + 1] = lead_velocity_prediction[:self.horizon + 1]
-        params[4 + self.horizon + 1] = self.previous_acceleration
-        params[4 + self.horizon + 2] = self.w_velocity
-        params[4 + self.horizon + 3] = self.w_safety
-        params[4 + self.horizon + 4] = self.w_comfort
-        params[4 + self.horizon + 5] = self.target_velocity
+        params[1] = distance_gaps[0]
+        params[2] = distance_gaps[1]
+        params[3] = distance_gaps[2]
+
+        idx = 4
+        params[idx:idx + N + 1] = v_lead1_pred
+        idx += N + 1
+        params[idx:idx + N + 1] = v_lead2_pred
+        idx += N + 1
+        params[idx:idx + N + 1] = v_lead3_pred
+        idx += N + 1
+
+        params[idx] = self.previous_acceleration
+        params[idx + 1] = self.w_velocity
+        params[idx + 2] = self.w_safety
+        params[idx + 3] = self.w_comfort
+        params[idx + 4] = self.target_velocity
 
         # Initial guess (warm start or default)
         if self.x0 is None:
-            # Default initialization
             x0 = np.zeros(self.n_vars)
-            # Initialize velocities
-            x0[:self.horizon + 1] = ego_velocity
-            # Initialize distances
-            x0[self.horizon + 1:2 * (self.horizon + 1)] = distance_gap
-            # Initialize accelerations to zero
+            n_state = N + 1
+            # Initialize velocity
+            x0[:n_state] = ego_velocity
+            # Initialize d1, d2, d3
+            x0[n_state:2 * n_state] = distance_gaps[0]
+            x0[2 * n_state:3 * n_state] = distance_gaps[1]
+            x0[3 * n_state:4 * n_state] = distance_gaps[2]
+            # Accelerations default to zero
         else:
             x0 = self.x0
 
@@ -332,16 +394,15 @@ class MPCController:
                 p=params
             )
 
-            # Check solver status
             stats = self.solver.stats()
             success = stats['success']
 
             if success:
-                # Extract solution
                 x_opt = np.array(sol['x']).flatten()
 
-                # Get first acceleration command
-                a_start = 2 * (self.horizon + 1)
+                # Acceleration starts after v, d1, d2, d3
+                n_state = N + 1
+                a_start = 4 * n_state
                 acceleration = float(x_opt[a_start])
 
                 # Store solution for warm start
@@ -354,22 +415,27 @@ class MPCController:
                     'success': True,
                     'cost': float(sol['f']),
                     'iterations': stats.get('iter_count', 0),
-                    'predicted_velocity': x_opt[:self.horizon + 1],
-                    'predicted_distance': x_opt[self.horizon + 1:2 * (self.horizon + 1)],
-                    'planned_acceleration': x_opt[a_start:a_start + self.horizon]
+                    'predicted_velocity': x_opt[:n_state],
+                    'predicted_d1': x_opt[n_state:2 * n_state],
+                    'predicted_d2': x_opt[2 * n_state:3 * n_state],
+                    'predicted_d3': x_opt[3 * n_state:4 * n_state],
+                    'planned_acceleration': x_opt[a_start:a_start + N]
                 }
 
             else:
-                # Solver failed - use fallback
                 logger.warning(f"MPC solver failed: {stats.get('return_status', 'unknown')}")
                 self.solve_failures += 1
-                acceleration = self._fallback_control(ego_velocity, lead_velocity, distance_gap)
+                acceleration = self._fallback_control(
+                    ego_velocity, lead_velocities[0], distance_gaps[0]
+                )
                 info = {'success': False, 'fallback': True}
 
         except Exception as e:
             logger.error(f"MPC solver exception: {e}")
             self.solve_failures += 1
-            acceleration = self._fallback_control(ego_velocity, lead_velocity, distance_gap)
+            acceleration = self._fallback_control(
+                ego_velocity, lead_velocities[0], distance_gaps[0]
+            )
             info = {'success': False, 'error': str(e)}
 
         # Clip acceleration to bounds
@@ -495,29 +561,37 @@ if __name__ == "__main__":
 
     # Initial conditions
     ego_velocity = 15.0
-    distance_gap = 30.0
+    distance_gaps = [30.0, 45.0, 60.0]  # d1, d2, d3
 
     # Data logging
     ego_velocities = [ego_velocity]
-    distances = [distance_gap]
+    distances = [distance_gaps[0]]
     accelerations = []
 
     for i in range(n_steps):
         lead_vel = lead_velocities[min(i, len(lead_velocities) - 1)]
+        # Assume leads 2 and 3 have same velocity as lead 1 for this test
+        all_lead_vels = [lead_vel, lead_vel, lead_vel]
 
-        # Compute control
-        accel, info = mpc.compute_control(ego_velocity, lead_vel, distance_gap)
+        # Compute control using new multi-lead interface
+        accel, info = mpc.compute_control(
+            ego_velocity=ego_velocity,
+            lead_velocities=all_lead_vels,
+            distance_gaps=distance_gaps,
+            lead_accelerations=[0.0, 0.0, 0.0]
+        )
         accelerations.append(accel)
 
         # Update state (simple integration)
         ego_velocity += accel * dt
         ego_velocity = np.clip(ego_velocity, 0.0, 30.0)
 
-        rel_vel = lead_vel - ego_velocity
-        distance_gap += rel_vel * dt
+        for j in range(3):
+            rel_vel_j = all_lead_vels[j] - ego_velocity
+            distance_gaps[j] += rel_vel_j * dt
 
         ego_velocities.append(ego_velocity)
-        distances.append(distance_gap)
+        distances.append(distance_gaps[0])
 
     # Plot results
     fig, axes = plt.subplots(3, 1, figsize=(10, 8), sharex=True)

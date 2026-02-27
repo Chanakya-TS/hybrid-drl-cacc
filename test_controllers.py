@@ -80,29 +80,48 @@ def run_controller_episode(
         'acceleration': [],
         'throttle': [],
         'brake': [],
-        'time_headway': []
+        'time_headway': [],
+        'distance_gap_2': [],
+        'distance_gap_3': [],
+        'rel_vel_2': [],
+        'rel_vel_3': [],
+        'lead_accel_1': [],
+        'lead_accel_2': [],
+        'lead_accel_3': []
     }
 
     step = 0
     done = False
 
     while step < max_steps and not done:
-        # Extract observation
-        ego_velocity, relative_velocity, distance_gap = obs
-        lead_velocity = ego_velocity + relative_velocity
+        # Extract 10-dim observation
+        ego_velocity = obs[0]
+        rel_vel_1, distance_1, accel_1 = obs[1], obs[2], obs[3]
+        rel_vel_2, distance_2, accel_2 = obs[4], obs[5], obs[6]
+        rel_vel_3, distance_3, accel_3 = obs[7], obs[8], obs[9]
+
+        lead_velocity_1 = ego_velocity + rel_vel_1
+        lead_velocities = [
+            lead_velocity_1,
+            ego_velocity + rel_vel_2,
+            ego_velocity + rel_vel_3
+        ]
+        distance_gaps = [distance_1, distance_2, distance_3]
+        lead_accelerations = [accel_1, accel_2, accel_3]
 
         # Compute control action
         if isinstance(controller, (MPCController, FixedWeightMPC)):
             acceleration, ctrl_info = controller.compute_control(
                 ego_velocity=ego_velocity,
-                lead_velocity=lead_velocity,
-                distance_gap=distance_gap
+                lead_velocities=lead_velocities,
+                distance_gaps=distance_gaps,
+                lead_accelerations=lead_accelerations
             )
         elif isinstance(controller, ACCController):
             acceleration, ctrl_info = controller.compute_control(
                 ego_velocity=ego_velocity,
-                lead_velocity=lead_velocity,
-                distance_gap=distance_gap
+                lead_velocity=lead_velocity_1,
+                distance_gap=distance_1
             )
         else:
             raise ValueError(f"Unknown controller type: {type(controller)}")
@@ -114,19 +133,27 @@ def run_controller_episode(
         # Record data
         episode_data['time'].append(step * env.dt)
         episode_data['ego_velocity'].append(ego_velocity)
-        episode_data['lead_velocity'].append(lead_velocity)
-        episode_data['distance_gap'].append(distance_gap)
-        episode_data['relative_velocity'].append(relative_velocity)
+        episode_data['lead_velocity'].append(lead_velocity_1)
+        episode_data['distance_gap'].append(distance_1)
+        episode_data['relative_velocity'].append(rel_vel_1)
         episode_data['acceleration'].append(acceleration)
         episode_data['throttle'].append(info.get('throttle', 0.0))
         episode_data['brake'].append(info.get('brake', 0.0))
         episode_data['time_headway'].append(info.get('time_headway', 0.0))
+        episode_data['distance_gap_2'].append(distance_2)
+        episode_data['distance_gap_3'].append(distance_3)
+        episode_data['rel_vel_2'].append(rel_vel_2)
+        episode_data['rel_vel_3'].append(rel_vel_3)
+        episode_data['lead_accel_1'].append(accel_1)
+        episode_data['lead_accel_2'].append(accel_2)
+        episode_data['lead_accel_3'].append(accel_3)
 
         # Progress logging
         if verbose and step % 100 == 0:
             logger.info(
                 f"  Step {step}: vel={ego_velocity:.1f} m/s, "
-                f"gap={distance_gap:.1f} m, THW={info.get('time_headway', 0):.2f} s"
+                f"d1={distance_1:.1f} m, d2={distance_2:.1f} m, "
+                f"THW={info.get('time_headway', 0):.2f} s"
             )
 
         step += 1
@@ -165,6 +192,8 @@ def print_comparison(mpc_metrics: Dict, acc_metrics: Dict):
         ('Min Time Headway (s)', 'safety', 'min_time_headway', '.2f'),
         ('Avg Time Headway (s)', 'safety', 'avg_time_headway', '.2f'),
         ('THW Violation Rate (%)', 'safety', 'violation_rate', '.1%'),
+        ('  Too Close (<1.5s)', 'safety', 'too_close_rate', '.1%'),
+        ('  Too Far (>5.0s)', 'safety', 'too_far_rate', '.1%'),
         ('Avg Velocity (m/s)', 'velocity', 'avg_ego_velocity', '.2f'),
         ('Avg Throttle', 'control', 'avg_throttle', '.3f'),
     ]

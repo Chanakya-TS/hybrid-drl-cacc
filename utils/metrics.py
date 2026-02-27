@@ -151,18 +151,21 @@ def calculate_rms_jerk(
 def calculate_safety_metrics(
     distance_gap: np.ndarray,
     ego_velocity: np.ndarray,
-    min_thw_threshold: float = 1.5
+    min_thw_threshold: float = 1.5,
+    max_thw_threshold: float = 5.0
 ) -> Dict[str, float]:
     """
     Calculate safety-related metrics.
 
     Time Headway (THW) = distance / velocity
     Lower THW values indicate potentially unsafe following.
+    Upper THW values indicate trailing too far (poor car-following).
 
     Args:
         distance_gap: Array of distance gap values (m)
         ego_velocity: Array of ego velocity values (m/s)
         min_thw_threshold: Minimum safe THW threshold (s)
+        max_thw_threshold: Maximum acceptable THW threshold (s)
 
     Returns:
         Dictionary with safety metrics
@@ -179,23 +182,34 @@ def calculate_safety_metrics(
     # Average THW
     avg_thw = np.mean(time_headway)
 
-    # THW violations (below threshold)
-    violations = time_headway < min_thw_threshold
-    violation_count = np.sum(violations)
+    # THW violations — too close (below min threshold)
+    too_close = time_headway < min_thw_threshold
+    too_close_count = int(np.sum(too_close))
+    too_close_rate = too_close_count / len(time_headway)
+
+    # THW violations — too far (above max threshold)
+    too_far = time_headway > max_thw_threshold
+    too_far_count = int(np.sum(too_far))
+    too_far_rate = too_far_count / len(time_headway)
+
+    # Combined violation rate (either too close or too far)
+    violations = too_close | too_far
+    violation_count = int(np.sum(violations))
     violation_rate = violation_count / len(time_headway)
 
     # Minimum distance gap
     min_distance = np.min(distance_gap)
 
-    # Time to collision (simplified: distance / closing_velocity)
-    # Only valid when approaching (positive relative velocity from ego perspective)
-
     return {
         'min_time_headway': float(min_thw),
         'avg_time_headway': float(avg_thw),
         'thw_std': float(np.std(time_headway)),
-        'violation_count': int(violation_count),
+        'violation_count': violation_count,
         'violation_rate': float(violation_rate),
+        'too_close_count': too_close_count,
+        'too_close_rate': float(too_close_rate),
+        'too_far_count': too_far_count,
+        'too_far_rate': float(too_far_rate),
         'min_distance_gap': float(min_distance),
         'avg_distance_gap': float(np.mean(distance_gap))
     }
@@ -420,6 +434,8 @@ def print_metrics_summary(metrics: Dict, controller_name: str = "Controller"):
     print(f"  Min Time Headway: {s['min_time_headway']:.2f} s")
     print(f"  Avg Time Headway: {s['avg_time_headway']:.2f} s")
     print(f"  THW Violations: {s['violation_count']} ({s['violation_rate']*100:.1f}%)")
+    print(f"    Too Close (<1.5s): {s['too_close_count']} ({s['too_close_rate']*100:.1f}%)")
+    print(f"    Too Far  (>5.0s):  {s['too_far_count']} ({s['too_far_rate']*100:.1f}%)")
     print(f"  Min Distance Gap: {s['min_distance_gap']:.2f} m")
 
     print("\n--- Velocity ---")
