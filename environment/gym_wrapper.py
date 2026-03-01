@@ -41,7 +41,7 @@ class HybridMPCEnv(gym.Env):
     metadata = {'render_modes': ['human']}
 
     # Normalization constants
-    MAX_VELOCITY = 30.0  # m/s
+    MAX_VELOCITY = 36.0  # m/s (~130 km/h, accommodates US06 peak)
     MAX_REL_VELOCITY = 20.0  # m/s
     MAX_DISTANCE = 100.0  # m
     MAX_ACCELERATION = 5.0  # m/s² (for normalizing lead accelerations)

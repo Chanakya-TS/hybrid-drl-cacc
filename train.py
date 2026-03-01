@@ -8,7 +8,7 @@ Usage:
     python train.py                          # Train with default settings
     python train.py --timesteps 100000       # Train for specific timesteps
     python train.py --resume checkpoint.zip  # Resume from checkpoint
-    python train.py --scenario multi_phase   # Train on specific scenario
+    python train.py --scenario udds           # Train on specific EPA cycle
 """
 
 import os
@@ -35,7 +35,8 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 
 # Project imports
 from environment.gym_wrapper import HybridMPCEnv
-from utils.scenarios import get_scenario, get_all_scenarios, DRL_ADVANTAGE_SCENARIOS
+from utils.scenarios import get_scenario, get_all_scenarios, DRL_ADVANTAGE_SCENARIOS, EASY_SCENARIOS
+from utils.drive_cycles import get_cycle_trajectory, get_cycle_subsections
 
 # Setup logging
 logging.basicConfig(
@@ -87,27 +88,24 @@ class TrainingMetricsCallback(BaseCallback):
 
 class CurriculumScheduler(gym.Wrapper):
     """
-    3-phase curriculum learning wrapper for scenario scheduling.
+    3-phase curriculum learning wrapper for EPA drive cycle scheduling.
 
-    Instead of uniform-random scenario selection, progressively increases
-    difficulty as training advances:
+    Progressively introduces harder drive cycles as training advances:
 
     Phase 1 — Warmup (0–20% of steps):
-        Only easy scenarios (highway_cruise, predictable_pattern).
-        Agent learns stable car-following with steady MPC weights.
+        HWFET only. Steady highway driving teaches stable car-following.
 
     Phase 2 — Main (20–70% of steps):
-        Weighted random: 70% DRL-advantage scenarios, 30% all scenarios.
-        Agent learns when and how to adjust weights.
+        UDDS + HWFET (70/30 mix). Stop-and-go city driving teaches
+        adaptive weight adjustment.
 
     Phase 3 — Generalization (70–100% of steps):
-        All scenarios equally. Agent refines across all patterns.
+        All 3 cycles equally (UDDS, HWFET, US06). Adds aggressive
+        driving to generalize across all speed regimes.
 
-    Tracks cumulative steps across episodes to determine current phase.
+    Uses subsectioned cycle windows (~300s each) for manageable episode
+    lengths, with occasional full cycles in the all_pool.
     """
-
-    # Scenario names for each phase
-    EASY_SCENARIOS = ['highway_cruise', 'predictable_pattern']
 
     def __init__(
         self,
@@ -250,19 +248,65 @@ class CurriculumScheduler(gym.Wrapper):
             pass  # Don't crash training if debug draw fails
 
 
+def build_training_pools(
+    dt: float = 0.05,
+    window_s: float = 300.0,
+    overlap_s: float = 30.0
+) -> tuple:
+    """
+    Build subsectioned training pools from EPA drive cycles.
+
+    Full EPA cycles are too long for training episodes (e.g. UDDS = 27,380
+    steps at dt=0.05). This function splits each cycle into overlapping
+    ~300s windows and also includes full cycles for occasional use.
+
+    Args:
+        dt: Simulation timestep
+        window_s: Subsection window duration in seconds
+        overlap_s: Overlap between windows in seconds
+
+    Returns:
+        (all_pool, drl_advantage_pool, easy_pool) — each is a list of
+        (trajectory, num_steps, name) tuples
+    """
+    all_pool = []
+    drl_advantage_pool = []
+    easy_pool = []
+
+    cycle_names = ['udds', 'hwfet', 'us06']
+
+    for cycle_name in cycle_names:
+        # Add subsections for training
+        subsections = get_cycle_subsections(cycle_name, dt, window_s, overlap_s)
+        for traj, dur, sub_name in subsections:
+            entry = (traj, len(traj), sub_name)
+            all_pool.append(entry)
+
+            if cycle_name in DRL_ADVANTAGE_SCENARIOS:
+                drl_advantage_pool.append(entry)
+            if cycle_name in EASY_SCENARIOS:
+                easy_pool.append(entry)
+
+        # Also add the full cycle to the all_pool for occasional full-episode training
+        full_traj, full_dur = get_cycle_trajectory(cycle_name, dt)
+        all_pool.append((full_traj, len(full_traj), f"{cycle_name}_full"))
+
+    return all_pool, drl_advantage_pool, easy_pool
+
+
 def create_training_env(
     scenario_name: Optional[str] = None,
     max_episode_steps: int = 1000,
-    total_timesteps: int = 200000,
+    total_timesteps: int = 500000,
     log_dir: str = "logs"
 ) -> gym.Env:
     """
-    Create the training environment with curriculum learning.
+    Create the training environment with curriculum learning over EPA cycles.
 
     When no scenario is specified, uses a 3-phase curriculum scheduler:
-    - Phase 1 (Warmup, 0-20%): Easy scenarios for basic car-following
-    - Phase 2 (Main, 20-70%): DRL-advantage scenarios for weight adaptation
-    - Phase 3 (Generalization, 70-100%): All scenarios equally
+    - Phase 1 (Warmup, 0-20%): HWFET subsections for stable car-following
+    - Phase 2 (Main, 20-70%): UDDS + HWFET for adaptive weight learning
+    - Phase 3 (Generalization, 70-100%): All cycles including aggressive US06
 
     Args:
         scenario_name: Name of a single scenario to use (None for curriculum)
@@ -280,11 +324,11 @@ def create_training_env(
         max_episode_steps = scenario.num_steps
         logger.info(f"Using scenario: {scenario_name} ({scenario.duration_s:.1f}s)")
     else:
-        # Use the longest scenario as the initial trajectory (will be swapped on reset)
-        all_scenarios = get_all_scenarios()
-        longest = max(all_scenarios.values(), key=lambda s: s.num_steps)
-        trajectory = longest.trajectory
-        max_episode_steps = longest.num_steps
+        # Use the longest subsection as the initial trajectory (will be swapped on reset)
+        all_pool, _, _ = build_training_pools()
+        longest = max(all_pool, key=lambda x: x[1])
+        trajectory = longest[0]
+        max_episode_steps = longest[1]
 
     # Create environment
     env = HybridMPCEnv(
@@ -300,34 +344,17 @@ def create_training_env(
 
     # If no specific scenario, wrap with curriculum scheduler
     if not scenario_name:
-        all_scenarios = get_all_scenarios()
+        all_pool, drl_advantage_pool, easy_pool = build_training_pools()
 
-        # Build scenario pools
-        all_pool = []
-        drl_advantage_pool = []
-        easy_pool = []
-
-        for name, s in all_scenarios.items():
-            entry = (s.trajectory, s.num_steps, name)
-            all_pool.append(entry)
-
-            if name in DRL_ADVANTAGE_SCENARIOS:
-                drl_advantage_pool.append(entry)
-
-            if name in CurriculumScheduler.EASY_SCENARIOS:
-                easy_pool.append(entry)
-
-        # Also add the custom varied training trajectory to all pool
-        varied_traj = create_varied_training_trajectory()
-        all_pool.append((varied_traj, len(varied_traj), 'varied_training'))
-
-        logger.info(f"Training with {len(all_pool)} scenarios (curriculum learning):")
+        logger.info(f"Training with {len(all_pool)} trajectory segments (curriculum learning):")
         for traj, steps, name in all_pool:
             phase_tags = []
-            if name in CurriculumScheduler.EASY_SCENARIOS:
-                phase_tags.append("P1-easy")
-            if name in DRL_ADVANTAGE_SCENARIOS:
-                phase_tags.append("P2-advantage")
+            # Determine which phase(s) this segment belongs to
+            base_cycle = name.split('_')[0]
+            if base_cycle in EASY_SCENARIOS:
+                phase_tags.append("P1-warmup")
+            if base_cycle in DRL_ADVANTAGE_SCENARIOS:
+                phase_tags.append("P2-main")
             phase_tags.append("P3-all")
             logger.info(f"  {name}: {steps} steps ({steps*0.05:.1f}s) [{', '.join(phase_tags)}]")
 
@@ -346,49 +373,10 @@ def create_training_env(
     return env
 
 
-def create_varied_training_trajectory() -> np.ndarray:
-    """
-    Create a varied training trajectory combining multiple patterns.
-
-    This helps the agent learn to handle different driving situations.
-    """
-    dt = 0.05
-
-    # Combine elements from different scenarios
-    trajectory = np.concatenate([
-        # Highway cruise with slight variations
-        20.0 + 2.0 * np.sin(np.linspace(0, 2 * np.pi, 200)),
-
-        # Gradual slowdown
-        np.linspace(22.0, 10.0, 150),
-
-        # Stop-and-go
-        np.linspace(10.0, 3.0, 50),
-        np.ones(30) * 3.0,
-        np.linspace(3.0, 15.0, 80),
-
-        # Traffic waves (sinusoidal)
-        15.0 + 4.0 * np.sin(np.linspace(0, 4 * np.pi, 300)),
-
-        # Emergency braking
-        np.ones(50) * 20.0,
-        np.linspace(20.0, 5.0, 40),
-        np.ones(30) * 5.0,
-
-        # Recovery
-        np.linspace(5.0, 22.0, 100),
-
-        # Final cruise
-        np.ones(100) * 22.0,
-    ])
-
-    return trajectory
-
-
 def create_sac_model(
     env,
     learning_rate: float = 3e-4,
-    buffer_size: int = 100000,
+    buffer_size: int = 300000,
     batch_size: int = 256,
     tau: float = 0.005,
     gamma: float = 0.99,
@@ -436,7 +424,7 @@ def create_sac_model(
 
 
 def train(
-    total_timesteps: int = 200000,
+    total_timesteps: int = 500000,
     scenario_name: Optional[str] = None,
     checkpoint_freq: int = 10000,
     resume_path: Optional[str] = None,
@@ -448,7 +436,7 @@ def train(
     Main training function.
 
     Args:
-        total_timesteps: Total training timesteps (default: 200k)
+        total_timesteps: Total training timesteps (default: 500k)
         scenario_name: Scenario to train on (None for curriculum learning)
         checkpoint_freq: Checkpoint save frequency
         resume_path: Path to resume training from
@@ -568,14 +556,14 @@ def main():
     parser.add_argument(
         '--timesteps', '-t',
         type=int,
-        default=200000,
-        help='Total training timesteps (default: 200000)'
+        default=500000,
+        help='Total training timesteps (default: 500000)'
     )
     parser.add_argument(
         '--scenario', '-s',
         type=str,
         default=None,
-        help='Scenario to train on (default: varied training trajectory)'
+        help='EPA cycle to train on (udds/hwfet/us06, default: curriculum)'
     )
     parser.add_argument(
         '--resume', '-r',

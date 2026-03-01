@@ -30,7 +30,7 @@ class CarFollowingEnv:
     MAX_BRAKING = 3.0  # m/s²
     TIME_HEADWAY = 1.8  # seconds (safety constraint)
     INITIAL_DISTANCE = 20.0  # meters (to first lead vehicle)
-    MAX_VELOCITY = 30.0  # m/s (~108 km/h)
+    MAX_VELOCITY = 36.0  # m/s (~130 km/h, accommodates US06 peak)
 
     def __init__(
         self,

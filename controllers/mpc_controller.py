@@ -27,7 +27,7 @@ class MPCController:
     """
 
     # Physical constants
-    MAX_VELOCITY = 30.0  # m/s (~108 km/h)
+    MAX_VELOCITY = 36.0  # m/s (~130 km/h, accommodates US06 peak)
     MIN_VELOCITY = 0.0  # m/s
     MAX_ACCELERATION = 2.0  # m/s²
     MAX_BRAKING = -3.0  # m/s² (negative for deceleration)
