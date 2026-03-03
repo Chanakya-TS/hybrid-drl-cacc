@@ -226,26 +226,8 @@ class CurriculumScheduler(gym.Wrapper):
         return obs, reward, terminated, truncated, info
 
     def _draw_scenario_label(self, name: str, num_steps: int):
-        """Draw the current scenario name as debug text in CARLA."""
-        try:
-            import carla
-            carla_env = self.env.carla_env
-            if carla_env.ego_vehicle is not None and carla_env.world is not None:
-                ego_loc = carla_env.ego_vehicle.get_location()
-                label_loc = carla.Location(
-                    x=ego_loc.x, y=ego_loc.y, z=ego_loc.z + 4.0
-                )
-                phase_names = {1: 'Warmup', 2: 'Main', 3: 'Generalize'}
-                label = f"P{self.current_phase}({phase_names[self.current_phase]}): {name}"
-                carla_env.world.debug.draw_string(
-                    label_loc,
-                    label,
-                    draw_shadow=True,
-                    color=carla.Color(0, 255, 0),
-                    life_time=num_steps * 0.05 + 5.0
-                )
-        except Exception:
-            pass  # Don't crash training if debug draw fails
+        """No-op (no 3D world to draw in with lightweight sim)."""
+        pass
 
 
 def build_training_pools(
@@ -332,14 +314,11 @@ def create_training_env(
 
     # Create environment
     env = HybridMPCEnv(
-        carla_host='localhost',
-        carla_port=2000,
         dt=0.05,
         mpc_horizon=20,
         max_episode_steps=max_episode_steps,
         target_velocity=20.0,
         lead_trajectory=trajectory,
-        map_name='Town04'
     )
 
     # If no specific scenario, wrap with curriculum scheduler
@@ -604,21 +583,15 @@ def main():
     print("HYBRID DRL-MPC ECO-DRIVING TRAINING")
     print("=" * 60)
     print()
-    print("Prerequisites:")
-    print("1. CARLA server must be running (use start_carla.bat)")
-    print("2. Ensure stable-baselines3 is installed")
-    print()
     print("Training Configuration:")
     print(f"  Timesteps: {args.timesteps}")
     print(f"  Scenario: {args.scenario or 'curriculum (3-phase learning)'}")
     print(f"  Checkpoint freq: {args.checkpoint_freq}")
     print()
 
-    model_name = input("Enter a name for this model: ").strip()
+    model_name = input("Enter a name for this model (or press ENTER to skip): ").strip()
     if not model_name:
         model_name = None
-
-    input("Press ENTER when CARLA is ready to start training...")
 
     train(
         total_timesteps=args.timesteps,

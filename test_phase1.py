@@ -65,20 +65,8 @@ def simple_proportional_controller(obs, kp_velocity=0.3, kp_distance=0.1):
 def main():
     """Run the Phase 1 test."""
     print("="*60)
-    print("PHASE 1 TEST: CARLA Environment Wrapper")
+    print("PHASE 1 TEST: Car-Following Environment")
     print("="*60)
-    print()
-
-    # Check if CARLA is running
-    print("Prerequisites:")
-    print("1. CARLA server must be running")
-    print("2. Default connection: localhost:2000")
-    print()
-    print("To start CARLA server:")
-    print("  CarlaUE4.exe -quality-level=Low -fps=20")
-    print()
-
-    input("Press ENTER when CARLA server is ready...")
     print()
 
     # Create test trajectory
@@ -92,8 +80,6 @@ def main():
     print("Creating CarFollowingEnv...")
     try:
         env = CarFollowingEnv(
-            carla_host='localhost',
-            carla_port=2000,
             dt=0.05,
             lead_vehicle_trajectory=trajectory,
             max_episode_steps=500
@@ -101,8 +87,6 @@ def main():
         print("  Environment created successfully!")
     except Exception as e:
         print(f"  ERROR: Failed to create environment: {e}")
-        print()
-        print("Make sure CARLA server is running!")
         sys.exit(1)
 
     print()

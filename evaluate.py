@@ -274,26 +274,20 @@ def evaluate_scenario(
 
     results = {}
 
-    # Create CARLA environment for baselines
+    # Create environment for baselines
     carla_env = CarFollowingEnv(
-        carla_host='localhost',
-        carla_port=2000,
         dt=scenario.dt,
         lead_vehicle_trajectory=scenario.trajectory,
         max_episode_steps=scenario.num_steps,
-        map_name='Town04'
     )
 
     # Create hybrid environment for DRL
     hybrid_env = HybridMPCEnv(
-        carla_host='localhost',
-        carla_port=2000,
         dt=scenario.dt,
         mpc_horizon=20,
         max_episode_steps=scenario.num_steps,
         target_velocity=20.0,
         lead_trajectory=scenario.trajectory,
-        map_name='Town04'
     )
 
     try:
@@ -652,13 +646,8 @@ def main():
     print("HYBRID DRL-MPC CONTROLLER EVALUATION")
     print("=" * 70)
     print()
-    print("Prerequisites:")
-    print("1. CARLA server must be running (use start_carla.bat)")
-    print()
     print(f"Model: {args.model}")
     print()
-
-    input("Press ENTER when CARLA is ready...")
 
     if args.scenario:
         if args.scenario not in ALL_SCENARIOS:

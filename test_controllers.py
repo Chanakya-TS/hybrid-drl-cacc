@@ -255,12 +255,9 @@ def run_scenario_test(
     created_env = False
     if env is None:
         env = CarFollowingEnv(
-            carla_host='localhost',
-            carla_port=2000,
             dt=scenario.dt,
             lead_vehicle_trajectory=scenario.trajectory,
             max_episode_steps=scenario.num_steps,
-            map_name='Town04'
         )
         created_env = True
     else:
@@ -361,12 +358,9 @@ def run_all_scenarios(save_results: bool = True, drl_only: bool = True) -> Dict[
     # Create environment once
     first_scenario = get_scenario(scenarios[0])
     env = CarFollowingEnv(
-        carla_host='localhost',
-        carla_port=2000,
         dt=first_scenario.dt,
         lead_vehicle_trajectory=first_scenario.trajectory,
         max_episode_steps=first_scenario.num_steps,
-        map_name='Town04'
     )
 
     try:
@@ -416,12 +410,6 @@ def interactive_menu():
     print("CONTROLLER COMPARISON TEST: MPC vs ACC")
     print("=" * 70)
     print()
-    print("Prerequisites:")
-    print("1. CARLA server must be running (use start_carla.bat)")
-    print("2. Make sure you have installed all dependencies")
-    print()
-
-    input("Press ENTER when CARLA is ready...")
 
     while True:
         print("\n" + "-" * 50)
@@ -519,10 +507,6 @@ def main():
         print("RUNNING ALL SCENARIOS")
         print("=" * 70)
         print()
-        print("Prerequisites:")
-        print("1. CARLA server must be running (use start_carla.bat)")
-        print()
-        input("Press ENTER when CARLA is ready...")
         run_all_scenarios(save_results=args.save, drl_only=False)
 
     elif args.drl:
@@ -530,10 +514,6 @@ def main():
         print("RUNNING DRL-ADVANTAGE SCENARIOS")
         print("=" * 70)
         print()
-        print("Prerequisites:")
-        print("1. CARLA server must be running (use start_carla.bat)")
-        print()
-        input("Press ENTER when CARLA is ready...")
         run_all_scenarios(save_results=args.save, drl_only=True)
 
     elif args.scenario:
@@ -546,10 +526,6 @@ def main():
         print(f"RUNNING SCENARIO: {args.scenario}")
         print("=" * 70)
         print()
-        print("Prerequisites:")
-        print("1. CARLA server must be running (use start_carla.bat)")
-        print()
-        input("Press ENTER when CARLA is ready...")
         run_scenario_test(args.scenario, save_results=args.save)
 
     else:

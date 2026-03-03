@@ -1,7 +1,7 @@
 """
 Gymnasium Wrapper for Hybrid DRL-MPC Eco-Driving Environment.
 
-This module wraps the CARLA CarFollowingEnv and MPC controller into a
+This module wraps the CarFollowingEnv and MPC controller into a
 Gymnasium-compatible environment for training DRL agents.
 
 The DRL agent learns to dynamically adjust MPC cost function weights
@@ -65,14 +65,11 @@ class HybridMPCEnv(gym.Env):
 
     def __init__(
         self,
-        carla_host: str = 'localhost',
-        carla_port: int = 2000,
         dt: float = 0.05,
         mpc_horizon: int = 20,
         max_episode_steps: int = 1000,
         target_velocity: float = 20.0,
         lead_trajectory: Optional[np.ndarray] = None,
-        map_name: str = 'Town04',
         action_repeat: Optional[int] = None,
         render_mode: Optional[str] = None
     ):
@@ -80,14 +77,11 @@ class HybridMPCEnv(gym.Env):
         Initialize the hybrid DRL-MPC environment.
 
         Args:
-            carla_host: CARLA server hostname
-            carla_port: CARLA server port
             dt: Simulation timestep
             mpc_horizon: MPC prediction horizon
             max_episode_steps: Maximum sim steps per episode
             target_velocity: Target cruising velocity
             lead_trajectory: Velocity profile for lead vehicle
-            map_name: CARLA map name
             action_repeat: Number of sim steps per DRL decision (default 20 = 1.0s).
                            MPC weights are held constant between decisions.
             render_mode: Rendering mode ('human' or None)
@@ -100,14 +94,11 @@ class HybridMPCEnv(gym.Env):
         self.action_repeat = action_repeat or self.DEFAULT_ACTION_REPEAT
         self.render_mode = render_mode
 
-        # Create CARLA environment
+        # Create simulation environment
         self.carla_env = CarFollowingEnv(
-            carla_host=carla_host,
-            carla_port=carla_port,
             dt=dt,
             lead_vehicle_trajectory=lead_trajectory,
             max_episode_steps=max_episode_steps,
-            map_name=map_name
         )
 
         # Create MPC controller (initialized at Fixed-MPC baseline weights)
@@ -465,8 +456,8 @@ class HybridMPCEnv(gym.Env):
         return float(reward)
 
     def render(self):
-        """Render the environment (handled by CARLA spectator camera)."""
-        pass  # Rendering is handled by CARLA's spectator camera
+        """Render the environment (no-op for lightweight sim)."""
+        pass
 
     def close(self):
         """Clean up resources."""
@@ -534,7 +525,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     print("Testing HybridMPCEnv...")
-    print("Make sure CARLA server is running!")
     print()
 
     # Create trajectory

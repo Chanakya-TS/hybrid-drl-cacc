@@ -2,7 +2,7 @@
 Environment package for Hybrid DRL-MPC Eco-Driving Framework.
 
 This package contains:
-- CarFollowingEnv: CARLA-based car-following simulation environment
+- CarFollowingEnv: Pure-Python 1D longitudinal car-following simulation
 - HybridMPCEnv: Gymnasium wrapper for DRL training
 """
 
