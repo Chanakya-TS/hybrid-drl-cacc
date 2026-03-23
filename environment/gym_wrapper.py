@@ -71,6 +71,7 @@ class HybridMPCEnv(gym.Env):
         target_velocity: float = 20.0,
         lead_trajectory: Optional[np.ndarray] = None,
         action_repeat: Optional[int] = None,
+        residual: bool = True,
         render_mode: Optional[str] = None
     ):
         """
@@ -84,6 +85,8 @@ class HybridMPCEnv(gym.Env):
             lead_trajectory: Velocity profile for lead vehicle
             action_repeat: Number of sim steps per DRL decision (default 20 = 1.0s).
                            MPC weights are held constant between decisions.
+            residual: If True (default), DRL outputs weight deltas from BASE_WEIGHTS.
+                      If False, DRL outputs absolute weights in [0, 1].
             render_mode: Rendering mode ('human' or None)
         """
         super().__init__()
@@ -92,6 +95,7 @@ class HybridMPCEnv(gym.Env):
         self.max_episode_steps = max_episode_steps
         self.target_velocity = target_velocity
         self.action_repeat = action_repeat or self.DEFAULT_ACTION_REPEAT
+        self.residual = residual
         self.render_mode = render_mode
 
         # Create simulation environment
@@ -135,13 +139,22 @@ class HybridMPCEnv(gym.Env):
             dtype=np.float32
         )
 
-        # Define action space: weight DELTAS from baseline [-MAX_DELTA, +MAX_DELTA]
-        # Zero action = Fixed-MPC weights (guaranteed baseline performance)
-        self.action_space = spaces.Box(
-            low=np.full(3, -self.MAX_DELTA, dtype=np.float32),
-            high=np.full(3, self.MAX_DELTA, dtype=np.float32),
-            dtype=np.float32
-        )
+        # Define action space based on residual vs absolute mode
+        if self.residual:
+            # Residual: weight DELTAS from baseline [-MAX_DELTA, +MAX_DELTA]
+            # Zero action = Fixed-MPC weights (guaranteed baseline performance)
+            self.action_space = spaces.Box(
+                low=np.full(3, -self.MAX_DELTA, dtype=np.float32),
+                high=np.full(3, self.MAX_DELTA, dtype=np.float32),
+                dtype=np.float32
+            )
+        else:
+            # Absolute: raw weights in [0, 1], normalized to sum to 1
+            self.action_space = spaces.Box(
+                low=np.full(3, 0.0, dtype=np.float32),
+                high=np.full(3, 1.0, dtype=np.float32),
+                dtype=np.float32
+            )
 
         # Episode tracking
         self.current_step = 0       # sim-level step counter
@@ -154,8 +167,9 @@ class HybridMPCEnv(gym.Env):
         self.weight_history = []
 
         decision_interval_s = self.action_repeat * self.dt
+        mode = "residual" if self.residual else "absolute"
         logger.info(
-            f"HybridMPCEnv initialized (action_repeat={self.action_repeat}, "
+            f"HybridMPCEnv initialized ({mode} policy, action_repeat={self.action_repeat}, "
             f"DRL decides every {decision_interval_s:.2f}s, "
             f"MPC runs at {1/self.dt:.0f}Hz)"
         )
@@ -224,8 +238,13 @@ class HybridMPCEnv(gym.Env):
             truncated: Whether episode was truncated (max steps)
             info: Additional information including sim_steps count
         """
-        # 1. Apply deltas to baseline weights (residual policy)
-        raw_weights = self.BASE_WEIGHTS + np.array(action)
+        # 1. Compute target weights from action
+        if self.residual:
+            # Residual policy: deltas on top of baseline
+            raw_weights = self.BASE_WEIGHTS + np.array(action)
+        else:
+            # Absolute policy: raw weights from action
+            raw_weights = np.array(action)
         raw_weights = np.clip(raw_weights, 0.05, 0.8)  # Keep weights in valid range
         # Normalize to sum to 1
         target_weights = raw_weights / raw_weights.sum()

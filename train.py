@@ -280,12 +280,16 @@ def create_training_env(
     scenario_name: Optional[str] = None,
     max_episode_steps: int = 1000,
     total_timesteps: int = 500000,
-    log_dir: str = "logs"
+    log_dir: str = "logs",
+    action_repeat: int = 20,
+    residual: bool = True,
+    use_curriculum: bool = True
 ) -> gym.Env:
     """
     Create the training environment with curriculum learning over EPA cycles.
 
-    When no scenario is specified, uses a 3-phase curriculum scheduler:
+    When no scenario is specified and use_curriculum=True, uses a 3-phase
+    curriculum scheduler:
     - Phase 1 (Warmup, 0-20%): HWFET subsections for stable car-following
     - Phase 2 (Main, 20-70%): UDDS + HWFET for adaptive weight learning
     - Phase 3 (Generalization, 70-100%): All cycles including aggressive US06
@@ -295,6 +299,9 @@ def create_training_env(
         max_episode_steps: Maximum steps per episode (used as initial default)
         total_timesteps: Total training timesteps (for curriculum phase boundaries)
         log_dir: Directory for logs
+        action_repeat: Number of sim steps per DRL decision
+        residual: If True, DRL outputs weight deltas; if False, absolute weights
+        use_curriculum: If True, use 3-phase curriculum; if False, uniform random
 
     Returns:
         Wrapped training environment
@@ -319,10 +326,12 @@ def create_training_env(
         max_episode_steps=max_episode_steps,
         target_velocity=20.0,
         lead_trajectory=trajectory,
+        action_repeat=action_repeat,
+        residual=residual,
     )
 
-    # If no specific scenario, wrap with curriculum scheduler
-    if not scenario_name:
+    # If no specific scenario, wrap with curriculum or uniform random scheduler
+    if not scenario_name and use_curriculum:
         all_pool, drl_advantage_pool, easy_pool = build_training_pools()
 
         logger.info(f"Training with {len(all_pool)} trajectory segments (curriculum learning):")
@@ -344,6 +353,18 @@ def create_training_env(
             easy_pool=easy_pool,
             total_timesteps=total_timesteps
         )
+    elif not scenario_name and not use_curriculum:
+        # Uniform random: all scenarios with equal probability (no phasing)
+        all_pool, _, _ = build_training_pools()
+        logger.info(f"Training with {len(all_pool)} trajectory segments (UNIFORM RANDOM, no curriculum):")
+        # Use CurriculumScheduler with phase boundaries at 0 so it's always phase 3
+        env = CurriculumScheduler(
+            env,
+            all_scenario_pool=all_pool,
+            drl_advantage_pool=all_pool,  # unused — always phase 3
+            easy_pool=all_pool,           # unused — always phase 3
+            total_timesteps=1             # phase1_end=0, phase2_end=0 → always phase 3
+        )
 
     # Wrap with Monitor for logging
     os.makedirs(log_dir, exist_ok=True)
@@ -359,7 +380,8 @@ def create_sac_model(
     batch_size: int = 256,
     tau: float = 0.005,
     gamma: float = 0.99,
-    verbose: int = 1
+    verbose: int = 1,
+    seed: Optional[int] = None
 ) -> SAC:
     """
     Create and configure SAC model.
@@ -372,6 +394,7 @@ def create_sac_model(
         tau: Soft update coefficient
         gamma: Discount factor
         verbose: Verbosity level
+        seed: Random seed for reproducibility
 
     Returns:
         Configured SAC model
@@ -389,6 +412,7 @@ def create_sac_model(
         ent_coef='auto',
         target_entropy='auto',
         verbose=verbose,
+        seed=seed,
         tensorboard_log="logs/tensorboard/"
     )
 
@@ -409,7 +433,11 @@ def train(
     resume_path: Optional[str] = None,
     save_path: str = "models",
     log_dir: str = "logs",
-    model_name: Optional[str] = None
+    model_name: Optional[str] = None,
+    action_repeat: int = 20,
+    residual: bool = True,
+    use_curriculum: bool = True,
+    seed: Optional[int] = None
 ):
     """
     Main training function.
@@ -422,6 +450,10 @@ def train(
         save_path: Directory to save models
         log_dir: Directory for logs
         model_name: User-provided name for the model (optional)
+        action_repeat: Sim steps per DRL decision
+        residual: Use residual (delta) or absolute action space
+        use_curriculum: Use 3-phase curriculum or uniform random
+        seed: Random seed for reproducibility
     """
     # Create directories
     os.makedirs(save_path, exist_ok=True)
@@ -443,10 +475,15 @@ def train(
 
     # Create environment
     logger.info("\nCreating training environment...")
+    mode = "residual" if residual else "absolute"
+    logger.info(f"  Action mode: {mode}, action_repeat: {action_repeat}, curriculum: {use_curriculum}")
     env = create_training_env(
         scenario_name=scenario_name,
         total_timesteps=total_timesteps,
-        log_dir=log_dir
+        log_dir=log_dir,
+        action_repeat=action_repeat,
+        residual=residual,
+        use_curriculum=use_curriculum,
     )
 
     try:
@@ -468,7 +505,7 @@ def train(
                             f"(Phase {env.env._get_current_phase()})")
         else:
             logger.info("\nCreating new SAC model...")
-            model = create_sac_model(env)
+            model = create_sac_model(env, seed=seed)
 
         # Setup callbacks
         checkpoint_callback = CheckpointCallback(
@@ -568,6 +605,34 @@ def main():
         default='logs',
         help='Directory for logs (default: logs)'
     )
+    parser.add_argument(
+        '--name',
+        type=str,
+        default=None,
+        help='Model name (skips interactive prompt)'
+    )
+    parser.add_argument(
+        '--action-repeat',
+        type=int,
+        default=20,
+        help='Sim steps per DRL decision (default: 20 = 1.0s)'
+    )
+    parser.add_argument(
+        '--no-residual',
+        action='store_true',
+        help='Use absolute action space instead of residual deltas'
+    )
+    parser.add_argument(
+        '--no-curriculum',
+        action='store_true',
+        help='Use uniform random scenario selection instead of curriculum'
+    )
+    parser.add_argument(
+        '--seed',
+        type=int,
+        default=None,
+        help='Random seed for reproducibility'
+    )
 
     args = parser.parse_args()
 
@@ -579,19 +644,26 @@ def main():
             print(f"Available scenarios: {', '.join(all_scenarios.keys())}")
             sys.exit(1)
 
+    # Model name: use CLI flag, or prompt interactively, or auto-generate
+    model_name = args.name
+    if model_name is None and sys.stdin.isatty():
+        model_name = input("Enter a name for this model (or press ENTER to skip): ").strip()
+        if not model_name:
+            model_name = None
+
     print("\n" + "=" * 60)
     print("HYBRID DRL-MPC ECO-DRIVING TRAINING")
     print("=" * 60)
     print()
     print("Training Configuration:")
-    print(f"  Timesteps: {args.timesteps}")
-    print(f"  Scenario: {args.scenario or 'curriculum (3-phase learning)'}")
-    print(f"  Checkpoint freq: {args.checkpoint_freq}")
+    print(f"  Timesteps:     {args.timesteps}")
+    print(f"  Scenario:      {args.scenario or 'curriculum (3-phase learning)'}")
+    print(f"  Action mode:   {'absolute' if args.no_residual else 'residual'}")
+    print(f"  Action repeat: {args.action_repeat}")
+    print(f"  Curriculum:    {not args.no_curriculum}")
+    print(f"  Seed:          {args.seed}")
+    print(f"  Checkpoint:    every {args.checkpoint_freq} steps")
     print()
-
-    model_name = input("Enter a name for this model (or press ENTER to skip): ").strip()
-    if not model_name:
-        model_name = None
 
     train(
         total_timesteps=args.timesteps,
@@ -600,7 +672,11 @@ def main():
         resume_path=args.resume,
         save_path=args.save_path,
         log_dir=args.log_dir,
-        model_name=model_name
+        model_name=model_name,
+        action_repeat=args.action_repeat,
+        residual=not args.no_residual,
+        use_curriculum=not args.no_curriculum,
+        seed=args.seed,
     )
 
 
