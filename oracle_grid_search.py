@@ -151,9 +151,12 @@ def run_fixed_mpc_episode(
     return {
         'total_energy': metrics['energy_throttle']['total_energy'],
         'energy_per_km': metrics['energy_throttle']['energy_per_km'],
+        'distance_km': metrics['energy_throttle']['distance_km'],
         'rms_jerk': metrics['comfort']['rms_jerk'],
         'min_thw': metrics['safety']['min_time_headway'],
+        'avg_thw': metrics['safety']['avg_time_headway'],
         'avg_velocity': metrics['velocity']['avg_ego_velocity'],
+        'avg_lead_velocity': metrics['velocity']['avg_lead_velocity'],
         'collision': metrics['summary']['collision'],
     }
 
@@ -197,11 +200,15 @@ def run_grid_search(
         if (idx + 1) % max(1, total // 10) == 0 or idx == total - 1:
             elapsed = time.time() - start_time
             eta = elapsed / (idx + 1) * (total - idx - 1)
-            best_so_far = min(r['total_energy'] for r in results if not r['collision'])
+            # Best = lowest energy_per_km among valid runs (no collision, reasonable velocity)
+            valid = [r for r in results
+                     if not r['collision'] and r['avg_velocity'] > 3.0 and r['min_thw'] > 0.8]
+            best_so_far = min((r['energy_per_km'] for r in valid), default=float('inf'))
             print(
                 f"  [{idx+1:>4}/{total}] "
                 f"w=({w_v:.2f},{w_s:.2f},{w_c:.2f}) "
-                f"E={metrics['total_energy']:.1f} "
+                f"E/km={metrics['energy_per_km']:.1f} "
+                f"v_avg={metrics['avg_velocity']:.1f} "
                 f"best={best_so_far:.1f} "
                 f"ETA={eta:.0f}s"
             )
@@ -231,20 +238,46 @@ def analyze_results(
     print("ORACLE ANALYSIS RESULTS")
     print("=" * 70)
 
+    # Minimum thresholds for a valid (non-degenerate) run:
+    # - Must not collide
+    # - Avg velocity must be at least 50% of lead vehicle avg (car is actually following)
+    # - Min THW >= 1.0s (safety requirement)
+    MIN_THW = 1.0        # seconds
+    MIN_VEL_RATIO = 0.5  # ego avg velocity >= 50% of lead avg velocity
+
     summary = {}
 
     for scenario_name, df in all_results.items():
-        # Filter out collisions
-        safe = df[~df['collision']]
-        if safe.empty:
-            print(f"\n{scenario_name}: ALL COMBINATIONS CAUSED COLLISIONS")
-            continue
+        # Filter: no collision, safe following, actually driving
+        valid = df[
+            (~df['collision']) &
+            (df['min_thw'] >= MIN_THW) &
+            (df['avg_velocity'] >= df['avg_lead_velocity'] * MIN_VEL_RATIO) &
+            (df['distance_km'] > 0.1)  # at least 100m traveled
+        ]
 
-        # Find oracle (minimum energy with no collision)
-        oracle_idx = safe['total_energy'].idxmin()
-        oracle = safe.loc[oracle_idx]
+        if valid.empty:
+            print(f"\n{scenario_name}: NO VALID COMBINATIONS (all collided or degenerate)")
+            print(f"  Loosening THW filter to 0.5s...")
+            valid = df[
+                (~df['collision']) &
+                (df['min_thw'] >= 0.5) &
+                (df['avg_velocity'] >= df['avg_lead_velocity'] * 0.3) &
+                (df['distance_km'] > 0.1)
+            ]
+            if valid.empty:
+                print(f"  Still no valid results. Skipping.")
+                continue
 
-        # Find Fixed-MPC result (closest to fixed_weights)
+        n_valid = len(valid)
+        n_total = len(df)
+        print(f"\n{scenario_name}: {n_valid}/{n_total} valid weight combinations")
+
+        # Find oracle: minimum energy_per_km among valid runs
+        oracle_idx = valid['energy_per_km'].idxmin()
+        oracle = valid.loc[oracle_idx]
+
+        # Find Fixed-MPC result (closest to fixed_weights on the grid)
         distances = (
             (df['w_velocity'] - fixed_weights[0])**2 +
             (df['w_safety'] - fixed_weights[1])**2 +
@@ -253,25 +286,36 @@ def analyze_results(
         fixed_idx = distances.idxmin()
         fixed = df.loc[fixed_idx]
 
-        improvement = (fixed['total_energy'] - oracle['total_energy']) / fixed['total_energy'] * 100
+        improvement = (fixed['energy_per_km'] - oracle['energy_per_km']) / fixed['energy_per_km'] * 100
 
         summary[scenario_name] = {
             'oracle_weights': (oracle['w_velocity'], oracle['w_safety'], oracle['w_comfort']),
-            'oracle_energy': oracle['total_energy'],
-            'fixed_energy': fixed['total_energy'],
+            'oracle_energy_per_km': oracle['energy_per_km'],
+            'oracle_total_energy': oracle['total_energy'],
+            'fixed_energy_per_km': fixed['energy_per_km'],
+            'fixed_total_energy': fixed['total_energy'],
             'improvement_pct': improvement,
+            'oracle_avg_velocity': oracle['avg_velocity'],
+            'fixed_avg_velocity': fixed['avg_velocity'],
             'oracle_jerk': oracle['rms_jerk'],
             'fixed_jerk': fixed['rms_jerk'],
             'oracle_min_thw': oracle['min_thw'],
+            'fixed_min_thw': fixed['min_thw'],
+            'valid_count': n_valid,
+            'total_count': n_total,
         }
 
         print(f"\n--- {scenario_name.upper()} ---")
-        print(f"  Oracle weights: w_v={oracle['w_velocity']:.3f}, w_s={oracle['w_safety']:.3f}, w_c={oracle['w_comfort']:.3f}")
-        print(f"  Oracle energy:  {oracle['total_energy']:.2f}")
-        print(f"  Fixed energy:   {fixed['total_energy']:.2f}")
-        print(f"  Improvement:    {improvement:+.1f}%")
-        print(f"  Oracle jerk:    {oracle['rms_jerk']:.4f} m/s³")
-        print(f"  Oracle min THW: {oracle['min_thw']:.2f} s")
+        print(f"  Oracle weights:    w_v={oracle['w_velocity']:.3f}, w_s={oracle['w_safety']:.3f}, w_c={oracle['w_comfort']:.3f}")
+        print(f"  Fixed weights:     w_v={fixed_weights[0]:.3f}, w_s={fixed_weights[1]:.3f}, w_c={fixed_weights[2]:.3f}")
+        print(f"  Oracle E/km:       {oracle['energy_per_km']:.2f}")
+        print(f"  Fixed  E/km:       {fixed['energy_per_km']:.2f}")
+        print(f"  Improvement:       {improvement:+.1f}%")
+        print(f"  Oracle avg vel:    {oracle['avg_velocity']:.2f} m/s")
+        print(f"  Fixed  avg vel:    {fixed['avg_velocity']:.2f} m/s")
+        print(f"  Oracle min THW:    {oracle['min_thw']:.2f} s")
+        print(f"  Fixed  min THW:    {fixed['min_thw']:.2f} s")
+        print(f"  Oracle jerk:       {oracle['rms_jerk']:.4f} m/s³")
 
     # Key question: do oracle weights differ across scenarios?
     print("\n" + "=" * 70)
@@ -304,18 +348,24 @@ def analyze_results(
     print("\n" + "=" * 70)
     print("SUMMARY TABLE (for paper)")
     print("=" * 70)
-    print(f"{'Scenario':<12} {'Oracle w_v':>10} {'Oracle w_s':>10} {'Oracle w_c':>10} "
-          f"{'Oracle E':>10} {'Fixed E':>10} {'Improve':>10}")
-    print("-" * 74)
+    print(f"{'Scenario':<10} {'w_v':>6} {'w_s':>6} {'w_c':>6} "
+          f"{'Oracle':>10} {'Fixed':>10} {'Improv':>8} "
+          f"{'Orc v':>7} {'Fix v':>7} {'Orc THW':>8}")
+    print(f"{'':10} {'':>6} {'':>6} {'':>6} "
+          f"{'E/km':>10} {'E/km':>10} {'%':>8} "
+          f"{'m/s':>7} {'m/s':>7} {'s':>8}")
+    print("-" * 90)
     for name, s in summary.items():
         w = s['oracle_weights']
-        print(f"{name:<12} {w[0]:>10.3f} {w[1]:>10.3f} {w[2]:>10.3f} "
-              f"{s['oracle_energy']:>10.2f} {s['fixed_energy']:>10.2f} "
-              f"{s['improvement_pct']:>+9.1f}%")
+        print(f"{name:<10} {w[0]:>6.3f} {w[1]:>6.3f} {w[2]:>6.3f} "
+              f"{s['oracle_energy_per_km']:>10.2f} {s['fixed_energy_per_km']:>10.2f} "
+              f"{s['improvement_pct']:>+7.1f}% "
+              f"{s['oracle_avg_velocity']:>7.1f} {s['fixed_avg_velocity']:>7.1f} "
+              f"{s['oracle_min_thw']:>8.2f}")
 
     avg_improvement = np.mean([s['improvement_pct'] for s in summary.values()])
-    print("-" * 74)
-    print(f"{'AVG':>54} {avg_improvement:>+9.1f}%")
+    print("-" * 90)
+    print(f"{'AVG':>44} {avg_improvement:>+7.1f}%")
 
     return summary
 
