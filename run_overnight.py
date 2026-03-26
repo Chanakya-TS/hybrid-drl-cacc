@@ -145,17 +145,19 @@ def main():
                         help='Only evaluate existing models in models/')
     parser.add_argument('--timesteps', type=int, default=None,
                         help='Override training timesteps')
-    parser.add_argument('--seeds', type=int, default=3,
-                        help='Number of seeds for main model (default: 3)')
+    parser.add_argument('--seeds', type=int, default=1,
+                        help='Number of seeds for main model (default: 1)')
     args = parser.parse_args()
 
     # Configuration
+    # At ~11 fps (agent steps/s), 300k steps ≈ 7.5 hours per run.
+    # Budget: oracle (~1h) + main (7.5h) + ablation (7.5h) + eval (~0.5h) ≈ 16.5h
     if args.quick:
         timesteps = 10000
         oracle_resolution = 5
         n_seeds = 1
     else:
-        timesteps = args.timesteps or 500000
+        timesteps = args.timesteps or 300000
         oracle_resolution = 10
         n_seeds = args.seeds
 
@@ -192,6 +194,9 @@ def main():
 
     # =========================================================================
     # Step 3: Ablation — absolute action space (no residual)
+    # This is the most important ablation: proves the residual architecture
+    # matters. The other ablations (no-curriculum, action_repeat=1) are
+    # optional and can be run separately if time permits.
     # =========================================================================
     if not args.eval_only:
         rc = run_training(
@@ -203,30 +208,6 @@ def main():
         results['ablation_absolute'] = 'OK' if rc == 0 else 'FAILED'
 
     # =========================================================================
-    # Step 4: Ablation — no curriculum (uniform random)
-    # =========================================================================
-    if not args.eval_only:
-        rc = run_training(
-            name="ablation_no_curriculum",
-            timesteps=timesteps,
-            seed=42,
-            no_curriculum=True,
-        )
-        results['ablation_no_curriculum'] = 'OK' if rc == 0 else 'FAILED'
-
-    # =========================================================================
-    # Step 5: Ablation — action_repeat=1 (every-step decisions)
-    # =========================================================================
-    if not args.eval_only:
-        rc = run_training(
-            name="ablation_ar1",
-            timesteps=timesteps,
-            seed=42,
-            action_repeat=1,
-        )
-        results['ablation_ar1'] = 'OK' if rc == 0 else 'FAILED'
-
-    # =========================================================================
     # Step 6: Evaluate all models
     # =========================================================================
     eval_dir = "results/eval"
@@ -236,8 +217,6 @@ def main():
     model_patterns = [
         "main_residual_s*_final.zip",
         "ablation_absolute_*_final.zip",
-        "ablation_no_curriculum_*_final.zip",
-        "ablation_ar1_*_final.zip",
     ]
 
     evaluated = []

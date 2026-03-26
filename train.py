@@ -127,11 +127,16 @@ class CurriculumScheduler(gym.Wrapper):
         self.all_pool = all_scenario_pool
         self.drl_advantage_pool = drl_advantage_pool
         self.easy_pool = easy_pool
-        self.total_timesteps = total_timesteps
 
-        # Phase boundaries (fraction of total_timesteps)
-        self.phase1_end = int(total_timesteps * 0.20)
-        self.phase2_end = int(total_timesteps * 0.70)
+        # Phase boundaries in SIM steps (not agent steps).
+        # cumulative_steps tracks sim steps (incremented by action_repeat per
+        # agent step), so boundaries must be scaled to match.
+        action_repeat = getattr(env, 'action_repeat',
+                                getattr(env, 'DEFAULT_ACTION_REPEAT', 20))
+        total_sim_steps = total_timesteps * action_repeat
+        self.total_timesteps = total_sim_steps
+        self.phase1_end = int(total_sim_steps * 0.20)
+        self.phase2_end = int(total_sim_steps * 0.70)
 
         # Tracking
         self.cumulative_steps = 0
@@ -141,13 +146,16 @@ class CurriculumScheduler(gym.Wrapper):
         self.episode_num = 0
         self.current_phase = 1
 
-        logger.info(f"CurriculumScheduler initialized:")
-        logger.info(f"  Phase 1 (Warmup):         steps 0–{self.phase1_end} "
-                     f"({len(easy_pool)} easy scenarios)")
-        logger.info(f"  Phase 2 (Main):           steps {self.phase1_end}–{self.phase2_end} "
-                     f"({len(drl_advantage_pool)} DRL-advantage + {len(all_scenario_pool)} all)")
-        logger.info(f"  Phase 3 (Generalization): steps {self.phase2_end}–{total_timesteps} "
-                     f"({len(all_scenario_pool)} all scenarios)")
+        logger.info(f"CurriculumScheduler initialized (action_repeat={action_repeat}):")
+        logger.info(f"  Phase 1 (Warmup):         sim steps 0–{self.phase1_end} "
+                     f"(~{self.phase1_end // action_repeat} agent steps, "
+                     f"{len(easy_pool)} easy scenarios)")
+        logger.info(f"  Phase 2 (Main):           sim steps {self.phase1_end}–{self.phase2_end} "
+                     f"(~{(self.phase2_end - self.phase1_end) // action_repeat} agent steps, "
+                     f"{len(drl_advantage_pool)} DRL-advantage + {len(all_scenario_pool)} all)")
+        logger.info(f"  Phase 3 (Generalization): sim steps {self.phase2_end}–{total_sim_steps} "
+                     f"(~{(total_sim_steps - self.phase2_end) // action_repeat} agent steps, "
+                     f"{len(all_scenario_pool)} all scenarios)")
 
     def _get_current_phase(self) -> int:
         """Determine curriculum phase from cumulative step count."""
@@ -192,11 +200,12 @@ class CurriculumScheduler(gym.Wrapper):
 
         # Console output with phase info
         phase_names = {1: 'Warmup', 2: 'Main', 3: 'Generalization'}
+        pct = self.cumulative_steps / max(1, self.total_timesteps) * 100
         logger.info(
             f"[Episode {self.episode_num}] Phase {self.current_phase} "
             f"({phase_names[self.current_phase]}) | Scenario: {name} "
             f"({num_steps} steps, {num_steps * 0.05:.0f}s) | "
-            f"Cumulative: {self.cumulative_steps}/{self.total_timesteps}"
+            f"Sim steps: {self.cumulative_steps}/{self.total_timesteps} ({pct:.1f}%)"
         )
 
         obs, info = self.env.reset(**kwargs)
