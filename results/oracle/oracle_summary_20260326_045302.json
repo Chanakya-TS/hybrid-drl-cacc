@@ -1,0 +1,62 @@
+{
+  "udds": {
+    "oracle_weights": [
+      0.73,
+      0.22,
+      0.05
+    ],
+    "oracle_energy_per_km": 114.93161489688677,
+    "oracle_total_energy": 1320.2218155628298,
+    "fixed_energy_per_km": 116.77111354377092,
+    "fixed_total_energy": 1341.2604122474197,
+    "improvement_pct": 1.5753028219557295,
+    "oracle_avg_velocity": 8.390503883361816,
+    "fixed_avg_velocity": 8.38992977142334,
+    "oracle_jerk": 0.15319625004785897,
+    "fixed_jerk": 0.10043134823084747,
+    "oracle_min_thw": 2.0386555194854736,
+    "fixed_min_thw": 2.1257829666137695,
+    "valid_count": 48,
+    "total_count": 66
+  },
+  "hwfet": {
+    "oracle_weights": [
+      0.305,
+      0.05,
+      0.645
+    ],
+    "oracle_energy_per_km": 107.72185434755491,
+    "oracle_total_energy": 1701.66404497607,
+    "fixed_energy_per_km": 111.21108796766316,
+    "fixed_total_energy": 1780.7782368453625,
+    "improvement_pct": 3.1374871731520293,
+    "oracle_avg_velocity": 20.648103713989258,
+    "fixed_avg_velocity": 20.930126190185547,
+    "oracle_jerk": 0.06296879764739052,
+    "fixed_jerk": 0.09400702982879082,
+    "oracle_min_thw": 1.6702460050582886,
+    "fixed_min_thw": 2.1161227226257324,
+    "valid_count": 60,
+    "total_count": 66
+  },
+  "us06": {
+    "oracle_weights": [
+      0.475,
+      0.135,
+      0.39
+    ],
+    "oracle_energy_per_km": 155.71791955045464,
+    "oracle_total_energy": 1927.7719719078189,
+    "fixed_energy_per_km": 162.68268714626777,
+    "fixed_total_energy": 2013.7330427327333,
+    "improvement_pct": 4.2811977832349895,
+    "oracle_avg_velocity": 20.63144302368164,
+    "fixed_avg_velocity": 20.62875747680664,
+    "oracle_jerk": 0.16325512014410504,
+    "fixed_jerk": 0.15742638614714496,
+    "oracle_min_thw": 2.079802989959717,
+    "fixed_min_thw": 2.1959822177886963,
+    "valid_count": 54,
+    "total_count": 66
+  }
+}

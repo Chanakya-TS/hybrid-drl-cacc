@@ -1,0 +1,813 @@
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.25, s:0.35, c:0.4]
+INFO:environment.gym_wrapper:HybridMPCEnv initialized (residual policy, action_repeat=20, DRL decides every 1.00s, MPC runs at 20Hz)
+INFO:__main__:Running DRL-MPC controller...
+INFO:environment.car_following:Episode 1 started
+INFO:__main__:  Agent step 10 (sim 200): reward=15.75, weights=[0.3964136509723101, 0.3964136509723101, 0.20717269805537974]
+INFO:__main__:  Agent step 20 (sim 400): reward=15.96, weights=[0.3757616318454387, 0.3757616318454387, 0.24847673630912262]
+INFO:__main__:  Agent step 30 (sim 600): reward=14.09, weights=[0.43622072236065856, 0.3033384908807932, 0.26044078675854837]
+INFO:__main__:  Agent step 40 (sim 800): reward=14.71, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 50 (sim 1000): reward=14.83, weights=[0.3737213738037571, 0.3737213738037571, 0.2525572523924859]
+INFO:__main__:  Agent step 60 (sim 1200): reward=15.92, weights=[0.3510750737918832, 0.3510750737918832, 0.29784985241623363]
+INFO:__main__:  Agent step 70 (sim 1400): reward=14.41, weights=[0.3855977464530088, 0.3855977464530088, 0.2288045070939824]
+INFO:__main__:  Agent step 80 (sim 1600): reward=15.02, weights=[0.36985329896154395, 0.36985329896154395, 0.26029340207691215]
+INFO:__main__:  Agent step 90 (sim 1800): reward=13.92, weights=[0.3878705513901809, 0.27588657548338963, 0.3362428731264296]
+INFO:__main__:  Agent step 100 (sim 2000): reward=14.77, weights=[0.38166585748741805, 0.38166585748741805, 0.23666828502516396]
+INFO:__main__:  Agent step 110 (sim 2200): reward=15.02, weights=[0.3769719036977599, 0.368061467783911, 0.2549666285183292]
+INFO:__main__:  Agent step 120 (sim 2400): reward=15.94, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 130 (sim 2600): reward=14.96, weights=[0.1431862639772261, 0.42840686801138694, 0.42840686801138694]
+INFO:__main__:  Agent step 140 (sim 2800): reward=15.95, weights=[0.38089390547373986, 0.38089390547373986, 0.2382121890525203]
+INFO:__main__:  Agent step 150 (sim 3000): reward=15.96, weights=[0.3753322240682941, 0.3753322240682941, 0.2493355518634119]
+INFO:__main__:  Agent step 160 (sim 3200): reward=15.96, weights=[0.3753224368485961, 0.3753224368485961, 0.24935512630280784]
+INFO:__main__:  Agent step 170 (sim 3400): reward=15.25, weights=[0.4631938798097414, 0.2126959560781513, 0.32411016411210736]
+INFO:__main__:  Agent step 180 (sim 3600): reward=12.55, weights=[0.37349068924014855, 0.37349068924014855, 0.2530186215197029]
+INFO:__main__:  Agent step 190 (sim 3800): reward=15.90, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 200 (sim 4000): reward=10.57, weights=[0.2842869224454049, 0.24488334969724104, 0.47082972785735416]
+INFO:__main__:  Agent step 210 (sim 4200): reward=7.37, weights=[0.2731617142211959, 0.41581426437621455, 0.31102402140258956]
+INFO:__main__:  Agent step 220 (sim 4400): reward=11.36, weights=[0.20623138011095424, 0.5217156828635929, 0.27205293702545275]
+INFO:__main__:  Agent step 230 (sim 4600): reward=7.43, weights=[0.1741747308032549, 0.5479913732726838, 0.2778338959240612]
+INFO:__main__:  Agent step 240 (sim 4800): reward=5.34, weights=[0.1742446001039197, 0.5407450321976169, 0.2850103676984633]
+INFO:__main__:  Agent step 250 (sim 5000): reward=4.76, weights=[0.20656171444357227, 0.5106810324490362, 0.2827572531073915]
+INFO:__main__:  Agent step 260 (sim 5200): reward=6.03, weights=[0.16710307333499974, 0.5179997421304079, 0.3148971845345923]
+INFO:__main__:  Agent step 270 (sim 5400): reward=6.67, weights=[0.16576702935983892, 0.5050067210827455, 0.32922624955741553]
+INFO:__main__:  Agent step 280 (sim 5600): reward=6.11, weights=[0.1697307843322193, 0.5405074961608599, 0.28976171950692076]
+INFO:__main__:  Agent step 290 (sim 5800): reward=5.81, weights=[0.21682085539442944, 0.5107133061564973, 0.27246583844907313]
+INFO:__main__:  Agent step 300 (sim 6000): reward=8.65, weights=[0.15557984915381345, 0.4456159830065708, 0.3988041678396157]
+INFO:__main__:  Agent step 310 (sim 6200): reward=10.82, weights=[0.17277706590435543, 0.465061126653316, 0.3621618074423285]
+INFO:__main__:  Agent step 320 (sim 6400): reward=14.46, weights=[0.1971551366883266, 0.4014224316558367, 0.4014224316558367]
+INFO:__main__:  Agent step 330 (sim 6600): reward=15.52, weights=[0.24644517603842842, 0.3767774119807858, 0.3767774119807858]
+INFO:__main__:  Agent step 340 (sim 6800): reward=15.54, weights=[0.2998106686014147, 0.3715878572290657, 0.32860147416951957]
+INFO:__main__:  Agent step 350 (sim 7000): reward=15.96, weights=[0.38575007846189396, 0.38575007846189396, 0.2284998430762121]
+INFO:__main__:  Agent step 360 (sim 7200): reward=11.52, weights=[0.38573770388811507, 0.22852459222376983, 0.38573770388811507]
+INFO:__main__:  Agent step 370 (sim 7400): reward=11.81, weights=[0.41903857536111755, 0.22609215674076358, 0.354869267898119]
+INFO:__main__:  Agent step 380 (sim 7600): reward=13.91, weights=[0.3654027936363136, 0.3654027936363136, 0.2691944127273728]
+INFO:__main__:  Agent step 390 (sim 7800): reward=15.90, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 400 (sim 8000): reward=14.78, weights=[0.15904037027324427, 0.4336085920076197, 0.407351037719136]
+INFO:__main__:  Agent step 410 (sim 8200): reward=15.15, weights=[0.3074713968598727, 0.2307356372031201, 0.4617929659370072]
+INFO:__main__:  Agent step 420 (sim 8400): reward=11.02, weights=[0.36772305766611973, 0.2978435290718336, 0.3344334132620467]
+INFO:__main__:  Agent step 430 (sim 8600): reward=15.14, weights=[0.2422712233602692, 0.3788643883198654, 0.3788643883198654]
+INFO:__main__:  Agent step 440 (sim 8800): reward=15.84, weights=[0.3942147260695833, 0.3942147260695833, 0.21157054786083346]
+INFO:__main__:  Agent step 450 (sim 9000): reward=15.96, weights=[0.38668878952735, 0.38668878952735, 0.22662242094530013]
+INFO:__main__:  Agent step 460 (sim 9200): reward=10.73, weights=[0.4119857998596137, 0.21090116672442966, 0.3771130334159567]
+INFO:__main__:  Agent step 470 (sim 9400): reward=11.73, weights=[0.40477739749410385, 0.2413124861784666, 0.35391011632742964]
+INFO:__main__:  Agent step 480 (sim 9600): reward=14.73, weights=[0.38169030039907675, 0.38169030039907675, 0.23661939920184655]
+INFO:__main__:  Agent step 490 (sim 9800): reward=14.81, weights=[0.3850882812327068, 0.3850882812327068, 0.2298234375345865]
+INFO:__main__:  Agent step 500 (sim 10000): reward=15.72, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 510 (sim 10200): reward=15.08, weights=[0.14291062586939457, 0.4285446870653027, 0.4285446870653027]
+INFO:__main__:  Agent step 520 (sim 10400): reward=15.41, weights=[0.3687509161176194, 0.40844304344736243, 0.22280604043501812]
+INFO:__main__:  Agent step 530 (sim 10600): reward=12.99, weights=[0.3046544765227947, 0.3476727617386026, 0.3476727617386026]
+INFO:__main__:  Agent step 540 (sim 10800): reward=14.47, weights=[0.38454254892650447, 0.38454254892650447, 0.2309149021469911]
+INFO:__main__:  Agent step 550 (sim 11000): reward=15.87, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 560 (sim 11200): reward=15.50, weights=[0.358671977918561, 0.36774084759129994, 0.27358717449013903]
+INFO:__main__:  Agent step 570 (sim 11400): reward=15.96, weights=[0.3943963736546638, 0.3943963736546638, 0.21120725269067245]
+INFO:__main__:  Agent step 580 (sim 11600): reward=13.94, weights=[0.37353678703757814, 0.40154743239518015, 0.22491578056724168]
+INFO:__main__:  Agent step 590 (sim 11800): reward=15.31, weights=[0.3869926461646764, 0.3869926461646764, 0.22601470767064732]
+INFO:__main__:  Agent step 600 (sim 12000): reward=14.81, weights=[0.3870286013412634, 0.3870286013412634, 0.22594279731747327]
+INFO:__main__:  Agent step 610 (sim 12200): reward=14.58, weights=[0.36059382657324884, 0.36059382657324884, 0.2788123468535023]
+INFO:__main__:  Agent step 620 (sim 12400): reward=15.60, weights=[0.31287534090345714, 0.34356232954827143, 0.34356232954827143]
+INFO:__main__:  Agent step 630 (sim 12600): reward=15.74, weights=[0.3965660790892075, 0.3965660790892075, 0.20686784182158513]
+INFO:__main__:  Agent step 640 (sim 12800): reward=15.96, weights=[0.3756680220743826, 0.3756680220743826, 0.24866395585123485]
+INFO:__main__:  Agent step 650 (sim 13000): reward=15.92, weights=[0.3884738814982072, 0.3884738814982072, 0.2230522370035856]
+INFO:__main__:  Agent step 660 (sim 13200): reward=12.77, weights=[0.3125390143082378, 0.3437304928458811, 0.3437304928458811]
+INFO:__main__:  Agent step 670 (sim 13400): reward=14.09, weights=[0.3772151319917492, 0.39837137256163807, 0.22441349544661263]
+INFO:__main__:  Agent step 680 (sim 13600): reward=15.39, weights=[0.18605567882137605, 0.40697216058931196, 0.40697216058931196]
+INFO:__main__:  Agent step 690 (sim 13800): reward=15.84, weights=[0.3942564307853451, 0.3942564307853451, 0.2114871384293098]
+INFO:__main__:  Agent step 700 (sim 14000): reward=15.83, weights=[0.3911266541240971, 0.3911266541240971, 0.21774669175180586]
+INFO:__main__:  Agent step 710 (sim 14200): reward=13.92, weights=[0.28337521337160765, 0.3583123933141962, 0.3583123933141962]
+INFO:__main__:  Agent step 720 (sim 14400): reward=14.68, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 730 (sim 14600): reward=15.36, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 740 (sim 14800): reward=13.74, weights=[0.3867107179369705, 0.3550864051326411, 0.25820287693038857]
+INFO:__main__:  Agent step 750 (sim 15000): reward=13.16, weights=[0.3917554221618055, 0.35491027106381934, 0.25333430677437535]
+INFO:__main__:  Agent step 760 (sim 15200): reward=15.79, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 770 (sim 15400): reward=15.45, weights=[0.40056670374164977, 0.19886659251670055, 0.40056670374164977]
+INFO:__main__:  Agent step 780 (sim 15600): reward=12.92, weights=[0.3134761252997458, 0.3432619373501271, 0.3432619373501271]
+INFO:__main__:  Agent step 790 (sim 15800): reward=13.44, weights=[0.4057698989418433, 0.3328971379202915, 0.2613329631378653]
+INFO:__main__:  Agent step 800 (sim 16000): reward=15.27, weights=[0.3698407961352763, 0.3496587200600238, 0.2805004838047]
+INFO:__main__:  Agent step 810 (sim 16200): reward=13.25, weights=[0.38322276142581935, 0.2537303007403377, 0.36304693783384306]
+INFO:__main__:  Agent step 820 (sim 16400): reward=14.85, weights=[0.39135293302353247, 0.3696033719880061, 0.23904369498846156]
+INFO:__main__:  Agent step 830 (sim 16600): reward=15.81, weights=[0.36888567044908593, 0.3533684445035329, 0.2777458850473813]
+INFO:__main__:  Agent step 840 (sim 16800): reward=15.93, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 850 (sim 17000): reward=15.48, weights=[0.366286678513102, 0.366286678513102, 0.26742664297379604]
+INFO:__main__:  Agent step 860 (sim 17200): reward=14.03, weights=[0.38886703901243513, 0.29669181629022545, 0.3144411446973395]
+INFO:__main__:  Agent step 870 (sim 17400): reward=15.76, weights=[0.33965604149483763, 0.32068791701032473, 0.33965604149483763]
+INFO:__main__:  Agent step 880 (sim 17600): reward=14.49, weights=[0.3947073988228005, 0.3301769195438016, 0.27511568163339806]
+INFO:__main__:  Agent step 890 (sim 17800): reward=15.22, weights=[0.37143208837919817, 0.37143208837919817, 0.2571358232416038]
+INFO:__main__:  Agent step 900 (sim 18000): reward=15.08, weights=[0.3747066255975447, 0.37317583015477795, 0.25211754424767746]
+INFO:__main__:  Agent step 910 (sim 18200): reward=15.56, weights=[0.347610103051798, 0.34692807437256223, 0.30546182257563986]
+INFO:__main__:  Agent step 920 (sim 18400): reward=15.96, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 930 (sim 18600): reward=14.81, weights=[0.37660280005077573, 0.37660280005077573, 0.24679439989844854]
+INFO:__main__:  Agent step 940 (sim 18800): reward=15.35, weights=[0.3496087678299518, 0.3297900224407201, 0.3206012097293282]
+INFO:__main__:  Agent step 950 (sim 19000): reward=15.20, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 960 (sim 19200): reward=15.09, weights=[0.1490142513391927, 0.42549287433040367, 0.42549287433040367]
+INFO:__main__:  Agent step 970 (sim 19400): reward=13.98, weights=[0.3894013159503794, 0.3894013159503794, 0.22119736809924118]
+INFO:__main__:  Agent step 980 (sim 19600): reward=12.85, weights=[0.38584364737280374, 0.3795605391844296, 0.2345958134427667]
+INFO:__main__:  Agent step 990 (sim 19800): reward=15.93, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 1000 (sim 20000): reward=15.58, weights=[0.343246641630106, 0.343246641630106, 0.31350671673978814]
+INFO:__main__:  Agent step 1010 (sim 20200): reward=14.70, weights=[0.3866276452799188, 0.39530123485984925, 0.21807111986023192]
+INFO:__main__:  Agent step 1020 (sim 20400): reward=15.90, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 1030 (sim 20600): reward=15.51, weights=[0.24602169155127443, 0.3769891542243628, 0.3769891542243628]
+INFO:__main__:  Agent step 1040 (sim 20800): reward=15.96, weights=[0.37623042353521197, 0.37623042353521197, 0.24753915292957612]
+INFO:__main__:  Agent step 1050 (sim 21000): reward=15.96, weights=[0.37533103278156243, 0.37533103278156243, 0.2493379344368752]
+INFO:__main__:  Agent step 1060 (sim 21200): reward=15.27, weights=[0.42858053580459765, 0.2877122238065705, 0.2837072403888318]
+INFO:__main__:  Agent step 1070 (sim 21400): reward=12.05, weights=[0.3453860757676005, 0.2608439841392228, 0.39376994009317656]
+INFO:__main__:  Agent step 1080 (sim 21600): reward=15.75, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 1090 (sim 21800): reward=15.67, weights=[0.16713252993088243, 0.41643373503455877, 0.41643373503455877]
+INFO:__main__:  Agent step 1100 (sim 22000): reward=15.90, weights=[0.39462400805561726, 0.39462400805561726, 0.21075198388876556]
+INFO:__main__:  Agent step 1110 (sim 22200): reward=15.50, weights=[0.39782075778905074, 0.39782075778905074, 0.20435848442189852]
+INFO:__main__:  Agent step 1120 (sim 22400): reward=13.43, weights=[0.3498786743487303, 0.3498786743487303, 0.3002426513025394]
+INFO:__main__:  Agent step 1130 (sim 22600): reward=14.27, weights=[0.3634569998069221, 0.3634569998069221, 0.27308600038615594]
+INFO:__main__:  Agent step 1140 (sim 22800): reward=14.86, weights=[0.3748477431058072, 0.3748477431058072, 0.2503045137883857]
+INFO:__main__:  Agent step 1150 (sim 23000): reward=15.78, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 1160 (sim 23200): reward=15.52, weights=[0.30083158747604477, 0.37214282007410504, 0.3270255924498502]
+INFO:__main__:  Agent step 1170 (sim 23400): reward=15.96, weights=[0.38615379020590157, 0.38615379020590157, 0.22769241958819694]
+INFO:__main__:  Agent step 1180 (sim 23600): reward=12.67, weights=[0.3922183749441448, 0.3922183749441448, 0.21556325011171049]
+INFO:__main__:  Agent step 1190 (sim 23800): reward=15.43, weights=[0.14887227107110337, 0.4255638644644483, 0.4255638644644483]
+INFO:__main__:  Agent step 1200 (sim 24000): reward=15.95, weights=[0.3945017656251555, 0.3945017656251555, 0.21099646874968908]
+INFO:__main__:  Agent step 1210 (sim 24200): reward=14.77, weights=[0.32020363823093795, 0.3681566412718859, 0.3116397204971761]
+INFO:__main__:  Agent step 1220 (sim 24400): reward=13.88, weights=[0.3794505905169022, 0.3794505905169022, 0.24109881896619564]
+INFO:__main__:  Agent step 1230 (sim 24600): reward=15.27, weights=[0.3546808597787158, 0.3546808597787158, 0.29063828044256845]
+INFO:__main__:  Agent step 1240 (sim 24800): reward=15.89, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 1250 (sim 25000): reward=15.64, weights=[0.3945810249264216, 0.3945810249264216, 0.21083795014715678]
+INFO:__main__:  Agent step 1260 (sim 25200): reward=15.96, weights=[0.39505975622793316, 0.39505975622793316, 0.20988048754413371]
+INFO:__main__:  Agent step 1270 (sim 25400): reward=15.34, weights=[0.36471975294832015, 0.36471975294832015, 0.27056049410335975]
+INFO:__main__:  Agent step 1280 (sim 25600): reward=12.95, weights=[0.31291343569175034, 0.34354328215412483, 0.34354328215412483]
+INFO:__main__:  Agent step 1290 (sim 25800): reward=14.94, weights=[0.3729721083723791, 0.3729721083723791, 0.25405578325524186]
+INFO:__main__:  Agent step 1300 (sim 26000): reward=14.62, weights=[0.3684901490636796, 0.3684901490636796, 0.2630197018726409]
+INFO:__main__:  Agent step 1310 (sim 26200): reward=15.87, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 1320 (sim 26400): reward=15.41, weights=[0.20191543775127738, 0.3990422811243613, 0.3990422811243613]
+INFO:__main__:  Agent step 1330 (sim 26600): reward=15.96, weights=[0.37633599999371925, 0.37633599999371925, 0.24732800001256158]
+INFO:__main__:  Agent step 1340 (sim 26800): reward=15.96, weights=[0.392298066581112, 0.392298066581112, 0.21540386683777607]
+INFO:__main__:  Agent step 1350 (sim 27000): reward=13.38, weights=[0.3681188436850391, 0.3836587674871515, 0.24822238882780934]
+INFO:__main__:  Agent step 1360 (sim 27200): reward=15.16, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 1370 (sim 27381): reward=0.78, weights=[0.150254278619213, 0.4248728606903935, 0.4248728606903935]
+INFO:__main__:  Episode completed: 1370 agent steps, 27381 sim steps, total reward: 19474.81
+INFO:controllers.mpc_controller:MPCController initialized: horizon=30, dt=0.05, weights=[v:0.25, s:0.35, c:0.4]
+INFO:controllers.mpc_controller:FixedWeightMPC initialized (baseline controller)
+INFO:__main__:Running Fixed MPC controller...
+INFO:environment.car_following:Episode 1 started
+INFO:__main__:  Episode completed: 27381 steps
+INFO:controllers.acc_controller:ACCController initialized: THW=1.8s, target_vel=20.0 m/s
+INFO:__main__:Running ACC controller...
+INFO:environment.car_following:Episode 2 started
+INFO:__main__:  Episode completed: 27381 steps
+INFO:__main__:Saved: results/eval/udds_drl_mpc_data.csv
+INFO:__main__:Saved: results/eval/udds_fixed_mpc_data.csv
+INFO:__main__:Saved: results/eval/udds_acc_data.csv
+INFO:__main__:Results saved to results/eval/
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.gym_wrapper:Closing HybridMPCEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.25, s:0.35, c:0.4]
+INFO:environment.gym_wrapper:HybridMPCEnv initialized (residual policy, action_repeat=20, DRL decides every 1.00s, MPC runs at 20Hz)
+INFO:__main__:Running DRL-MPC controller...
+INFO:environment.car_following:Episode 1 started
+INFO:__main__:  Agent step 10 (sim 200): reward=15.67, weights=[0.24343293156488938, 0.3403699750683659, 0.4161970933667447]
+INFO:__main__:  Agent step 20 (sim 400): reward=11.15, weights=[0.3838187464858796, 0.2085457102528595, 0.40763554326126084]
+INFO:__main__:  Agent step 30 (sim 600): reward=12.38, weights=[0.42575628285925776, 0.28311153414515816, 0.2911321829955842]
+INFO:__main__:  Agent step 40 (sim 800): reward=14.20, weights=[0.37111855219507056, 0.37111855219507056, 0.25776289560985893]
+INFO:__main__:  Agent step 50 (sim 1000): reward=14.25, weights=[0.3749779740015061, 0.3749779740015061, 0.25004405199698776]
+INFO:__main__:  Agent step 60 (sim 1200): reward=12.11, weights=[0.39249919986943843, 0.21500160026112308, 0.39249919986943843]
+INFO:__main__:  Agent step 70 (sim 1400): reward=12.59, weights=[0.35021836897215214, 0.35021836897215214, 0.29956326205569583]
+INFO:__main__:  Agent step 80 (sim 1600): reward=12.63, weights=[0.3453652440531135, 0.4176186957096812, 0.23701606023720526]
+INFO:__main__:  Agent step 90 (sim 1800): reward=12.33, weights=[0.2510936254697955, 0.4672757382806605, 0.281630636249544]
+INFO:__main__:  Agent step 100 (sim 2000): reward=11.61, weights=[0.1720053454503875, 0.538695609781624, 0.28929904476798846]
+INFO:__main__:  Agent step 110 (sim 2200): reward=10.19, weights=[0.2079140372255309, 0.5073987624515399, 0.2846872003229291]
+INFO:__main__:  Agent step 120 (sim 2400): reward=9.88, weights=[0.22638222248998274, 0.469903388125549, 0.3037143893844682]
+INFO:__main__:  Agent step 130 (sim 2600): reward=10.37, weights=[0.15246828293149842, 0.4774893321111458, 0.3700423849573557]
+INFO:__main__:  Agent step 140 (sim 2800): reward=11.19, weights=[0.18231901952867752, 0.4976369704063238, 0.32004401006499855]
+INFO:__main__:  Agent step 150 (sim 3000): reward=14.50, weights=[0.16476588436499018, 0.5137665979239252, 0.32146751771108456]
+INFO:__main__:  Agent step 160 (sim 3200): reward=12.18, weights=[0.24104181865509344, 0.48764815224727487, 0.2713100290976316]
+INFO:__main__:  Agent step 170 (sim 3400): reward=11.46, weights=[0.20119201256786579, 0.5231883500548867, 0.2756196373772474]
+INFO:__main__:  Agent step 180 (sim 3600): reward=12.15, weights=[0.20097037760931913, 0.4600388612255745, 0.3389907611651063]
+INFO:__main__:  Agent step 190 (sim 3800): reward=13.66, weights=[0.16441445566082818, 0.5137926373761676, 0.3217929069630041]
+INFO:__main__:  Agent step 200 (sim 4000): reward=12.78, weights=[0.19488956529328622, 0.47351998570934684, 0.3315904489973669]
+INFO:__main__:  Agent step 210 (sim 4200): reward=13.48, weights=[0.16664030217984407, 0.5249212333986792, 0.30843846442147665]
+INFO:__main__:  Agent step 220 (sim 4400): reward=14.60, weights=[0.17158273229756799, 0.5442032739948047, 0.28421399370762723]
+INFO:__main__:  Agent step 230 (sim 4600): reward=11.44, weights=[0.36349045191074925, 0.36349045191074925, 0.2730190961785016]
+INFO:__main__:  Agent step 240 (sim 4800): reward=11.71, weights=[0.2603987025647438, 0.4778745177331529, 0.26172677970210323]
+INFO:__main__:  Agent step 250 (sim 5000): reward=11.56, weights=[0.17751853985427948, 0.5358008705111127, 0.2866805896346078]
+INFO:__main__:  Agent step 260 (sim 5200): reward=10.70, weights=[0.17542262369934247, 0.5332798651156561, 0.2912975111850014]
+INFO:__main__:  Agent step 270 (sim 5400): reward=10.53, weights=[0.29223741174511675, 0.4197958821661867, 0.28796670608869657]
+INFO:__main__:  Agent step 280 (sim 5600): reward=11.86, weights=[0.15508541278860596, 0.4804638385202935, 0.36445074869110045]
+INFO:__main__:  Agent step 290 (sim 5800): reward=14.32, weights=[0.21918093438086095, 0.3854848369613706, 0.39533422865776846]
+INFO:__main__:  Agent step 300 (sim 6000): reward=15.78, weights=[0.40154023052610827, 0.1969195389477835, 0.40154023052610827]
+INFO:__main__:  Agent step 310 (sim 6200): reward=10.65, weights=[0.40303994677548505, 0.19392010644902996, 0.40303994677548505]
+INFO:__main__:  Agent step 320 (sim 6400): reward=12.07, weights=[0.3570025946298315, 0.3570025946298315, 0.28599481074033706]
+INFO:__main__:  Agent step 330 (sim 6600): reward=11.40, weights=[0.3547827374128098, 0.427682075239052, 0.21753518734813815]
+INFO:__main__:  Agent step 340 (sim 6800): reward=6.65, weights=[0.18302218628183334, 0.5234352519977228, 0.2935425617204439]
+INFO:__main__:  Agent step 350 (sim 7000): reward=3.73, weights=[0.17891695531767138, 0.5355457914390357, 0.28553725324329293]
+INFO:__main__:  Agent step 360 (sim 7200): reward=3.76, weights=[0.20593196143782516, 0.5028330462857823, 0.29123499227639255]
+INFO:__main__:  Agent step 370 (sim 7400): reward=4.32, weights=[0.18257945359216865, 0.5187180660212826, 0.2987024803865488]
+INFO:__main__:  Agent step 380 (sim 7600): reward=4.69, weights=[0.19477769861725538, 0.4975507027181471, 0.30767159866459753]
+INFO:__main__:  Agent step 390 (sim 7800): reward=4.60, weights=[0.17804163598891265, 0.5279101652388397, 0.29404819877224764]
+INFO:__main__:  Agent step 400 (sim 8000): reward=3.20, weights=[0.1761931035098948, 0.5441025198279612, 0.27970437666214387]
+INFO:__main__:  Agent step 410 (sim 8200): reward=4.02, weights=[0.2024826561679899, 0.49412862972001825, 0.3033887141119918]
+INFO:__main__:  Agent step 420 (sim 8400): reward=3.52, weights=[0.17691274175074104, 0.532955413443734, 0.290131844805525]
+INFO:__main__:  Agent step 430 (sim 8600): reward=2.67, weights=[0.19924393335434507, 0.5160355058200774, 0.2847205608255775]
+INFO:__main__:  Agent step 440 (sim 8800): reward=4.10, weights=[0.18545704683123557, 0.5088339768483255, 0.3057089763204389]
+INFO:__main__:  Agent step 450 (sim 9000): reward=3.88, weights=[0.18268477074960957, 0.522355697109535, 0.2949595321408554]
+INFO:__main__:  Agent step 460 (sim 9200): reward=3.97, weights=[0.18207686424856967, 0.5276891222455546, 0.2902340135058757]
+INFO:__main__:  Agent step 470 (sim 9400): reward=4.02, weights=[0.18828402928942084, 0.5189601215465893, 0.2927558491639899]
+INFO:__main__:  Agent step 480 (sim 9600): reward=4.41, weights=[0.17731502796824725, 0.5259499092201301, 0.2967350628116227]
+INFO:__main__:  Agent step 490 (sim 9800): reward=5.31, weights=[0.1790460511387418, 0.5072024261551946, 0.31375152270606355]
+INFO:__main__:  Agent step 500 (sim 10000): reward=5.23, weights=[0.18520991521827426, 0.5159567786087657, 0.29883330617296006]
+INFO:__main__:  Agent step 510 (sim 10200): reward=5.71, weights=[0.1767941150829012, 0.5118173217408157, 0.3113885631762831]
+INFO:__main__:  Agent step 520 (sim 10400): reward=5.90, weights=[0.17356217303959254, 0.5374308569103681, 0.28900697005003934]
+INFO:__main__:  Agent step 530 (sim 10600): reward=5.39, weights=[0.17775393807152273, 0.5322495074145926, 0.2899965545138846]
+INFO:__main__:  Agent step 540 (sim 10800): reward=4.96, weights=[0.18402620645250584, 0.5299786623543563, 0.28599513119313785]
+INFO:__main__:  Agent step 550 (sim 11000): reward=5.09, weights=[0.1801711317110026, 0.5354885711765281, 0.2843402971124693]
+INFO:__main__:  Agent step 560 (sim 11200): reward=5.74, weights=[0.18667727623035132, 0.5038498090362687, 0.3094729147333799]
+INFO:__main__:  Agent step 570 (sim 11400): reward=6.80, weights=[0.1662446908331196, 0.5075066061580393, 0.326248703008841]
+INFO:__main__:  Agent step 580 (sim 11600): reward=7.14, weights=[0.16604216357130844, 0.4672512768921044, 0.36670655953658715]
+INFO:__main__:  Agent step 590 (sim 11800): reward=8.84, weights=[0.1590041240436933, 0.46390610464452736, 0.3770897713117793]
+INFO:__main__:  Agent step 600 (sim 12000): reward=8.49, weights=[0.15190710409427527, 0.4563085636713208, 0.3917843322344039]
+INFO:__main__:  Agent step 610 (sim 12200): reward=8.98, weights=[0.14941578945365616, 0.47159922668926324, 0.37898498385708057]
+INFO:__main__:  Agent step 620 (sim 12400): reward=9.90, weights=[0.1626902403298344, 0.513624037417934, 0.3236857222522315]
+INFO:__main__:  Agent step 630 (sim 12600): reward=6.56, weights=[0.17322743289929218, 0.5454545181152263, 0.2813180489854815]
+INFO:__main__:  Agent step 640 (sim 12800): reward=6.67, weights=[0.228293488281465, 0.4857691145338495, 0.2859373971846854]
+INFO:__main__:  Agent step 650 (sim 13000): reward=10.77, weights=[0.14751280761898142, 0.4262435961905093, 0.4262435961905093]
+INFO:__main__:  Agent step 660 (sim 13200): reward=7.29, weights=[0.1805745145365946, 0.5325523660459829, 0.28687311941742244]
+INFO:__main__:  Agent step 670 (sim 13400): reward=7.35, weights=[0.17189197371727016, 0.5152272221221845, 0.3128808041605452]
+INFO:__main__:  Agent step 680 (sim 13600): reward=7.80, weights=[0.24205326384069437, 0.44254867681789134, 0.31539805934141424]
+INFO:__main__:  Agent step 690 (sim 13800): reward=8.57, weights=[0.15703777530953675, 0.44233935274928365, 0.40062287194117957]
+INFO:__main__:  Agent step 700 (sim 14000): reward=6.55, weights=[0.16838646297777304, 0.5316305299200386, 0.2999830071021884]
+INFO:__main__:  Agent step 710 (sim 14200): reward=5.00, weights=[0.1840098576421636, 0.5184761128801925, 0.29751402947764394]
+INFO:__main__:  Agent step 720 (sim 14400): reward=4.16, weights=[0.19978157991515733, 0.48161938934276904, 0.31859903074207363]
+INFO:__main__:  Agent step 730 (sim 14600): reward=4.01, weights=[0.20759838844315975, 0.5169469554261124, 0.2754546561307278]
+INFO:__main__:  Agent step 740 (sim 14800): reward=7.10, weights=[0.1691318225345544, 0.46302411779665426, 0.3678440596687913]
+INFO:__main__:  Agent step 750 (sim 15000): reward=9.38, weights=[0.17642128585778402, 0.37296021803616525, 0.4506184961060508]
+INFO:__main__:  Agent step 760 (sim 15200): reward=14.37, weights=[0.31242697022329347, 0.34378651488835327, 0.34378651488835327]
+INFO:__main__:  Episode completed: 766 agent steps, 15301 sim steps, total reward: 6716.20
+INFO:controllers.mpc_controller:MPCController initialized: horizon=30, dt=0.05, weights=[v:0.25, s:0.35, c:0.4]
+INFO:controllers.mpc_controller:FixedWeightMPC initialized (baseline controller)
+INFO:__main__:Running Fixed MPC controller...
+INFO:environment.car_following:Episode 1 started
+INFO:__main__:  Episode completed: 15301 steps
+INFO:controllers.acc_controller:ACCController initialized: THW=1.8s, target_vel=20.0 m/s
+INFO:__main__:Running ACC controller...
+INFO:environment.car_following:Episode 2 started
+INFO:__main__:  Episode completed: 15301 steps
+
+======================================================================
+HYBRID DRL-MPC CONTROLLER EVALUATION
+======================================================================
+
+Model: /home/thanh14401/projects/hybrid-drl-cacc/models/ablation_absolute_20260326_221021_final.zip
+
+
+======================================================================
+EVALUATING 3 SCENARIOS
+======================================================================
+
+[1/3] udds
+
+======================================================================
+EVALUATING SCENARIO: udds
+Description: Urban Dynamometer Driving Schedule (FTP-72) — city driving (1369s)
+Duration: 1369.0s (27381 steps)
+======================================================================
+
+--------------------------------------------------
+Testing DRL-MPC (Hybrid) Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: DRL-MPC (Hybrid)
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 1344.61
+  Distance traveled: 11.49 km
+  Energy per km: 117.06
+  Mechanical Energy: 4840.59 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.135 m/s³
+  Max Jerk: 9.351 m/s³
+
+--- Safety ---
+  Min Time Headway: 2.12 s
+  Avg Time Headway: 6.21 s
+  THW Violations: 4437 (16.2%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  4437 (16.2%)
+  Min Distance Gap: 4.14 m
+
+--- Velocity ---
+  Avg Ego Velocity: 8.39 m/s (30.2 km/h)
+  Velocity RMSE: 13.09 m/s
+
+--- Control ---
+  Avg Throttle: 0.121
+  Accel/Decel/Coast: 57.0% / 23.1% / 19.9%
+
+--- Summary ---
+  Duration: 1369.1 s
+  Collision: False
+============================================================
+
+--------------------------------------------------
+Testing Fixed-Weight MPC Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: Fixed-Weight MPC
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 1338.71
+  Distance traveled: 11.49 km
+  Energy per km: 116.55
+  Mechanical Energy: 4819.34 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.115 m/s³
+  Max Jerk: 9.856 m/s³
+
+--- Safety ---
+  Min Time Headway: 2.13 s
+  Avg Time Headway: 6.85 s
+  THW Violations: 4721 (17.2%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  4721 (17.2%)
+  Min Distance Gap: 4.65 m
+
+--- Velocity ---
+  Avg Ego Velocity: 8.39 m/s (30.2 km/h)
+  Velocity RMSE: 13.09 m/s
+
+--- Control ---
+  Avg Throttle: 0.121
+  Accel/Decel/Coast: 57.2% / 23.2% / 19.6%
+
+--- Summary ---
+  Duration: 1369.1 s
+  Collision: False
+============================================================
+
+--------------------------------------------------
+Testing ACC Baseline Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: ACC Baseline
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 1341.13
+  Distance traveled: 11.49 km
+  Energy per km: 116.76
+  Mechanical Energy: 4828.08 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.084 m/s³
+  Max Jerk: 2.064 m/s³
+
+--- Safety ---
+  Min Time Headway: 2.02 s
+  Avg Time Headway: 7.30 s
+  THW Violations: 4909 (17.9%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  4909 (17.9%)
+  Min Distance Gap: 5.01 m
+
+--- Velocity ---
+  Avg Ego Velocity: 8.39 m/s (30.2 km/h)
+  Velocity RMSE: 13.10 m/s
+
+--- Control ---
+  Avg Throttle: 0.121
+  Accel/Decel/Coast: 56.8% / 23.1% / 20.1%
+
+--- Summary ---
+  Duration: 1369.1 s
+  Collision: False
+============================================================
+
+======================================================================
+COMPARISON SUMMARY
+======================================================================
+Metric                              DRL-MPC    Fixed-MPC          ACC
+----------------------------------------------------------------------
+Total Energy                        1344.61      1338.71      1341.13
+Energy per km                        117.06       116.55       116.76
+RMS Jerk (m/s³)                      0.1353       0.1148       0.0843
+Min Time Headway (s)                   2.12         2.13         2.02
+Avg Time Headway (s)                   6.21         6.85         7.30
+THW Violation Rate                    16.2%        17.2%        17.9%
+  Too Close (<1.5s)                    0.0%         0.0%         0.0%
+  Too Far (>5.0s)                     16.2%        17.2%        17.9%
+Avg Velocity (m/s)                     8.39         8.39         8.39
+
+Analysis:
+  + Most energy efficient: Fixed-MPC
+  + Smoothest ride (lowest jerk): ACC
+  + Safest following distance: Fixed-MPC
+
+Pausing 3 seconds before next scenario...
+
+[2/3] hwfet
+
+======================================================================
+EVALUATING SCENARIO: hwfet
+Description: Highway Fuel Economy Test — highway driving (765s)
+Duration: 765.0s (15301 steps)
+======================================================================
+
+--------------------------------------------------
+Testing DRL-MPC (Hybrid) Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: DRL-MPC (Hybrid)
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 1785.18
+  Distance traveled: 16.01 km
+  Energy per km: 111.48
+  Mechanical Energy: 6426.65 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.122 m/s³
+  Max Jerk: 9.351 m/s³
+
+--- Safety ---
+  Min Time Headway: 2.09 s
+  Avg Time Headway: 2.60 s
+  THW Violations: 44 (0.3%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  44 (0.3%)
+  Min Distance Gap: 8.43 m
+
+--- Velocity ---
+  Avg Ego Velocity: 20.93 m/s (75.4 km/h)
+  Velocity RMSE: 4.24 m/s
+
+--- Control ---
+  Avg Throttle: 0.117
+  Accel/Decel/Coast: 87.4% / 4.9% / 7.7%
+
+--- Summary ---
+  Duration: 765.1 s
+  Collision: False
+============================================================
+
+--------------------------------------------------
+Testing Fixed-Weight MPC Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: Fixed-Weight MPC
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 1780.25
+  Distance traveled: 16.01 km
+  Energy per km: 111.20
+  Mechanical Energy: 6408.90 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.107 m/s³
+  Max Jerk: 9.856 m/s³
+
+--- Safety ---
+  Min Time Headway: 2.11 s
+  Avg Time Headway: 2.80 s
+  THW Violations: 52 (0.3%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  52 (0.3%)
+  Min Distance Gap: 9.61 m
+
+--- Velocity ---
+  Avg Ego Velocity: 20.93 m/s (75.3 km/h)
+  Velocity RMSE: 4.20 m/s
+
+--- Control ---
+  Avg Throttle: 0.116
+  Accel/Decel/Coast: 86.9% / 5.1% / 8.0%
+
+--- Summary ---
+  Duration: 765.1 s
+  Collision: False
+============================================================
+
+--------------------------------------------------
+Testing ACC Baseline Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: ACC Baseline
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 1793.76
+  Distance traveled: 16.01 km
+  Energy per km: 112.02
+  Mechanical Energy: 6457.54 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.069 m/s³
+  Max Jerk: 2.064 m/s³
+
+--- Safety ---
+  Min Time Headway: 2.01 s
+  Avg Time Headway: 2.14 s
+  THW Violations: 42 (0.3%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  42 (0.3%)
+  Min Distance Gap: 9.85 m
+
+--- Velocity ---
+  Avg Ego Velocity: 20.93 m/s (75.4 km/h)
+  Velocity RMSE: 4.30 m/s
+
+--- Control ---
+  Avg Throttle: 0.117
+  Accel/Decel/Coast: 84.9% / 6.2% / 8.9%
+
+--- Summary ---
+  Duration: 765.1 s
+  Collision: False
+============================================================
+
+======================================================================
+COMPARISON SUMMARY
+======================================================================
+INFO:__main__:Saved: results/eval/hwfet_drl_mpc_data.csv
+INFO:__main__:Saved: results/eval/hwfet_fixed_mpc_data.csv
+INFO:__main__:Saved: results/eval/hwfet_acc_data.csv
+INFO:__main__:Results saved to results/eval/
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.gym_wrapper:Closing HybridMPCEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.25, s:0.35, c:0.4]
+INFO:environment.gym_wrapper:HybridMPCEnv initialized (residual policy, action_repeat=20, DRL decides every 1.00s, MPC runs at 20Hz)
+INFO:__main__:Running DRL-MPC controller...
+INFO:environment.car_following:Episode 1 started
+INFO:__main__:  Agent step 10 (sim 200): reward=15.75, weights=[0.39656457344373475, 0.39656457344373475, 0.20687085311253062]
+INFO:__main__:  Agent step 20 (sim 400): reward=9.90, weights=[0.4078551868477257, 0.18428962630454865, 0.4078551868477257]
+INFO:__main__:  Agent step 30 (sim 600): reward=10.33, weights=[0.4081223710846725, 0.31387732628178056, 0.27800030263354714]
+INFO:__main__:  Agent step 40 (sim 800): reward=15.14, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 50 (sim 1000): reward=15.37, weights=[0.27244104600637176, 0.3637794769968141, 0.3637794769968141]
+INFO:__main__:  Agent step 60 (sim 1200): reward=9.73, weights=[0.4073152508197032, 0.1853694983605936, 0.4073152508197032]
+INFO:__main__:  Agent step 70 (sim 1400): reward=5.06, weights=[0.22414527578351845, 0.5008684815399598, 0.27498624267652166]
+INFO:__main__:  Agent step 80 (sim 1600): reward=7.31, weights=[0.2006104903361284, 0.5178136565127548, 0.28157585315111666]
+INFO:__main__:  Agent step 90 (sim 1800): reward=4.16, weights=[0.3866887884915923, 0.40197984926141406, 0.21133136224699361]
+INFO:__main__:  Agent step 100 (sim 2000): reward=-5.43, weights=[0.32609280415098746, 0.3337501107138553, 0.34015708513515724]
+INFO:__main__:  Agent step 110 (sim 2200): reward=5.46, weights=[0.17911174743399177, 0.5126383598719252, 0.3082498926940831]
+INFO:__main__:  Agent step 120 (sim 2400): reward=5.80, weights=[0.14625942614641307, 0.4090630354796959, 0.44467753837389107]
+INFO:__main__:  Agent step 130 (sim 2600): reward=13.89, weights=[0.18334215356678057, 0.5098217926919268, 0.30683605374129247]
+INFO:__main__:  Agent step 140 (sim 2800): reward=15.86, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 150 (sim 3000): reward=5.71, weights=[0.3907885850288467, 0.22111115269202064, 0.38810026227913275]
+INFO:__main__:  Agent step 160 (sim 3200): reward=5.26, weights=[0.39823641953584765, 0.39823641953584765, 0.20352716092830475]
+INFO:__main__:  Agent step 170 (sim 3400): reward=1.04, weights=[0.17088696939244236, 0.5251160485227179, 0.30399698208483966]
+INFO:__main__:  Agent step 180 (sim 3600): reward=5.54, weights=[0.1859319859720004, 0.503399076384449, 0.3106689376435506]
+INFO:__main__:  Agent step 190 (sim 3800): reward=4.71, weights=[0.17337905339154852, 0.5471612265484886, 0.2794597200599627]
+INFO:__main__:  Agent step 200 (sim 4000): reward=1.79, weights=[0.20773250353893813, 0.46222529961174874, 0.33004219684931313]
+INFO:__main__:  Agent step 210 (sim 4200): reward=1.09, weights=[0.19393943509582542, 0.5018982654439621, 0.3041622994602124]
+INFO:__main__:  Agent step 220 (sim 4400): reward=0.34, weights=[0.18687213693135016, 0.5094334538003293, 0.3036944092683205]
+INFO:__main__:  Agent step 230 (sim 4600): reward=2.22, weights=[0.18076736064287474, 0.48275734369364004, 0.33647529566348516]
+INFO:__main__:  Agent step 240 (sim 4800): reward=3.57, weights=[0.2296887696541159, 0.4212506311460568, 0.3490605991998273]
+INFO:__main__:  Agent step 250 (sim 5000): reward=2.18, weights=[0.17424222347922075, 0.47962102165280784, 0.3461367548679713]
+INFO:__main__:  Agent step 260 (sim 5200): reward=2.31, weights=[0.18225294183548157, 0.4779765070819301, 0.33977055108258825]
+INFO:__main__:  Agent step 270 (sim 5400): reward=2.47, weights=[0.1754278157660041, 0.4872653732767347, 0.3373068109572611]
+INFO:__main__:  Agent step 280 (sim 5600): reward=2.14, weights=[0.17176899972644852, 0.48272971927018515, 0.34550128100336625]
+INFO:__main__:  Agent step 290 (sim 5800): reward=1.27, weights=[0.18953407742084066, 0.5287080051185883, 0.28175791746057094]
+INFO:__main__:  Agent step 300 (sim 6000): reward=-2.56, weights=[0.20123694263470437, 0.5162115735140088, 0.28255148385128676]
+INFO:__main__:  Agent step 310 (sim 6200): reward=-2.94, weights=[0.18186629578508312, 0.5271786958290319, 0.2909550083858849]
+INFO:__main__:  Agent step 320 (sim 6400): reward=-0.70, weights=[0.1728898454006091, 0.5493121016151112, 0.27779805298427956]
+INFO:__main__:  Agent step 330 (sim 6600): reward=-3.85, weights=[0.17283249554269572, 0.5418605328469408, 0.28530697161036334]
+INFO:__main__:  Agent step 340 (sim 6800): reward=-1.75, weights=[0.17509175960496612, 0.5255870376373053, 0.29932120275772844]
+INFO:__main__:  Agent step 350 (sim 7000): reward=5.31, weights=[0.13541550388057302, 0.4322922480597135, 0.4322922480597135]
+INFO:__main__:  Agent step 360 (sim 7200): reward=2.87, weights=[0.1666073766533359, 0.5062624617660133, 0.3271301615806507]
+INFO:__main__:  Agent step 370 (sim 7400): reward=1.39, weights=[0.16768384061841046, 0.5189720496882041, 0.31334410969338533]
+INFO:__main__:  Agent step 380 (sim 7600): reward=0.04, weights=[0.17828392342420582, 0.5335598593396005, 0.28815621723619367]
+INFO:__main__:  Agent step 390 (sim 7800): reward=0.94, weights=[0.17682296088224256, 0.5024259607581463, 0.32075107835961114]
+INFO:__main__:  Agent step 400 (sim 8000): reward=0.49, weights=[0.1742397615366207, 0.5316571060052812, 0.2941031324580981]
+INFO:__main__:  Agent step 410 (sim 8200): reward=-0.19, weights=[0.17471611672983772, 0.5371715303778885, 0.28811235289227377]
+INFO:__main__:  Agent step 420 (sim 8400): reward=1.58, weights=[0.18546960965201983, 0.4954609277907664, 0.3190694625572137]
+INFO:__main__:  Agent step 430 (sim 8600): reward=1.08, weights=[0.17129897851494483, 0.5296985666959503, 0.29900245478910487]
+INFO:__main__:  Agent step 440 (sim 8800): reward=3.13, weights=[0.16747956631582947, 0.4970269972437753, 0.33549343644039514]
+INFO:__main__:  Agent step 450 (sim 9000): reward=1.55, weights=[0.17118823747383335, 0.5441065563367561, 0.2847052061894105]
+INFO:__main__:  Agent step 460 (sim 9200): reward=3.59, weights=[0.15602250507141352, 0.46775863998242784, 0.37621885494615864]
+INFO:__main__:  Agent step 470 (sim 9400): reward=3.21, weights=[0.20886617055391538, 0.4725024644860087, 0.3186313649600759]
+INFO:__main__:  Agent step 480 (sim 9600): reward=5.66, weights=[0.1662981220999309, 0.5050634071841726, 0.3286384707158964]
+INFO:__main__:  Agent step 490 (sim 9800): reward=7.43, weights=[0.1764649834396388, 0.2628093639543908, 0.5607256526059705]
+INFO:__main__:  Agent step 500 (sim 10000): reward=15.03, weights=[0.2382335065865908, 0.3808832467067046, 0.3808832467067046]
+INFO:__main__:  Agent step 510 (sim 10200): reward=13.26, weights=[0.4574604947614093, 0.29200703804421346, 0.25053246719437733]
+INFO:__main__:  Agent step 520 (sim 10400): reward=15.77, weights=[0.3827821772940188, 0.20067099933180063, 0.4165468233741805]
+INFO:__main__:  Agent step 530 (sim 10600): reward=15.77, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 540 (sim 10800): reward=12.56, weights=[0.45824358433697193, 0.29961397940818135, 0.24214243625484683]
+INFO:__main__:  Agent step 550 (sim 11000): reward=15.28, weights=[0.4069833521554444, 0.18603329568911126, 0.4069833521554444]
+INFO:__main__:  Agent step 560 (sim 11200): reward=15.39, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 570 (sim 11400): reward=15.60, weights=[0.40509014310686864, 0.1898197137862628, 0.40509014310686864]
+INFO:__main__:  Agent step 580 (sim 11600): reward=8.87, weights=[0.40418056862670104, 0.19551683948885584, 0.4003025918844432]
+INFO:__main__:  Agent step 590 (sim 11800): reward=13.28, weights=[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+INFO:__main__:  Agent step 600 (sim 12000): reward=14.44, weights=[0.17206219893330665, 0.4139689005333467, 0.4139689005333467]
+INFO:__main__:  Episode completed: 601 agent steps, 12001 sim steps, total reward: 3478.81
+INFO:controllers.mpc_controller:MPCController initialized: horizon=30, dt=0.05, weights=[v:0.25, s:0.35, c:0.4]
+INFO:controllers.mpc_controller:FixedWeightMPC initialized (baseline controller)
+INFO:__main__:Running Fixed MPC controller...
+INFO:environment.car_following:Episode 1 started
+INFO:__main__:  Episode completed: 12001 steps
+INFO:controllers.acc_controller:ACCController initialized: THW=1.8s, target_vel=20.0 m/s
+INFO:__main__:Running ACC controller...
+INFO:environment.car_following:Episode 2 started
+INFO:__main__:  Episode completed: 12001 steps
+INFO:__main__:Saved: results/eval/us06_drl_mpc_data.csv
+INFO:__main__:Saved: results/eval/us06_fixed_mpc_data.csv
+INFO:__main__:Saved: results/eval/us06_acc_data.csv
+INFO:__main__:Results saved to results/eval/
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.gym_wrapper:Closing HybridMPCEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+Metric                              DRL-MPC    Fixed-MPC          ACC
+----------------------------------------------------------------------
+Total Energy                        1785.18      1780.25      1793.76
+Energy per km                        111.48       111.20       112.02
+RMS Jerk (m/s³)                      0.1216       0.1067       0.0687
+Min Time Headway (s)                   2.09         2.11         2.01
+Avg Time Headway (s)                   2.60         2.80         2.14
+THW Violation Rate                     0.3%         0.3%         0.3%
+  Too Close (<1.5s)                    0.0%         0.0%         0.0%
+  Too Far (>5.0s)                      0.3%         0.3%         0.3%
+Avg Velocity (m/s)                    20.93        20.93        20.93
+
+Analysis:
+  + Most energy efficient: Fixed-MPC
+  + Smoothest ride (lowest jerk): ACC
+  + Safest following distance: Fixed-MPC
+
+Pausing 3 seconds before next scenario...
+
+[3/3] us06
+
+======================================================================
+EVALUATING SCENARIO: us06
+Description: Supplemental FTP (Aggressive Driving) — aggressive driving (600s)
+Duration: 600.0s (12001 steps)
+======================================================================
+
+--------------------------------------------------
+Testing DRL-MPC (Hybrid) Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: DRL-MPC (Hybrid)
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 2037.06
+  Distance traveled: 12.38 km
+  Energy per km: 164.56
+  Mechanical Energy: 7333.43 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.232 m/s³
+  Max Jerk: 9.351 m/s³
+
+--- Safety ---
+  Min Time Headway: 2.06 s
+  Avg Time Headway: 3.00 s
+  THW Violations: 293 (2.4%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  293 (2.4%)
+  Min Distance Gap: 5.48 m
+
+--- Velocity ---
+  Avg Ego Velocity: 20.63 m/s (74.3 km/h)
+  Velocity RMSE: 10.25 m/s
+
+--- Control ---
+  Avg Throttle: 0.183
+  Accel/Decel/Coast: 75.1% / 19.0% / 5.9%
+
+--- Summary ---
+  Duration: 600.1 s
+  Collision: False
+============================================================
+
+--------------------------------------------------
+Testing Fixed-Weight MPC Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: Fixed-Weight MPC
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 2013.11
+  Distance traveled: 12.38 km
+  Energy per km: 162.64
+  Mechanical Energy: 7247.21 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.167 m/s³
+  Max Jerk: 9.856 m/s³
+
+--- Safety ---
+  Min Time Headway: 2.11 s
+  Avg Time Headway: 3.35 s
+  THW Violations: 355 (3.0%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  355 (3.0%)
+  Min Distance Gap: 6.05 m
+
+--- Velocity ---
+  Avg Ego Velocity: 20.63 m/s (74.3 km/h)
+  Velocity RMSE: 10.14 m/s
+
+--- Control ---
+  Avg Throttle: 0.181
+  Accel/Decel/Coast: 75.4% / 19.9% / 4.6%
+
+--- Summary ---
+  Duration: 600.1 s
+  Collision: False
+============================================================
+
+--------------------------------------------------
+Testing ACC Baseline Controller
+--------------------------------------------------
+
+============================================================
+METRICS SUMMARY: ACC Baseline
+============================================================
+
+--- Energy ---
+  Total Energy (throttle proxy): 2052.08
+  Distance traveled: 12.38 km
+  Energy per km: 165.77
+  Mechanical Energy: 7387.50 kJ
+
+--- Comfort ---
+  RMS Jerk: 0.126 m/s³
+  Max Jerk: 2.064 m/s³
+
+--- Safety ---
+  Min Time Headway: 1.97 s
+  Avg Time Headway: 2.46 s
+  THW Violations: 493 (4.1%)
+    Too Close (<1.5s): 0 (0.0%)
+    Too Far  (>5.0s):  493 (4.1%)
+  Min Distance Gap: 6.29 m
+
+--- Velocity ---
+  Avg Ego Velocity: 20.63 m/s (74.3 km/h)
+  Velocity RMSE: 10.32 m/s
+
+--- Control ---
+  Avg Throttle: 0.183
+  Accel/Decel/Coast: 74.7% / 20.5% / 4.8%
+
+--- Summary ---
+  Duration: 600.1 s
+  Collision: False
+============================================================
+
+======================================================================
+COMPARISON SUMMARY
+======================================================================
+Metric                              DRL-MPC    Fixed-MPC          ACC
+----------------------------------------------------------------------
+Total Energy                        2037.06      2013.11      2052.08
+Energy per km                        164.56       162.64       165.77
+RMS Jerk (m/s³)                      0.2322       0.1665       0.1262
+Min Time Headway (s)                   2.06         2.11         1.97
+Avg Time Headway (s)                   3.00         3.35         2.46
+THW Violation Rate                     2.4%         3.0%         4.1%
+  Too Close (<1.5s)                    0.0%         0.0%         0.0%
+  Too Far (>5.0s)                      2.4%         3.0%         4.1%
+Avg Velocity (m/s)                    20.63        20.63        20.63
+
+Analysis:
+  + Most energy efficient: Fixed-MPC
+  + Smoothest ride (lowest jerk): ACC
+  + Safest following distance: Fixed-MPC
+
+======================================================================
+AGGREGATE RESULTS ACROSS ALL SCENARIOS
+======================================================================
+
+Scenario                     DRL-MPC  Fixed-MPC        ACC     Winner
+----------------------------------------------------------------------
+udds                         1344.61    1338.71    1341.13  Fixed-MPC
+hwfet                        1785.18    1780.25    1793.76  Fixed-MPC
+us06                         2037.06    2013.11    2052.08  Fixed-MPC
+----------------------------------------------------------------------
+TOTAL WINS                         0          3          0
+
+DRL-MPC vs Fixed-MPC: -0.6% energy
+DRL-MPC vs ACC: +0.3% energy

@@ -1,0 +1,62 @@
+{
+  "energy_throttle": {
+    "total_energy": 1780.2488266959735,
+    "avg_power": 2.326970559696717,
+    "distance_m": 16010.1220703125,
+    "distance_km": 16.010122299194336,
+    "energy_per_km": 111.19519147568055
+  },
+  "energy_mechanical": {
+    "total_energy_J": 6408895.776105506,
+    "total_energy_kJ": 6408.895776105506,
+    "regen_potential_J": 465070.2186880711,
+    "regen_potential_kJ": 465.0702186880711,
+    "net_energy_kJ": 6083.346623023856
+  },
+  "comfort": {
+    "rms_jerk": 0.10666726656685258,
+    "max_jerk": 9.855715549728732,
+    "avg_abs_jerk": 0.020279103988629553,
+    "jerk_std": 0.10662929013880862
+  },
+  "safety": {
+    "min_time_headway": 2.106355905532837,
+    "avg_time_headway": 2.8022539615631104,
+    "thw_std": 2.9355955123901367,
+    "violation_count": 52,
+    "violation_rate": 0.0033984706881903144,
+    "too_close_count": 0,
+    "too_close_rate": 0.0,
+    "too_far_count": 52,
+    "too_far_rate": 0.0033984706881903144,
+    "min_distance_gap": 9.608041763305664,
+    "avg_distance_gap": 57.78821563720703
+  },
+  "velocity": {
+    "avg_ego_velocity": 20.926897048950195,
+    "avg_lead_velocity": 20.9224796295166,
+    "max_ego_velocity": 25.576461791992188,
+    "min_ego_velocity": 0.0,
+    "velocity_rmse": 4.201322555541992,
+    "avg_relative_velocity": -0.004414101131260395,
+    "velocity_smoothness": 0.01152149960398674
+  },
+  "control": {
+    "avg_throttle": 0.11609696750130684,
+    "avg_brake": 0.008374824747129255,
+    "throttle_smoothness": 0.002520779326471019,
+    "brake_smoothness": 0.0005730654041383106,
+    "avg_acceleration": 0.2070694607612259,
+    "acceleration_std": 0.22939898568313002,
+    "max_acceleration": 1.926546617167142,
+    "max_braking": -1.2312498808624353,
+    "accel_time_ratio": 0.8687667472714201,
+    "decel_time_ratio": 0.051303836350565325,
+    "coast_time_ratio": 0.07992941637801457
+  },
+  "summary": {
+    "duration_s": 765.0500000000001,
+    "total_steps": 15301,
+    "collision": false
+  }
+}

@@ -12,8 +12,8 @@ env/
 .env
 
 # Training artifacts
-models/
-logs/
+# models/
+# logs/
 tensorboard/
 
 # CARLA simulator (too large for git)
@@ -21,7 +21,7 @@ CARLA_0.9.16/
 CARLA_0.9.16.zip
 
 # Results (regenerable)
-results/
+# results/
 
 # IDE
 .vscode/

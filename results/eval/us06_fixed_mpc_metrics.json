@@ -1,0 +1,62 @@
+{
+  "energy_throttle": {
+    "total_energy": 2013.1147408364932,
+    "avg_power": 3.3549116587559253,
+    "distance_m": 12377.7978515625,
+    "distance_km": 12.377798080444336,
+    "energy_per_km": 162.63915218589867
+  },
+  "energy_mechanical": {
+    "total_energy_J": 7247213.067011375,
+    "total_energy_kJ": 7247.213067011375,
+    "regen_potential_J": 1578604.3054396175,
+    "regen_potential_kJ": 1578.6043054396175,
+    "net_energy_kJ": 6142.1900532036425
+  },
+  "comfort": {
+    "rms_jerk": 0.16653643050101394,
+    "max_jerk": 9.855715549728732,
+    "avg_abs_jerk": 0.0720916831014213,
+    "jerk_std": 0.16649797901194316
+  },
+  "safety": {
+    "min_time_headway": 2.1064975261688232,
+    "avg_time_headway": 3.3533477783203125,
+    "thw_std": 3.352083921432495,
+    "violation_count": 355,
+    "violation_rate": 0.029580868260978253,
+    "too_close_count": 0,
+    "too_close_rate": 0.0,
+    "too_far_count": 355,
+    "too_far_rate": 0.029580868260978253,
+    "min_distance_gap": 6.0509467124938965,
+    "avg_distance_gap": 68.17481231689453
+  },
+  "velocity": {
+    "avg_ego_velocity": 20.62794303894043,
+    "avg_lead_velocity": 20.6204776763916,
+    "max_ego_velocity": 33.73290252685547,
+    "min_ego_velocity": 0.0,
+    "velocity_rmse": 10.135769844055176,
+    "avg_relative_velocity": -0.007467476651072502,
+    "velocity_smoothness": 0.028662314638495445
+  },
+  "control": {
+    "avg_throttle": 0.1806781964876202,
+    "avg_brake": 0.045535726394975405,
+    "throttle_smoothness": 0.0035293933452427836,
+    "brake_smoothness": 0.0014514441336789196,
+    "avg_acceleration": 0.22474921379031415,
+    "acceleration_std": 0.5768730609029761,
+    "max_acceleration": 1.926546617167142,
+    "max_braking": -1.421654640271682,
+    "accel_time_ratio": 0.7541038246812766,
+    "decel_time_ratio": 0.19948337638530123,
+    "coast_time_ratio": 0.046412798933422206
+  },
+  "summary": {
+    "duration_s": 600.0500000000001,
+    "total_steps": 12001,
+    "collision": false
+  }
+}

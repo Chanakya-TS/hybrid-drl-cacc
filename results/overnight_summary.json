@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-03-27T07:26:59.589664",
+  "total_time_hours": 16.930608647730615,
+  "config": {
+    "timesteps": 300000,
+    "n_seeds": 1,
+    "oracle_resolution": 10
+  },
+  "results": {
+    "oracle": "SKIPPED",
+    "main_seed0": "OK",
+    "ablation_absolute": "OK",
+    "eval_main_residual_s0_20260326_143110_final.zip": "OK",
+    "eval_ablation_absolute_20260326_221021_final.zip": "OK"
+  },
+  "evaluated_models": [
+    "main_residual_s0_20260326_143110_final.zip",
+    "ablation_absolute_20260326_221021_final.zip"
+  ]
+}

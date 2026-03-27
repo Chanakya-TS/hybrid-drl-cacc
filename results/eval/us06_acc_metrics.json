@@ -1,0 +1,62 @@
+{
+  "energy_throttle": {
+    "total_energy": 2052.082341803262,
+    "avg_power": 3.4198522486513823,
+    "distance_m": 12378.8193359375,
+    "distance_km": 12.378819465637207,
+    "energy_per_km": 165.77365793286089
+  },
+  "energy_mechanical": {
+    "total_energy_J": 7387496.430491742,
+    "total_energy_kJ": 7387.496430491742,
+    "regen_potential_J": 1674906.2146627572,
+    "regen_potential_kJ": 1674.9062146627573,
+    "net_energy_kJ": 6215.062080227812
+  },
+  "comfort": {
+    "rms_jerk": 0.12615386197166845,
+    "max_jerk": 2.06362247467041,
+    "avg_abs_jerk": 0.07219758664568265,
+    "jerk_std": 0.12604499606997727
+  },
+  "safety": {
+    "min_time_headway": 1.9651563167572021,
+    "avg_time_headway": 2.458509683609009,
+    "thw_std": 3.069627285003662,
+    "violation_count": 493,
+    "violation_rate": 0.04107991000749937,
+    "too_close_count": 0,
+    "too_close_rate": 0.0,
+    "too_far_count": 493,
+    "too_far_rate": 0.04107991000749937,
+    "min_distance_gap": 6.293946266174316,
+    "avg_distance_gap": 42.49386978149414
+  },
+  "velocity": {
+    "avg_ego_velocity": 20.62964630126953,
+    "avg_lead_velocity": 20.6204776763916,
+    "max_ego_velocity": 34.186241149902344,
+    "min_ego_velocity": 0.0,
+    "velocity_rmse": 10.322240829467773,
+    "avg_relative_velocity": -0.009170657955110073,
+    "velocity_smoothness": 0.029866699129343033
+  },
+  "control": {
+    "avg_throttle": 0.18343957452015494,
+    "avg_brake": 0.0472217810287481,
+    "throttle_smoothness": 0.0026024122802076857,
+    "brake_smoothness": 0.0011824101297604995,
+    "avg_acceleration": 0.22521380595406557,
+    "acceleration_std": 0.6010153636314541,
+    "max_acceleration": 2.0,
+    "max_braking": -1.4987335205078125,
+    "accel_time_ratio": 0.7472710607449379,
+    "decel_time_ratio": 0.2050662444796267,
+    "coast_time_ratio": 0.047662694775435416
+  },
+  "summary": {
+    "duration_s": 600.0500000000001,
+    "total_steps": 12001,
+    "collision": false
+  }
+}

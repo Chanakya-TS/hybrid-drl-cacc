@@ -1,0 +1,1495 @@
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.05, c:0.9]
+INFO:environment.car_following:Episode 1 started
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.135, c:0.815]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.21999999999999997, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.305, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.38999999999999996, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.475, c:0.475]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.56, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.645, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.73, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.815, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.9, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.05, c:0.815]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.135, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.21999999999999997, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.305, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.13500000000000004, s:0.39, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.475, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.56, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.645, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.73, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.815, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.05, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.135, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.21999999999999997, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.22, s:0.30500000000000005, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.22000000000000003, s:0.39000000000000007, c:0.39000000000000007]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.475, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.56, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.645, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.73, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.05, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.135, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.30500000000000005, s:0.22, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.305, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.38999999999999996, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.475, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.56, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.645, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.05, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39, s:0.13500000000000004, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39000000000000007, s:0.22000000000000003, c:0.39000000000000007]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.305, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39, s:0.39, c:0.22]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.475, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.56, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.05, c:0.475]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.135, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.21999999999999997, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.305, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.38999999999999996, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.475, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.05, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.135, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.21999999999999997, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.305, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.38999999999999996, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.05, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.135, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.21999999999999997, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.305, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.05, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.135, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.21999999999999997, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.815, s:0.05, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.815, s:0.135, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.9, s:0.05, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.05, c:0.9]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.135, c:0.815]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.21999999999999997, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.305, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.38999999999999996, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.475, c:0.475]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.56, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.645, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.73, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.815, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.9, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.05, c:0.815]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.135, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.21999999999999997, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.305, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.13500000000000004, s:0.39, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.475, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.56, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.645, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.73, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.815, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.05, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.135, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.21999999999999997, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.22, s:0.30500000000000005, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.22000000000000003, s:0.39000000000000007, c:0.39000000000000007]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.475, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.56, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.645, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.73, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.05, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.135, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.30500000000000005, s:0.22, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.305, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.38999999999999996, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.475, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.56, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.645, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.05, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39, s:0.13500000000000004, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39000000000000007, s:0.22000000000000003, c:0.39000000000000007]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.305, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39, s:0.39, c:0.22]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.475, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.56, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.05, c:0.475]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.135, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.21999999999999997, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.305, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.38999999999999996, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.475, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.05, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.135, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.21999999999999997, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.305, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.38999999999999996, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.05, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.135, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.21999999999999997, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.305, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.05, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.135, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.21999999999999997, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.815, s:0.05, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.815, s:0.135, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.9, s:0.05, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.05, c:0.9]
+INFO:environment.car_following:Episode 1 started
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.135, c:0.815]
+INFO:environment.car_following:Episode 1 started
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.21999999999999997, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.305, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.38999999999999996, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.475, c:0.475]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.56, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.645, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.73, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.815, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.05, s:0.9, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.05, c:0.815]
+INFO:environment.car_following:Episode 1 started
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Restoration_Failed
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Restoration_Failed
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Restoration_Failed
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Restoration_Failed
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Restoration_Failed
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+WARNING:controllers.mpc_controller:MPC solver failed: Infeasible_Problem_Detected
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.135, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.21999999999999997, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.305, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.13500000000000004, s:0.39, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.475, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.56, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.645, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.73, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.135, s:0.815, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.05, c:0.73]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.135, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.21999999999999997, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.22, s:0.30500000000000005, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.22000000000000003, s:0.39000000000000007, c:0.39000000000000007]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.475, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.56, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.645, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.21999999999999997, s:0.73, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.05, c:0.645]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.135, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.30500000000000005, s:0.22, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.305, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.38999999999999996, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.475, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.56, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.305, s:0.645, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.05, c:0.56]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39, s:0.13500000000000004, c:0.47500000000000003]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39000000000000007, s:0.22000000000000003, c:0.39000000000000007]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.305, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.39, s:0.39, c:0.22]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.475, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.38999999999999996, s:0.56, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.05, c:0.475]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.135, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.21999999999999997, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.305, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.38999999999999996, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.475, s:0.475, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.05, c:0.38999999999999996]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.135, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.21999999999999997, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.305, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.56, s:0.38999999999999996, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.05, c:0.305]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.135, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.21999999999999997, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.645, s:0.305, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.05, c:0.21999999999999997]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.135, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.73, s:0.21999999999999997, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.815, s:0.05, c:0.135]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.815, s:0.135, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.9, s:0.05, c:0.05]
+INFO:environment.car_following:Episode 1 started
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+Generated 66 weight combinations (resolution=10)
+
+======================================================================
+GRID SEARCH: UDDS (66 weight combinations)
+======================================================================
+  [   6/66] w=(0.05,0.47,0.47) E/km=127.9 v_avg=8.4 best=127.9 ETA=1710s
+  [  12/66] w=(0.14,0.05,0.81) E/km=105.5 v_avg=2.3 best=116.3 ETA=1645s
+  [  18/66] w=(0.14,0.56,0.30) E/km=116.9 v_avg=8.4 best=116.3 ETA=1611s
+  [  24/66] w=(0.22,0.22,0.56) E/km=117.8 v_avg=8.4 best=116.3 ETA=1418s
+  [  30/66] w=(0.22,0.73,0.05) E/km=116.6 v_avg=8.4 best=116.3 ETA=1283s
+  [  36/66] w=(0.30,0.47,0.22) E/km=116.5 v_avg=8.4 best=116.1 ETA=1060s
+  [  42/66] w=(0.39,0.30,0.30) E/km=116.2 v_avg=8.4 best=115.9 ETA=834s
+  [  48/66] w=(0.47,0.22,0.30) E/km=115.6 v_avg=8.4 best=115.6 ETA=620s
+  [  54/66] w=(0.56,0.22,0.22) E/km=115.3 v_avg=8.4 best=115.3 ETA=415s
+  [  60/66] w=(0.65,0.30,0.05) E/km=115.5 v_avg=8.4 best=115.1 ETA=213s
+  [  66/66] w=(0.90,0.05,0.05) E/km=273.9 v_avg=4.0 best=114.9 ETA=0s
+
+Completed in 2201.8s
+
+======================================================================
+GRID SEARCH: HWFET (66 weight combinations)
+======================================================================
+  [   6/66] w=(0.05,0.47,0.47) E/km=112.3 v_avg=20.9 best=110.0 ETA=1060s
+  [  12/66] w=(0.14,0.05,0.81) E/km=108.3 v_avg=20.7 best=108.3 ETA=961s
+  [  18/66] w=(0.14,0.56,0.30) E/km=111.7 v_avg=20.9 best=108.3 ETA=876s
+  [  24/66] w=(0.22,0.22,0.56) E/km=110.0 v_avg=20.9 best=107.8 ETA=779s
+  [  30/66] w=(0.22,0.73,0.05) E/km=111.5 v_avg=20.9 best=107.8 ETA=676s
+  [  36/66] w=(0.30,0.47,0.22) E/km=111.2 v_avg=20.9 best=107.7 ETA=570s
+  [  42/66] w=(0.39,0.30,0.30) E/km=110.5 v_avg=20.9 best=107.7 ETA=460s
+  [  48/66] w=(0.47,0.22,0.30) E/km=110.1 v_avg=20.9 best=107.7 ETA=348s
+  [  54/66] w=(0.56,0.22,0.22) E/km=110.1 v_avg=20.9 best=107.7 ETA=234s
+  [  60/66] w=(0.65,0.30,0.05) E/km=110.6 v_avg=20.9 best=107.7 ETA=116s
+  [  66/66] w=(0.90,0.05,0.05) E/km=247.2 v_avg=4.2 best=107.7 ETA=0s
+
+Completed in 1231.1s
+
+======================================================================
+GRID SEARCH: US06 (66 weight combinations)
+======================================================================
+  [   6/66] w=(0.05,0.47,0.47) E/km=168.2 v_avg=20.6 best=166.5 ETA=708s
+  [  12/66] w=(0.14,0.05,0.81) E/km=141.4 v_avg=21.3 best=164.3 ETA=744s
+  [  18/66] w=(0.14,0.56,0.30) E/km=164.8 v_avg=20.6 best=158.7 ETA=711s
+  [  24/66] w=(0.22,0.22,0.56) E/km=160.7 v_avg=20.6 best=157.2 ETA=614s
+  [  30/66] w=(0.22,0.73,0.05) E/km=163.5 v_avg=20.6 best=157.2 ETA=545s
+  [  36/66] w=(0.30,0.47,0.22) E/km=162.4 v_avg=20.6 best=156.5 ETA=449s
+  [  42/66] w=(0.39,0.30,0.30) E/km=160.1 v_avg=20.6 best=156.4 ETA=360s
+  [  48/66] w=(0.47,0.22,0.30) E/km=159.0 v_avg=20.6 best=155.7 ETA=272s
+  [  54/66] w=(0.56,0.22,0.22) E/km=158.6 v_avg=20.6 best=155.7 ETA=183s
+  [  60/66] w=(0.65,0.30,0.05) E/km=159.9 v_avg=20.6 best=155.7 ETA=94s
+  [  66/66] w=(0.90,0.05,0.05) E/km=273.9 v_avg=4.0 best=155.7 ETA=0s
+
+Completed in 1021.9s
+
+======================================================================
+ORACLE ANALYSIS RESULTS
+======================================================================
+
+udds: 48/66 valid weight combinations
+
+--- UDDS ---
+  Oracle weights:    w_v=0.730, w_s=0.220, w_c=0.050
+  Fixed weights:     w_v=0.250, w_s=0.350, w_c=0.400
+  Oracle E/km:       114.93
+  Fixed  E/km:       116.77
+  Improvement:       +1.6%
+  Oracle avg vel:    8.39 m/s
+  Fixed  avg vel:    8.39 m/s
+  Oracle min THW:    2.04 s
+  Fixed  min THW:    2.13 s
+  Oracle jerk:       0.1532 m/s³
+
+hwfet: 60/66 valid weight combinations
+
+--- HWFET ---
+  Oracle weights:    w_v=0.305, w_s=0.050, w_c=0.645
+  Fixed weights:     w_v=0.250, w_s=0.350, w_c=0.400
+  Oracle E/km:       107.72
+  Fixed  E/km:       111.21
+  Improvement:       +3.1%
+  Oracle avg vel:    20.65 m/s
+  Fixed  avg vel:    20.93 m/s
+  Oracle min THW:    1.67 s
+  Fixed  min THW:    2.12 s
+  Oracle jerk:       0.0630 m/s³
+
+us06: 54/66 valid weight combinations
+
+--- US06 ---
+  Oracle weights:    w_v=0.475, w_s=0.135, w_c=0.390
+  Fixed weights:     w_v=0.250, w_s=0.350, w_c=0.400
+  Oracle E/km:       155.72
+  Fixed  E/km:       162.68
+  Improvement:       +4.3%
+  Oracle avg vel:    20.63 m/s
+  Fixed  avg vel:    20.63 m/s
+  Oracle min THW:    2.08 s
+  Fixed  min THW:    2.20 s
+  Oracle jerk:       0.1633 m/s³
+
+======================================================================
+KEY FINDING: Do optimal weights differ across scenarios?
+======================================================================
+  udds vs hwfet: weight distance = 0.7507
+  udds vs us06: weight distance = 0.4334
+  hwfet vs us06: weight distance = 0.3180
+
+  >> YES — optimal weights are scenario-dependent (max distance: 0.7507)
+  >> This justifies adaptive weight tuning via DRL.
+
+======================================================================
+SUMMARY TABLE (for paper)
+======================================================================
+Scenario      w_v    w_s    w_c     Oracle      Fixed   Improv   Orc v   Fix v  Orc THW
+                                      E/km       E/km        %     m/s     m/s        s
+------------------------------------------------------------------------------------------
+udds        0.730  0.220  0.050     114.93     116.77    +1.6%     8.4     8.4     2.04
+hwfet       0.305  0.050  0.645     107.72     111.21    +3.1%    20.6    20.9     1.67
+us06        0.475  0.135  0.390     155.72     162.68    +4.3%    20.6    20.6     2.08
+------------------------------------------------------------------------------------------
+                                         AVG    +3.0%
+
+Saved: results/oracle/grid_udds_20260326_045302.csv
+
+Saved: results/oracle/grid_hwfet_20260326_045302.csv
+
+Saved: results/oracle/grid_us06_20260326_045302.csv
+Saved: results/oracle/oracle_summary_20260326_045302.json

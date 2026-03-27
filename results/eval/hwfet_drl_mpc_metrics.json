@@ -1,0 +1,62 @@
+{
+  "energy_throttle": {
+    "total_energy": 1785.181438368135,
+    "avg_power": 2.333417996690589,
+    "distance_m": 16013.296875,
+    "distance_km": 16.013296127319336,
+    "energy_per_km": 111.48118485669279
+  },
+  "energy_mechanical": {
+    "total_energy_J": 6426653.178125287,
+    "total_energy_kJ": 6426.653178125287,
+    "regen_potential_J": 482221.8262517337,
+    "regen_potential_kJ": 482.2218262517337,
+    "net_energy_kJ": 6089.097899749074
+  },
+  "comfort": {
+    "rms_jerk": 0.12159761775663841,
+    "max_jerk": 9.350796173307913,
+    "avg_abs_jerk": 0.027036887709057385,
+    "jerk_std": 0.121577403378481
+  },
+  "safety": {
+    "min_time_headway": 2.089986801147461,
+    "avg_time_headway": 2.6028246879577637,
+    "thw_std": 2.631176710128784,
+    "violation_count": 44,
+    "violation_rate": 0.002875629043853343,
+    "too_close_count": 0,
+    "too_close_rate": 0.0,
+    "too_far_count": 44,
+    "too_far_rate": 0.002875629043853343,
+    "min_distance_gap": 8.426534652709961,
+    "avg_distance_gap": 53.61798095703125
+  },
+  "velocity": {
+    "avg_ego_velocity": 20.931045532226562,
+    "avg_lead_velocity": 20.9224796295166,
+    "max_ego_velocity": 25.616424560546875,
+    "min_ego_velocity": 0.03896380960941315,
+    "velocity_rmse": 4.243549823760986,
+    "avg_relative_velocity": -0.008563789539039135,
+    "velocity_smoothness": 0.01244079228490591
+  },
+  "control": {
+    "avg_throttle": 0.11668416539318605,
+    "avg_brake": 0.009206666187537354,
+    "throttle_smoothness": 0.0027914581111789984,
+    "brake_smoothness": 0.0007977015344091575,
+    "avg_acceleration": 0.20574833222376002,
+    "acceleration_std": 0.2482934097047457,
+    "max_acceleration": 1.999989742712639,
+    "max_braking": -1.5275997528338408,
+    "accel_time_ratio": 0.874060518920332,
+    "decel_time_ratio": 0.04934318018430168,
+    "coast_time_ratio": 0.07659630089536634
+  },
+  "summary": {
+    "duration_s": 765.0500000000001,
+    "total_steps": 15301,
+    "collision": false
+  }
+}

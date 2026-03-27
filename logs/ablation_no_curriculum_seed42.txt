@@ -1,0 +1,65 @@
+INFO:__main__:============================================================
+INFO:__main__:HYBRID DRL-MPC TRAINING
+INFO:__main__:============================================================
+INFO:__main__:Run name: ablation_no_curriculum_20260326_033813
+INFO:__main__:Total timesteps: 1
+INFO:__main__:Checkpoint frequency: 10000
+INFO:__main__:
+Creating training environment...
+INFO:__main__:  Action mode: residual, action_repeat: 20, curriculum: False
+INFO:environment.car_following:SimplifiedCarFollowingEnv initialized (pure-Python sim)
+INFO:controllers.mpc_controller:MPCController initialized: horizon=20, dt=0.05, weights=[v:0.25, s:0.35, c:0.4]
+INFO:environment.gym_wrapper:HybridMPCEnv initialized (residual policy, action_repeat=20, DRL decides every 1.00s, MPC runs at 20Hz)
+INFO:__main__:Training with 13 trajectory segments (UNIFORM RANDOM, no curriculum):
+INFO:__main__:CurriculumScheduler initialized:
+INFO:__main__:  Phase 1 (Warmup):         steps 0–0 (13 easy scenarios)
+INFO:__main__:  Phase 2 (Main):           steps 0–0 (13 DRL-advantage + 13 all)
+INFO:__main__:  Phase 3 (Generalization): steps 0–1 (13 all scenarios)
+INFO:__main__:
+Creating new SAC model...
+INFO:__main__:SAC model created with parameters:
+INFO:__main__:  Learning rate: 0.0003
+INFO:__main__:  Buffer size: 300000
+INFO:__main__:  Batch size: 256
+INFO:__main__:  Gamma: 0.99
+INFO:__main__:  Tau: 0.005
+INFO:__main__:
+Starting training...
+INFO:__main__:Press Ctrl+C to stop training early (model will be saved)
+INFO:__main__:[Episode 1] Phase 3 (Generalization) | Scenario: hwfet_s0 (6000 steps, 300s) | Cumulative: 0/1
+INFO:environment.car_following:Episode 1 started
+
+============================================================
+HYBRID DRL-MPC ECO-DRIVING TRAINING
+============================================================
+
+Training Configuration:
+  Timesteps:     1
+  Scenario:      curriculum (3-phase learning)
+  Action mode:   residual
+  Action repeat: 20
+  Curriculum:    False
+  Seed:          42
+  Checkpoint:    every 10000 steps
+
+Using cpu device
+Wrapping the env in a DummyVecEnv.
+
+Logging to logs/tensorboard/SAC_26
+ 100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1/1  [ 0:00:00 < 0:00:00 , ? it/s ]
+INFO:__main__:
+Training completed in 0.0 minutes
+INFO:__main__:Final model saved to: models/ablation_no_curriculum_20260326_033813_final.zip
+INFO:environment.gym_wrapper:Closing HybridMPCEnv
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv
+INFO:__main__:Environment closed
+
+============================================================
+TRAINING SUMMARY
+============================================================
+Total timesteps: 1
+Episodes completed: 0
+Training time: 0.0 minutes
+Model saved to: models/ablation_no_curriculum_20260326_033813_final.zip
+============================================================
+INFO:environment.car_following:Closing SimplifiedCarFollowingEnv

@@ -1,0 +1,41 @@
+{
+  "udds": {
+    "oracle_weights": [
+      0.135,
+      0.05,
+      0.815
+    ],
+    "oracle_energy": 3.9992039449982544,
+    "fixed_energy": 1341.2604122474197,
+    "improvement_pct": 99.70183240268031,
+    "oracle_jerk": 0.18110214326789278,
+    "fixed_jerk": 0.10043134823084747,
+    "oracle_min_thw": 1.2758268117904663
+  },
+  "hwfet": {
+    "oracle_weights": [
+      0.645,
+      0.05,
+      0.305
+    ],
+    "oracle_energy": 9.901149712726962,
+    "fixed_energy": 1780.7782368453625,
+    "improvement_pct": 99.44399872438542,
+    "oracle_jerk": 0.6725900491587244,
+    "fixed_jerk": 0.09400702982879082,
+    "oracle_min_thw": 0.5358962416648865
+  },
+  "us06": {
+    "oracle_weights": [
+      0.22,
+      0.05,
+      0.73
+    ],
+    "oracle_energy": 5.602703737045967,
+    "fixed_energy": 2013.7330427327333,
+    "improvement_pct": 99.72177524934274,
+    "oracle_jerk": 0.32671742247965985,
+    "fixed_jerk": 0.15742638614714496,
+    "oracle_min_thw": 0.9831720590591431
+  }
+}
